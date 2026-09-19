@@ -1,4 +1,4 @@
-<section class="product-recommendations" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}">
+<section class="product-recommendations" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ cart.items.first.product.id | default: product.id }}&limit={{ section.settings.products_to_show }}">
   <div class="page-width">
     <div class="recommendation-heading"><div><p class="eyebrow">{{ 'templates.product.recommended_eyebrow' | t }}</p><h2>{{ section.settings.heading | escape }}</h2>{% if section.settings.subheading != blank %}<p>{{ section.settings.subheading | escape }}</p>{% endif %}</div><a class="recommendation-link" href="{{ routes.all_products_collection_url }}">{{ 'general.view_all' | t }} →</a></div>
     <div class="recommendation-grid" aria-live="polite">
