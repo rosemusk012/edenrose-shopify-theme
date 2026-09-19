@@ -5,7 +5,7 @@
       {% for link in linklists[section.settings.menu].links %}
         {% if link.links != blank %}
           <details class="nav-dropdown">
-            <summary{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
+            <summary aria-expanded="false"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
             <div class="nav-dropdown__menu">
               {% for child_link in link.links %}
                 <a href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a>
@@ -28,7 +28,7 @@
             {% for link in linklists[section.settings.menu].links %}
               {% if link.links != blank %}
                 <details class="mobile-nav-group">
-                  <summary>{{ link.title | escape }}<span aria-hidden="true">⌄</span></summary>
+                  <summary aria-expanded="false">{{ link.title | escape }}<span aria-hidden="true">⌄</span></summary>
                   <div class="mobile-nav-sub-links">
                     {% for child_link in link.links %}
                       <a href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a>
@@ -63,7 +63,9 @@
   }
   dropdowns.forEach(function(dropdown){
     dropdown.addEventListener('toggle',function(){
-      if(dropdown.open)dropdowns.forEach(function(other){if(other!==dropdown)other.removeAttribute('open');});
+      var dropdownSummary=dropdown.querySelector('summary');
+      if(dropdownSummary)dropdownSummary.setAttribute('aria-expanded',String(dropdown.open));
+      if(dropdown.open)dropdowns.forEach(function(other){if(other!==dropdown){other.removeAttribute('open');var otherSummary=other.querySelector('summary');if(otherSummary)otherSummary.setAttribute('aria-expanded','false');}});
     });
   });
   menu&&menu.addEventListener('toggle',function(){
@@ -74,7 +76,7 @@
   document.addEventListener('keydown',function(event){
     if(event.key==='Escape'){
       if(menu&&menu.open)close();
-      dropdowns.forEach(function(dropdown){if(dropdown.open)dropdown.removeAttribute('open');});
+      dropdowns.forEach(function(dropdown){if(dropdown.open){dropdown.removeAttribute('open');var dropdownSummary=dropdown.querySelector('summary');if(dropdownSummary)dropdownSummary.setAttribute('aria-expanded','false');}});
     }
   });
   document.addEventListener('click',function(event){
