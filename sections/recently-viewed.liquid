@@ -6,7 +6,8 @@
 </section>
 <script>
 (function(){
-  const section=document.querySelector('[data-recently-viewed]'); if(!section)return;
+  const section=document.querySelector('[data-recently-viewed]'); if(!section||section.dataset.initialized)return;
+  section.dataset.initialized='true';
   const key='edenrose-recently-viewed', current='{{ product.handle }}';
   let handles=[]; try{handles=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}
   handles=handles.filter(h=>h&&h!==current).slice(0,4);
