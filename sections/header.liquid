@@ -22,8 +22,8 @@
       <form class="header-search" action="{{ routes.search_url }}" method="get" role="search"><label class="visually-hidden" for="HeaderSearch">{{ 'general.search' | t }}</label><input id="HeaderSearch" type="search" name="q" placeholder="{{ 'templates.search.placeholder' | t }}" autocomplete="off"><button type="submit" aria-label="{{ 'general.search' | t }}">⌕</button></form>
       <a class="header-action bag-action" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart' | t }}{% if cart.item_count > 0 %}, {{ cart.item_count }}{% endif %}"><span>{{ 'general.cart' | t }}</span><span class="bag-count" aria-hidden="true">{{ cart.item_count }}</span></a>
       <details class="mobile-menu">
-        <summary aria-label="{{ 'accessibility.menu' | t }}"><span class="menu-icon" aria-hidden="true"><i></i><i></i></span><span class="visually-hidden">{{ 'accessibility.menu' | t }}</span></summary>
-        <nav class="mobile-nav" aria-label="{{ 'accessibility.main_navigation' | t }}">
+        <summary aria-label="{{ 'accessibility.menu' | t }}" aria-controls="MobileNavigation-{{ section.id }}"><span class="menu-icon" aria-hidden="true"><i></i><i></i></span><span class="visually-hidden">{{ 'accessibility.menu' | t }}</span></summary>
+        <nav id="MobileNavigation-{{ section.id }}" class="mobile-nav" aria-label="{{ 'accessibility.main_navigation' | t }}">
           <div class="mobile-nav-links">
             {% for link in linklists[section.settings.menu].links %}
               {% if link.links != blank %}
@@ -53,15 +53,17 @@
 (function(){
   var menu=document.querySelector('.mobile-menu');
   if(!menu)return;
-  var summary=menu.querySelector('summary');
+  var summary=menu.querySelector('summary'),nav=document.getElementById('MobileNavigation-{{ section.id }}');
   function close(){
     if(!menu.open)return;
     menu.removeAttribute('open');
     document.body.classList.remove('mobile-menu-open');
-    if(summary)summary.focus();
+    if(summary){summary.setAttribute('aria-expanded','false');summary.focus();}
   }
   menu.addEventListener('toggle',function(){
     document.body.classList.toggle('mobile-menu-open',menu.open);
+    if(summary)summary.setAttribute('aria-expanded',String(menu.open));
+    if(nav)nav.inert=!menu.open;
   });
   document.addEventListener('keydown',function(event){
     if(event.key==='Escape'&&menu.open)close();
