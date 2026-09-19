@@ -17,15 +17,15 @@
               {% if category.featured_image %}
                 {{ category.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 750px) 33vw, 100vw', alt: category.title | escape }}
               {% elsif category.products.first.featured_image %}
-                {{ category.products.first.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 750px) 33vw, 100vw', alt: category.title }}
+                {{ category.products.first.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 750px) 33vw, 100vw', alt: category.title | escape }}
               {% else %}
-                <div class="category-card__placeholder" aria-hidden="true"><span>{{ category.title | slice: 0 }}</span></div>
+                <div class="category-card__placeholder" aria-hidden="true"><span>{{ category.title | slice: 0 | escape }}</span></div>
               {% endif %}
               <div class="category-card__veil"></div>
             </div>
             <div class="category-card__content">
               <span class="category-card__number">{{ forloop.index | prepend: '0' }}</span>
-              <span class="category-card__name">{{ category.title }}</span>
+              <span class="category-card__name">{{ category.title | escape }}</span>
               <span class="category-card__arrow" aria-hidden="true">↗</span>
             </div>
           </a>
