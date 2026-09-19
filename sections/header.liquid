@@ -1,28 +1,18 @@
 <header class="site-header">
   <div class="page-width header-row">
     <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">{{ shop.name | escape }}</a>
-
     <nav class="nav nav-desktop" aria-label="{{ 'accessibility.main_navigation' | t }}">
       {% for link in linklists[section.settings.menu].links %}
         <a href="{{ link.url }}">{{ link.title | escape }}</a>
       {% endfor %}
     </nav>
-
     <div class="header-actions">
-      <a class="header-action" href="{{ routes.search_url }}">
-        <span aria-hidden="true">⌕</span>
-        <span class="action-label">{{ 'general.search' | t }}</span>
-      </a>
-      <a class="header-action" href="{{ routes.cart_url }}">
-        <span aria-hidden="true">Bag</span>
-        <span class="action-label">({{ cart.item_count }})</span>
-      </a>
+      <a class="header-action" href="{{ routes.search_url }}"><span aria-hidden="true">⌕</span><span class="action-label">{{ 'general.search' | t }}</span></a>
+      <a class="header-action bag-action" href="{{ routes.cart_url }}"><span>{{ 'general.cart' | t }}</span><span class="bag-count">{{ cart.item_count }}</span></a>
       <details class="mobile-menu">
         <summary aria-label="{{ 'accessibility.menu' | t }}"><span aria-hidden="true">☰</span><span class="visually-hidden">{{ 'accessibility.menu' | t }}</span></summary>
         <nav class="mobile-nav" aria-label="{{ 'accessibility.main_navigation' | t }}">
-          {% for link in linklists[section.settings.menu].links %}
-            <a href="{{ link.url }}">{{ link.title | escape }}</a>
-          {% endfor %}
+          {% for link in linklists[section.settings.menu].links %}<a href="{{ link.url }}">{{ link.title | escape }}</a>{% endfor %}
           <a href="{{ routes.search_url }}">{{ 'general.search' | t }}</a>
           <a href="{{ routes.cart_url }}">{{ 'general.cart' | t }} ({{ cart.item_count }})</a>
         </nav>
@@ -30,40 +20,7 @@
     </div>
   </div>
 </header>
-
 {% stylesheet %}
-.site-header .header-row{position:relative}
-.header-action{display:inline-flex;align-items:center;gap:5px;min-height:44px}
-.header-action:hover{text-decoration:underline;text-underline-offset:4px}
-.mobile-menu{display:none}
-.mobile-menu summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}
-.mobile-menu summary::-webkit-details-marker{display:none}
-.mobile-nav{position:absolute;right:0;top:calc(100% + 1px);min-width:240px;padding:14px;background:var(--paper);border:1px solid var(--line);box-shadow:0 16px 35px rgba(23,20,17,.12);display:grid;gap:4px}
-.mobile-nav a{padding:12px 10px;border-radius:2px}
-.mobile-nav a:hover,.mobile-nav a:focus-visible{background:#eee7dc;text-decoration:none}
-.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media(max-width:900px){
-  .nav-desktop{display:none}
-  .mobile-menu{display:block}
-  .header-row{grid-template-columns:1fr auto}
-  .header-actions{gap:4px}
-  .action-label{display:none}
-}
-@media(max-width:560px){
-  .brand{font-size:24px}
-}
+.site-header .header-row{position:relative}.header-action{display:inline-flex;align-items:center;gap:7px;min-height:44px}.header-action:hover{text-decoration:underline;text-underline-offset:4px}.bag-action{font-weight:600}.bag-count{display:inline-flex;align-items:center;justify-content:center;min-width:1.45rem;height:1.45rem;padding:0 .3rem;border:1px solid var(--ink);border-radius:999px;font-size:.72rem;font-weight:500}.mobile-menu{display:none}.mobile-menu summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}.mobile-menu summary::-webkit-details-marker{display:none}.mobile-nav{position:absolute;right:0;top:calc(100% + 1px);min-width:240px;padding:14px;background:var(--paper);border:1px solid var(--line);box-shadow:0 16px 35px rgba(23,20,17,.12);display:grid;gap:4px}.mobile-nav a{padding:12px 10px;border-radius:2px}.mobile-nav a:hover,.mobile-nav a:focus-visible{background:#eee7dc;text-decoration:none}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:900px){.nav-desktop{display:none}.mobile-menu{display:block}.header-row{grid-template-columns:1fr auto}.header-actions{gap:4px}.action-label{display:none}}@media(max-width:560px){.brand{font-size:24px}}
 {% endstylesheet %}
-
-{% schema %}
-{
-  "name": "t:sections.header.name",
-  "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:sections.header.settings.menu",
-      "default": "main-menu"
-    }
-  ]
-}
-{% endschema %}
+{% schema %}{"name":"t:sections.header.name","settings":[{"type":"link_list","id":"menu","label":"t:sections.header.settings.menu","default":"main-menu"}]}{% endschema %}
