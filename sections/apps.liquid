@@ -1,4 +1,4 @@
-<section class="apps-section">
+<section class="apps-section"{% if section.blocks.size == 0 %} hidden{% endif %}>
   <div class="page-width">
     {% for block in section.blocks %}
       <div class="app-block" {{ block.shopify_attributes }}>
@@ -9,7 +9,7 @@
 </section>
 
 {% stylesheet %}
-.apps-section{padding:clamp(2rem,5vw,4rem) 0}
+.apps-section{padding:clamp(2rem,5vw,4rem) 0}.apps-section[hidden]{display:none}
 .app-block + .app-block{margin-top:1.5rem}
 {% endstylesheet %}
 
