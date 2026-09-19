@@ -1,1 +1,133 @@
-{"sections":{"hero":{"type":"hero","settings":{"eyebrow":"EdenRose","heading":"Find something that feels like you.","text":"Clothing and jewellery, brought together in one easy-to-browse collection.","button_label":"Shop clothing & jewellery","button_link":"/collections/all","secondary_label":"New arrivals","secondary_link":"/collections/new-arrivals"}},"categories":{"type":"shop-by-category","blocks":{"category-1":{"type":"category","settings":{"collection":"clothing"}},"category-2":{"type":"category","settings":{"collection":"dresses"}},"category-3":{"type":"category","settings":{"collection":"tops-blouses"}},"category-4":{"type":"category","settings":{"collection":"jewellery"}},"category-5":{"type":"category","settings":{"collection":"rings"}},"category-6":{"type":"category","settings":{"collection":"new-arrivals"}}},"block_order":["category-1","category-2","category-3","category-4","category-5","category-6"]},"featured":{"type":"featured-collection","settings":{"collection":"new-arrivals","heading":"New arrivals","subheading":"A fresh edit of pieces to discover now.","products_to_show":8}},"benefits":{"type":"benefits","settings":{}}},"order":["hero","categories","featured","benefits"]}
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "EdenRose",
+        "heading": "Find something that feels like you.",
+        "text": "Clothing and jewellery, brought together in one easy-to-browse collection.",
+        "button_label": "Shop clothing & jewellery",
+        "button_link": "/collections/all",
+        "secondary_label": "New arrivals",
+        "secondary_link": "/collections/new-arrivals"
+      }
+    },
+    "categories": {
+      "type": "shop-by-category",
+      "blocks": {
+        "category-1": {
+          "type": "category",
+          "settings": {
+            "collection": "clothing"
+          }
+        },
+        "category-2": {
+          "type": "category",
+          "settings": {
+            "collection": "dresses-1"
+          }
+        },
+        "category-3": {
+          "type": "category",
+          "settings": {
+            "collection": "tops-blouses"
+          }
+        },
+        "category-4": {
+          "type": "category",
+          "settings": {
+            "collection": "bottoms-sets"
+          }
+        },
+        "category-5": {
+          "type": "category",
+          "settings": {
+            "collection": "jumpsuits-rompers"
+          }
+        },
+        "category-6": {
+          "type": "category",
+          "settings": {
+            "collection": "sweaters-hoodies"
+          }
+        },
+        "category-7": {
+          "type": "category",
+          "settings": {
+            "collection": "plus-size"
+          }
+        },
+        "category-8": {
+          "type": "category",
+          "settings": {
+            "collection": "shoes"
+          }
+        },
+        "category-9": {
+          "type": "category",
+          "settings": {
+            "collection": "jewelry"
+          }
+        },
+        "category-10": {
+          "type": "category",
+          "settings": {
+            "collection": "rings"
+          }
+        },
+        "category-11": {
+          "type": "category",
+          "settings": {
+            "collection": "necklaces"
+          }
+        },
+        "category-12": {
+          "type": "category",
+          "settings": {
+            "collection": "earrings"
+          }
+        },
+        "category-13": {
+          "type": "category",
+          "settings": {
+            "collection": "new-arrivals"
+          }
+        }
+      },
+      "block_order": [
+        "category-1",
+        "category-2",
+        "category-3",
+        "category-4",
+        "category-5",
+        "category-6",
+        "category-7",
+        "category-8",
+        "category-9",
+        "category-10",
+        "category-11",
+        "category-12",
+        "category-13"
+      ]
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "new-arrivals",
+        "heading": "New arrivals",
+        "subheading": "A fresh edit of pieces to discover now.",
+        "products_to_show": 8
+      }
+    },
+    "benefits": {
+      "type": "benefits",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "categories",
+    "featured",
+    "benefits"
+  ]
+}
