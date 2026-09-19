@@ -1,1 +1,43 @@
-{% doc %}Renders a product card. @param {product} product The product to display. @example {% render 'card-product', product: product %}{% enddoc %}<article class="card"><a href="{{ product.url }}" aria-label="{{ product.title | escape }}"><div class="card-image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.featured_image.alt | default: product.title }}{% endif %}</div><div class="card-info"><h3 class="card-title">{{ product.title | escape }}</h3><div class="card-price">{{ product.price | money }}{% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}</div></div></a></article>
+{% doc %}
+Renders a product card with image, availability, pricing, and quick add.
+@param {product} product The product to display.
+@example
+{% render 'card-product', product: product %}
+{% enddoc %}
+<article class="card">
+  <a class="card-media-link" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+    <div class="card-image">
+      {% if product.featured_image %}
+        {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.featured_image.alt | default: product.title }}
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag }}
+      {% endif %}
+      {% if product.available == false %}
+        <span class="card-badge">{{ 'products.product.sold_out' | t }}</span>
+      {% elsif product.compare_at_price > product.price %}
+        <span class="card-badge card-badge--sale">{{ 'products.product.sale' | t }}</span>
+      {% endif %}
+    </div>
+  </a>
+  <div class="card-info">
+    <h3 class="card-title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+    <div class="card-price">
+      <span>{{ product.price | money }}</span>
+      {% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}
+    </div>
+    {% if product.available %}
+      {% if product.has_only_default_variant %}
+        {% form 'product', product, class: 'card-quick-add' %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit" class="quick-add">{{ 'products.product.add_to_cart' | t }}</button>
+        {% endform %}
+      {% else %}
+        <a class="quick-add quick-add--link" href="{{ product.url }}">{{ 'products.product.choose_options' | t }}</a>
+      {% endif %}
+    {% endif %}
+  </div>
+</article>
+{% stylesheet %}
+.card{min-width:0}.card-media-link{display:block}.card-image{position:relative;overflow:hidden;aspect-ratio:4/5;background:var(--soft)}.card-image img,.card-image svg{width:100%;height:100%;object-fit:cover;display:block}.card-media-link:hover img{transform:scale(1.025)}.card-image img{transition:transform .25s ease}.card-badge{position:absolute;top:.75rem;left:.75rem;padding:.35rem .55rem;background:var(--paper);color:var(--ink);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}.card-badge--sale{background:var(--ink);color:var(--paper)}.card-info{padding:.75rem 0}.card-title{font-size:.95rem;line-height:1.35;margin:0 0 .35rem}.card-title a{color:inherit;text-decoration:none}.card-price{display:flex;gap:.5rem;align-items:center;font-weight:600}.card-price s{color:var(--muted);font-weight:400}.quick-add{display:flex;align-items:center;justify-content:center;width:100%;margin-top:.75rem;padding:.65rem .8rem;border:1px solid var(--ink);background:transparent;color:var(--ink);font:inherit;cursor:pointer;text-decoration:none;transition:background .15s ease,color .15s ease}.quick-add:hover,.quick-add:focus-visible{background:var(--ink);color:var(--paper)}@media(max-width:749px){.quick-add{min-height:44px}.card-info{padding:.65rem 0}.card-title{font-size:.9rem}}
+{% endstylesheet %}
