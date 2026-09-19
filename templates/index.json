@@ -122,12 +122,17 @@
     "benefits": {
       "type": "benefits",
       "settings": {}
+    },
+    "apps": {
+      "type": "apps",
+      "settings": {}
     }
   },
   "order": [
     "hero",
     "categories",
     "featured",
+    "apps",
     "benefits"
   ]
 }
