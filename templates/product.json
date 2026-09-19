@@ -1,1 +1,1 @@
-{"sections":{"main":{"type":"main-product","settings":{}}},"order":["main"]}
+{"sections":{"main":{"type":"main-product","settings":{}},"recommendations":{"type":"product-recommendations","settings":{"heading":"You may also like","subheading":"Keep exploring EdenRose.","products_to_show":4}}},"order":["main","recommendations"]}
