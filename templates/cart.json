@@ -7,10 +7,19 @@
     "apps": {
       "type": "apps",
       "settings": {}
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "Keep exploring",
+        "subheading": "You might find something else to love.",
+        "products_to_show": 4
+      }
     }
   },
   "order": [
     "main",
+    "recommendations",
     "apps"
   ]
 }
