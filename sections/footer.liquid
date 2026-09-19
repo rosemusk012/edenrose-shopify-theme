@@ -1,2 +1,35 @@
-<footer class="site-footer"><div class="page-width footer-grid"><div><h2>{{ shop.name | escape }}</h2><p class="footer-note">{{ 'sections.footer.note' | t }}</p></div><div><h3>{{ 'sections.footer.shop' | t }}</h3>{% for link in linklists[section.settings.menu].links %}<p><a href="{{ link.url }}">{{ link.title | escape }}</a></p>{% endfor %}</div><div><h3>{{ 'sections.footer.help' | t }}</h3><p><a href="{{ routes.search_url }}">{{ 'general.search' | t }}</a></p><p><a href="{{ routes.cart_url }}">{{ 'general.cart' | t }}</a></p></div></div></footer>
+<footer class="site-footer">
+  <div class="page-width">
+    <div class="footer-trust">
+      <div><strong>{{ 'sections.footer.shipping_title' | t }}</strong><span>{{ 'sections.footer.shipping_text' | t }}</span></div>
+      <div><strong>{{ 'sections.footer.returns_title' | t }}</strong><span>{{ 'sections.footer.returns_text' | t }}</span></div>
+      <div><strong>{{ 'sections.footer.secure_title' | t }}</strong><span>{{ 'sections.footer.secure_text' | t }}</span></div>
+    </div>
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">{{ shop.name | escape }}</p>
+        <p class="footer-note">{{ 'sections.footer.note' | t }}</p>
+      </div>
+      <nav aria-label="{{ 'sections.footer.shop' | t }}">
+        <h2>{{ 'sections.footer.shop' | t }}</h2>
+        {% for link in linklists[section.settings.menu].links %}<p><a href="{{ link.url }}">{{ link.title | escape }}</a></p>{% endfor %}
+      </nav>
+      <nav aria-label="{{ 'sections.footer.help' | t }}">
+        <h2>{{ 'sections.footer.help' | t }}</h2>
+        <p><a href="{{ routes.search_url }}">{{ 'general.search' | t }}</a></p>
+        <p><a href="{{ routes.cart_url }}">{{ 'general.cart' | t }}</a></p>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© {{ 'now' | date: '%Y' }} {{ shop.name | escape }}</span>
+      <a href="{{ routes.root_url }}">{{ 'sections.footer.back_to_store' | t }}</a>
+    </div>
+  </div>
+</footer>
+
+{% stylesheet %}
+.site-footer{margin-top:4rem;border-top:1px solid var(--line);padding:2rem 0 1.25rem}.footer-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding-bottom:2rem;border-bottom:1px solid var(--line)}.footer-trust div{display:grid;gap:.3rem}.footer-trust span{font-size:.82rem;color:var(--muted);line-height:1.45}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem;padding:2.5rem 0}.footer-brand{font-size:1.3rem;font-weight:700;margin:0 0 .5rem}.footer-note{max-width:28rem;color:var(--muted);line-height:1.5}.footer-grid h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;margin:0 0 .75rem}.footer-grid p{margin:.45rem 0}.footer-grid a,.footer-bottom a{color:inherit;text-decoration:none}.footer-grid a:hover,.footer-grid a:focus-visible,.footer-bottom a:hover,.footer-bottom a:focus-visible{text-decoration:underline}.footer-bottom{display:flex;justify-content:space-between;gap:1rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.78rem;color:var(--muted)}
+@media(max-width:749px){.footer-trust{grid-template-columns:1fr;gap:1.25rem}.footer-grid{grid-template-columns:1fr 1fr;gap:1.5rem;padding:2rem 0}.footer-grid>div:first-child{grid-column:1/-1}.footer-bottom{display:grid}}
+{% endstylesheet %}
+
 {% schema %}{"name":"t:sections.footer.name","settings":[{"type":"link_list","id":"menu","label":"t:sections.footer.settings.menu","default":"footer"}]}{% endschema %}
