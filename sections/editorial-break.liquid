@@ -1,0 +1,70 @@
+<section class="edenrose-break" aria-labelledby="edenrose-break-title-{{ section.id }}">
+  <div class="edenrose-break__inner">
+    <p class="edenrose-break__eyebrow">{{ 'sections.editorial_break.eyebrow' | t }}</p>
+    <h2 id="edenrose-break-title-{{ section.id }}">{{ section.settings.heading }}</h2>
+    <a href="{{ section.settings.link }}" class="edenrose-break__link">{{ section.settings.link_label }} <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
+{% stylesheet %}
+.edenrose-break {
+  overflow: hidden;
+  padding: clamp(54px, 8vw, 105px) 20px;
+  background: var(--wine);
+  color: var(--paper);
+}
+.edenrose-break__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  text-align: center;
+}
+.edenrose-break__eyebrow {
+  margin: 0 0 18px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  opacity: .72;
+}
+.edenrose-break h2 {
+  margin: 0 auto 28px;
+  font-family: var(--display);
+  font-size: clamp(58px, 13vw, 170px);
+  font-weight: 400;
+  line-height: .82;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+}
+.edenrose-break__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  border-bottom: 1px solid currentColor;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+@media (max-width: 760px) {
+  .edenrose-break { padding-inline: 14px; }
+  .edenrose-break h2 { font-size: clamp(62px, 22vw, 110px); }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Editorial break",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The edit" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Explore the edit" },
+    { "type": "url", "id": "link", "label": "Link" }
+  ],
+  "presets": [
+    {
+      "name": "Editorial break",
+      "settings": { "heading": "The edit", "link_label": "Explore the edit", "link": "/collections/all" }
+    }
+  ]
+}
+{% endschema %}
