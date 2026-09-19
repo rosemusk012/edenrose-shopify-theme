@@ -1,1 +1,16 @@
-{"sections":{"main":{"type":"main-collection","settings":{}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {}
+    },
+    "apps": {
+      "type": "apps",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "apps"
+  ]
+}
