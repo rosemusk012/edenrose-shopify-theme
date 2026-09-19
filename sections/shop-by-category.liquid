@@ -8,16 +8,35 @@
       {% if section.settings.intro != blank %}<p class="category-intro__text">{{ section.settings.intro | escape }}</p>{% endif %}
     </div>
 
+    {% assign used_category_images = '|' %}
     <div class="category-grid category-grid--all">
       {% for block in section.blocks %}
         {% if block.settings.collection != blank %}
           {% assign category = block.settings.collection %}
+          {% assign category_image = category.featured_image %}
+          {% assign category_image_key = blank %}
+          {% if category_image != blank %}
+            {% assign category_image_key = category_image | image_url: width: 1200 %}
+          {% endif %}
+          {% if category_image == blank or used_category_images contains category_image_key %}
+            {% for product in category.products limit: 12 %}
+              {% if product.featured_image != blank %}
+                {% assign candidate_key = product.featured_image | image_url: width: 1200 %}
+                {% unless used_category_images contains candidate_key %}
+                  {% assign category_image = product.featured_image %}
+                  {% assign category_image_key = candidate_key %}
+                  {% break %}
+                {% endunless %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+          {% if category_image != blank and category_image_key != blank %}
+            {% assign used_category_images = used_category_images | append: category_image_key | append: '|' %}
+          {% endif %}
           <a class="category-card category-card--{{ forloop.index }}" href="{{ category.url }}" {{ block.shopify_attributes }}>
             <div class="category-card__media">
-              {% if category.featured_image %}
-                {{ category.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 750px) 33vw, 100vw', alt: category.title | escape }}
-              {% elsif category.products.first.featured_image %}
-                {{ category.products.first.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 750px) 33vw, 100vw', alt: category.title | escape }}
+              {% if category_image != blank %}
+                {{ category_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 750px) 33vw, 100vw', alt: category.title | escape }}
               {% else %}
                 <div class="category-card__placeholder" aria-hidden="true"><span>{{ category.title | slice: 0 | escape }}</span></div>
               {% endif %}
