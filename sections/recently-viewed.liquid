@@ -1,0 +1,24 @@
+<section class="recently-viewed" data-recently-viewed>
+  <div class="page-width">
+    <div class="section-head"><div><p class="eyebrow">EdenRose</p><h2>{{ section.settings.heading | escape }}</h2></div></div>
+    <div class="product-grid" data-recently-grid></div>
+  </div>
+</section>
+<script>
+(function(){
+  const section=document.querySelector('[data-recently-viewed]'); if(!section)return;
+  const key='edenrose-recently-viewed', current='{{ product.handle }}';
+  let handles=[]; try{handles=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}
+  handles=handles.filter(h=>h&&h!==current).slice(0,4);
+  if(!handles.length){section.hidden=true;return}
+  const grid=section.querySelector('[data-recently-grid]');
+  Promise.all(handles.map(h=>fetch('/products/'+encodeURIComponent(h)+'?view=card').then(r=>r.ok?r.text():'').catch(()=>''))).then(items=>{
+    const html=items.filter(Boolean).join(''); if(!html){section.hidden=true;return} grid.innerHTML=html;
+  });
+  if(current){try{handles=[current,...handles.filter(h=>h!==current)].slice(0,4);localStorage.setItem(key,JSON.stringify(handles))}catch(e){}}
+})();
+</script>
+{% stylesheet %}
+.recently-viewed{padding:0 0 clamp(3rem,7vw,6rem)}.recently-viewed[hidden]{display:none}.recently-viewed .section-head{margin-bottom:1.5rem}.recently-viewed h2{font:normal clamp(2rem,4vw,3.5rem)/1 Georgia,serif;letter-spacing:-.04em;margin:.2rem 0}
+{% endstylesheet %}
+{% schema %}{"name":"Recently viewed","settings":[{"type":"text","id":"heading","label":"Heading","default":"Recently viewed"}]}{% endschema %}
