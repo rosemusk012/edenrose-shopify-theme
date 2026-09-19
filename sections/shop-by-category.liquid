@@ -51,7 +51,7 @@
         {% endif %}
       {% endfor %}
     </div>
-    {% assign visible_categories = 0 %}{% for block in section.blocks %}{% if block.settings.collection != blank %}{% assign visible_categories = visible_categories | plus: 1 %}{% endif %}{% endfor %}{% if visible_categories > 6 %}<div class="category-more"><button class="button" type="button" data-category-toggle aria-expanded="false" data-show-all="{{ 'sections.shop_by_category.show_all' | t | escape }}" data-show-fewer="{{ 'sections.shop_by_category.show_fewer' | t | escape }}">{{ 'sections.shop_by_category.show_all' | t }}</button></div>{% endif %}
+    {% assign visible_categories = 0 %}{% for block in section.blocks %}{% if block.settings.collection != blank %}{% assign visible_categories = visible_categories | plus: 1 %}{% endif %}{% endfor %}{% if visible_categories > 6 %}<div class="category-more"><button class="button" type="button" data-category-toggle aria-expanded="false" data-show-all="Show all collections" data-show-fewer="Show fewer collections">Show all collections</button></div>{% endif %}
   </div>
 </section>
 
