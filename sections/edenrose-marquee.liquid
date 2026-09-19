@@ -1,0 +1,50 @@
+{% assign marquee_text = 'sections.edenrose_marquee.text' | t %}
+<section class="edenrose-marquee" aria-label="{{ marquee_text | escape }}">
+  <div class="edenrose-marquee__track">
+    <span>{{ marquee_text }}</span>
+    <span aria-hidden="true">{{ marquee_text }}</span>
+    <span aria-hidden="true">{{ marquee_text }}</span>
+    <span aria-hidden="true">{{ marquee_text }}</span>
+  </div>
+</section>
+
+{% stylesheet %}
+.edenrose-marquee {
+  overflow: hidden;
+  background: var(--wine);
+  color: var(--paper);
+  border-block: 1px solid rgba(255,255,255,.14);
+}
+.edenrose-marquee__track {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  align-items: center;
+  animation: edenrose-marquee 24s linear infinite;
+}
+.edenrose-marquee__track span {
+  flex: 0 0 auto;
+  padding: 15px 28px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+@keyframes edenrose-marquee {
+  to { transform: translateX(-25%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .edenrose-marquee__track { animation: none; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "EdenRose marquee",
+  "settings": [],
+  "presets": [
+    { "name": "EdenRose marquee" }
+  ]
+}
+{% endschema %}
