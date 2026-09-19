@@ -126,12 +126,32 @@
     "apps": {
       "type": "apps",
       "settings": {}
+    },
+    "clothing_edit": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "apparel",
+        "heading": "Clothing",
+        "subheading": "Explore the full EdenRose clothing collection.",
+        "products_to_show": 8
+      }
+    },
+    "jewellery_edit": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "jewelry",
+        "heading": "Jewellery",
+        "subheading": "Explore rings, necklaces and earrings.",
+        "products_to_show": 8
+      }
     }
   },
   "order": [
     "hero",
     "categories",
     "featured",
+    "clothing_edit",
+    "jewellery_edit",
     "apps",
     "benefits"
   ]
