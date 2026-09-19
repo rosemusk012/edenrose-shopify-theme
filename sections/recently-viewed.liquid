@@ -12,13 +12,13 @@
   handles=handles.filter(h=>h&&h!==current).slice(0,4);
   if(!handles.length){section.hidden=true;return}
   const grid=section.querySelector('[data-recently-grid]');
-  Promise.all(handles.map(h=>fetch('/products/'+encodeURIComponent(h)+'?view=card').then(r=>r.ok?r.text():'').catch(()=>''))).then(items=>{
+  Promise.all(handles.map(h=>fetch('/products/'+encodeURIComponent(h)+'.js').then(r=>r.ok?r.json():null).then(p=>p?`<article class="card recent-card"><a href="/products/${encodeURIComponent(p.handle)}"><div class="recent-card-image">${p.featured_image?`<img src="${p.featured_image}" alt="${(p.title||'').replace(/"/g,'&quot;')}" loading="lazy">`:''}</div><div class="card-info"><p class="card-title">${p.title||''}</p><p class="card-price">${new Intl.NumberFormat(undefined,{style:'currency',currency:'AUD'}).format((p.price||0)/100)}</p></div></a></article>`:'').catch(()=>''))).then(items=>{
     const html=items.filter(Boolean).join(''); if(!html){section.hidden=true;return} grid.innerHTML=html;
   });
   if(current){try{handles=[current,...handles.filter(h=>h!==current)].slice(0,4);localStorage.setItem(key,JSON.stringify(handles))}catch(e){}}
 })();
 </script>
 {% stylesheet %}
-.recently-viewed{padding:0 0 clamp(3rem,7vw,6rem)}.recently-viewed[hidden]{display:none}.recently-viewed .section-head{margin-bottom:1.5rem}.recently-viewed h2{font:normal clamp(2rem,4vw,3.5rem)/1 Georgia,serif;letter-spacing:-.04em;margin:.2rem 0}.recent-card{min-width:0}.recent-card-image{aspect-ratio:3/4;background:var(--soft);overflow:hidden}.recent-card-image img{width:100%;height:100%;object-fit:cover;display:block}.recent-card-title{font-size:.9rem;margin-top:.65rem;line-height:1.35}.recent-card-price{font-size:.85rem;margin-top:.2rem}@media(max-width:749px){.recently-viewed .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}}
+.recently-viewed{padding:0 0 clamp(3rem,7vw,6rem)}.recently-viewed[hidden]{display:none}.recently-viewed .section-head{margin-bottom:1.5rem}.recently-viewed h2{font:normal clamp(2rem,4vw,3.5rem)/1 Georgia,serif;letter-spacing:-.04em;margin:.2rem 0}.recent-card{min-width:0}.recently-viewed .card-info{padding-top:.65rem}.recent-card-image{aspect-ratio:3/4;background:var(--soft);overflow:hidden}.recent-card-image img{width:100%;height:100%;object-fit:cover;display:block}.recent-card-title{font-size:.9rem;margin-top:.65rem;line-height:1.35}.recent-card-price{font-size:.85rem;margin-top:.2rem}@media(max-width:749px){.recently-viewed .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}}
 {% endstylesheet %}
 {% schema %}{"name":"Recently viewed","settings":[{"type":"text","id":"heading","label":"Heading","default":"Recently viewed"}]}{% endschema %}
