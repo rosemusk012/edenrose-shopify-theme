@@ -1,2 +1,103 @@
-<section class="collection-hero"><div class="page-width"><p class="eyebrow">{{ 'templates.collection.eyebrow' | t }}</p><h1>{{ collection.title | escape }}</h1>{% if collection.description != blank %}<div>{{ collection.description }}</div>{% endif %}</div></section><section class="section"><div class="page-width"><div class="toolbar"><span>{{ collection.products_count }} {{ 'templates.collection.products' | t }}</span><form><label for="SortBy">{{ 'templates.collection.sort_by' | t }}</label> <select id="SortBy" name="sort_by" onchange="this.form.submit()"><option value="manual">{{ 'templates.collection.featured' | t }}</option><option value="price-ascending">{{ 'templates.collection.price_low' | t }}</option><option value="price-descending">{{ 'templates.collection.price_high' | t }}</option><option value="created-descending">{{ 'templates.collection.newest' | t }}</option></select></form></div>{% paginate collection.products by 24 %}<div class="product-grid">{% for product in collection.products %}{% render 'card-product', product: product %}{% endfor %}</div><div class="pagination">{{ paginate | default_pagination }}</div>{% endpaginate %}</div></section>
+<section class="collection-page">
+  <div class="collection-hero page-width">
+    <p class="eyebrow">{{ 'templates.collection.eyebrow' | t }}</p>
+    <h1>{{ collection.title | escape }}</h1>
+    {% if collection.description != blank %}<div class="collection-description">{{ collection.description }}</div>{% endif %}
+  </div>
+
+  <div class="section page-width">
+    {% paginate collection.products by 24 %}
+      <div class="collection-toolbar">
+        <div class="collection-count"><strong>{{ collection.products_count }}</strong> {{ 'templates.collection.products' | t }}</div>
+        <div class="collection-actions">
+          <button type="button" class="filter-toggle" aria-expanded="false" aria-controls="CollectionFilters">Filter</button>
+          <form class="sort-form">
+            <label for="SortBy">{{ 'templates.collection.sort_by' | t }}</label>
+            <select id="SortBy" name="sort_by" onchange="this.form.submit()">
+              <option value="manual">{{ 'templates.collection.featured' | t }}</option>
+              <option value="price-ascending">{{ 'templates.collection.price_low' | t }}</option>
+              <option value="price-descending">{{ 'templates.collection.price_high' | t }}</option>
+              <option value="created-descending">{{ 'templates.collection.newest' | t }}</option>
+            </select>
+          </form>
+        </div>
+      </div>
+
+      <div class="collection-layout">
+        <aside id="CollectionFilters" class="collection-filters" aria-label="Product filters">
+          <div class="filter-heading"><strong>Filter</strong><button type="button" class="filter-close" aria-label="Close filters">×</button></div>
+          {% for filter in collection.filters %}
+            {% if filter.type == 'price_range' %}
+              <details class="filter-group">
+                <summary>{{ filter.label }}</summary>
+                <div class="filter-options">
+                  <label>Min <input type="number" name="{{ filter.min_value.param_name }}" placeholder="0" min="0"></label>
+                  <label>Max <input type="number" name="{{ filter.max_value.param_name }}" placeholder="{{ cart.currency.iso_code }}" min="0"></label>
+                  <button type="submit" class="button button--small" form="CollectionFilterForm">Apply</button>
+                </div>
+              </details>
+            {% else %}
+              <details class="filter-group">
+                <summary>{{ filter.label }}</summary>
+                <div class="filter-options">
+                  {% for value in filter.values %}
+                    <label class="filter-value">
+                      <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                      <span>{{ value.label }}</span>
+                      <small>{{ value.count }}</small>
+                    </label>
+                  {% endfor %}
+                </div>
+              </details>
+            {% endif %}
+          {% endfor %}
+          <button type="submit" class="button filter-apply" form="CollectionFilterForm">Apply filters</button>
+        </aside>
+
+        <form id="CollectionFilterForm" class="filter-form" method="get">
+          <div class="product-grid">
+            {% for product in collection.products %}
+              {% render 'card-product', product: product %}
+            {% else %}
+              <p>No products found. Try removing a filter.</p>
+            {% endfor %}
+          </div>
+        </form>
+      </div>
+
+      <div class="pagination">{{ paginate | default_pagination }}</div>
+    {% endpaginate %}
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var page = document.querySelector('.collection-page');
+    if (!page) return;
+    var toggle = page.querySelector('.filter-toggle');
+    var panel = page.querySelector('.collection-filters');
+    var close = page.querySelector('.filter-close');
+    if (toggle && panel) {
+      toggle.addEventListener('click', function () {
+        panel.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('filters-open');
+      });
+    }
+    if (close) close.addEventListener('click', function () {
+      panel.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('filters-open');
+    });
+  });
+</script>
+
+{% stylesheet %}
+.collection-description{max-width:680px;margin:1rem 0 0;color:var(--muted)}
+.collection-toolbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-block:1px solid var(--line);padding:1rem 0;margin-bottom:1.5rem}
+.collection-actions{display:flex;align-items:center;gap:1rem}.sort-form{display:flex;align-items:center;gap:.5rem}.sort-form select{padding:.65rem 2rem .65rem .75rem;border:1px solid var(--line);background:var(--paper)}
+.filter-toggle{display:none}.collection-layout{display:grid;grid-template-columns:220px 1fr;gap:2rem}.collection-filters{position:sticky;top:90px;align-self:start}.filter-heading{display:flex;justify-content:space-between;padding-bottom:1rem;border-bottom:1px solid var(--line)}.filter-close{display:none}.filter-group{border-bottom:1px solid var(--line);padding:.9rem 0}.filter-group summary{cursor:pointer;font-weight:600;list-style:none}.filter-group summary::-webkit-details-marker{display:none}.filter-options{padding-top:.8rem;display:grid;gap:.55rem}.filter-value{display:grid;grid-template-columns:auto 1fr auto;gap:.5rem;align-items:center;font-size:.9rem}.filter-value small{color:var(--muted)}.filter-options input[type=number]{width:100%;padding:.55rem;border:1px solid var(--line);background:var(--paper)}.filter-apply{margin-top:1rem;width:100%}.button--small{padding:.55rem .8rem}.filter-form{min-width:0}
+@media(max-width:749px){.collection-toolbar{align-items:stretch;flex-direction:column}.collection-actions{justify-content:space-between}.filter-toggle{display:inline-flex;align-items:center;justify-content:center;padding:.65rem 1rem;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:inherit}.sort-form{flex:1;justify-content:flex-end}.sort-form select{max-width:180px}.collection-layout{display:block}.collection-filters{position:fixed;z-index:50;inset:0 auto 0 0;width:min(88vw,360px);padding:1.25rem;background:var(--paper);box-shadow:0 0 40px #0002;transform:translateX(-105%);transition:transform .2s ease;overflow:auto}.collection-filters.is-open{transform:translateX(0)}.filter-close{display:block;border:0;background:none;font-size:1.5rem;line-height:1}.filters-open:after{content:"";position:fixed;z-index:40;inset:0;background:#0008}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}}
+{% endstylesheet %}
+
 {% schema %}{"name":"t:sections.main_collection.name"}{% endschema %}
