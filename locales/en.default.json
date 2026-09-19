@@ -123,6 +123,17 @@
         "subheading": "Subheading",
         "products_to_show": "Products to show"
       }
+    },
+    "edenrose_marquee": {
+      "text": "EDENROSE ✦ NEW ARRIVALS ✦ EDENROSE10 ✦ 10% OFF"
+    },
+    "editorial_feature": {
+      "eyebrow": "The EdenRose edit",
+      "shop": "Shop this piece",
+      "tag_one": "Featured piece"
+    },
+    "editorial_break": {
+      "eyebrow": "EdenRose"
     }
   },
   "templates": {
