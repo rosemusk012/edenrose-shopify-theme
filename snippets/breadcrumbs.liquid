@@ -1,0 +1,18 @@
+<nav class="breadcrumbs page-width" aria-label="Breadcrumb">
+  <a href="{{ routes.root_url }}">Home</a><span aria-hidden="true">/</span>
+  {% if template.name == 'product' %}
+    {% if collection %}<a href="{{ collection.url }}">{{ collection.title | escape }}</a><span aria-hidden="true">/</span>{% endif %}
+    <span aria-current="page">{{ product.title | escape }}</span>
+  {% elsif template.name == 'collection' %}
+    <span aria-current="page">{{ collection.title | escape }}</span>
+  {% elsif template.name == 'page' %}
+    <span aria-current="page">{{ page.title | escape }}</span>
+  {% elsif template.name == 'search' %}
+    <span aria-current="page">{{ 'templates.search.eyebrow' | t }}</span>
+  {% elsif template.name == 'cart' %}
+    <span aria-current="page">{{ 'templates.cart.eyebrow' | t }}</span>
+  {% endif %}
+</nav>
+{% stylesheet %}
+.breadcrumbs{display:flex;align-items:center;gap:.55rem;padding-top:1rem;padding-bottom:0;font-size:.75rem;color:var(--muted);overflow:auto;white-space:nowrap}.breadcrumbs a{text-decoration:underline;text-underline-offset:3px}.breadcrumbs [aria-current="page"]{color:var(--ink);overflow:hidden;text-overflow:ellipsis}@media(max-width:749px){.breadcrumbs{padding-top:.75rem;font-size:.72rem}}
+{% endstylesheet %}
