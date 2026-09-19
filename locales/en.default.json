@@ -186,7 +186,8 @@
       "line_total": "Line total",
       "order_progress": "Almost there",
       "shipping_calculated": "Shipping and taxes are calculated at checkout.",
-      "browse_categories": "Browse categories"
+      "browse_categories": "Browse categories",
+      "quantity_for": "Quantity for {{ product }}"
     },
     "search": {
       "eyebrow": "Search",
