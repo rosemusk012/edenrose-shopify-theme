@@ -1,1 +1,32 @@
-{"sections":{"main":{"type":"main-product","settings":{}},"recommendations":{"type":"product-recommendations","settings":{"heading":"You may also like","subheading":"Keep exploring EdenRose.","products_to_show":4}},"recently-viewed":{"type":"recently-viewed","settings":{"heading":"Recently viewed"}}},"order":["main","recommendations","recently-viewed"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "subheading": "Keep exploring EdenRose.",
+        "products_to_show": 4
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "settings": {
+        "heading": "Recently viewed"
+      }
+    },
+    "apps": {
+      "type": "apps",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "recommendations",
+    "recently-viewed",
+    "apps"
+  ]
+}
