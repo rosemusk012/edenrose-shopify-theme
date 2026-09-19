@@ -21,7 +21,8 @@
     "header": {
       "name": "Header",
       "settings": {
-        "menu": "Menu"
+        "menu": "Menu",
+        "logo": "Logo"
       }
     },
     "footer": {
