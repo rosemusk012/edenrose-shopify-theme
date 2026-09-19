@@ -1,2 +1,66 @@
-<section class="product-page"><div class="page-width product-layout"><div class="product-media">{% for image in product.images %}{{ image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: image.alt | default: product.title }}{% endfor %}</div><div class="product-info"><p class="eyebrow">{{ product.type | escape }}</p><h1>{{ product.title | escape }}</h1><div class="card-price">{{ product.price | money }}</div>{% if product.description != blank %}<div class="product-description">{{ product.description }}</div>{% endif %}{% form 'product', product, class: 'product-form' %}{% unless product.has_only_default_variant %}<label for="Variant-{{ section.id }}">{{ 'templates.product.variant' | t }}</label><select id="Variant-{{ section.id }}" name="id">{% for variant in product.variants %}<option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>{{ variant.title | escape }} — {{ variant.price | money }}{% unless variant.available %} — {{ 'templates.product.sold_out' | t }}{% endunless %}</option>{% endfor %}</select>{% else %}<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">{% endunless %}<label for="Quantity-{{ section.id }}">{{ 'templates.product.quantity' | t }}</label><input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1"><button class="button" type="submit" {% unless product.available %}disabled{% endunless %}>{% if product.available %}{{ 'templates.product.add_to_cart' | t }}{% else %}{{ 'templates.product.sold_out' | t }}{% endif %}</button>{% endform %}<div class="trust-row"><div class="trust"><strong>{{ 'templates.product.shipping_title' | t }}</strong>{{ 'templates.product.shipping_text' | t }}</div><div class="trust"><strong>{{ 'templates.product.returns_title' | t }}</strong>{{ 'templates.product.returns_text' | t }}</div><div class="trust"><strong>{{ 'templates.product.secure_title' | t }}</strong>{{ 'templates.product.secure_text' | t }}</div></div></div></div></section>
+<section class="product-page">
+  <div class="page-width product-layout">
+    <div class="product-media">
+      {% for image in product.images %}
+        {{ image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: image.alt | default: product.title }}
+      {% endfor %}
+    </div>
+    <div class="product-info">
+      <p class="eyebrow">{{ product.type | escape }}</p>
+      <h1>{{ product.title | escape }}</h1>
+      <div class="product-price">
+        <span>{{ product.price | money }}</span>
+        {% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s><span class="sale-note">{{ 'templates.product.on_sale' | t }}</span>{% endif %}
+      </div>
+
+      {% form 'product', product, class: 'product-form' %}
+        {% unless product.has_only_default_variant %}
+          <div class="field">
+            <label for="Variant-{{ section.id }}">{{ 'templates.product.variant' | t }}</label>
+            <select id="Variant-{{ section.id }}" name="id">
+              {% for variant in product.variants %}
+                <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %} {% if variant.id == product.selected_or_first_available_variant.id %}selected{% endif %}>
+                  {{ variant.title | escape }} — {{ variant.price | money }}{% unless variant.available %} — {{ 'templates.product.sold_out' | t }}{% endunless %}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        {% else %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {% endunless %}
+
+        {% if product.available %}
+          <div class="purchase-row">
+            <div class="quantity-field">
+              <label for="Quantity-{{ section.id }}">{{ 'templates.product.quantity' | t }}</label>
+              <input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1">
+            </div>
+            <button class="button add-to-cart" type="submit">{{ 'templates.product.add_to_cart' | t }}</button>
+          </div>
+        {% else %}
+          <button class="button" type="button" disabled>{{ 'templates.product.sold_out' | t }}</button>
+        {% endif %}
+      {% endform %}
+
+      {% if product.description != blank %}
+        <details class="product-details" open>
+          <summary>{{ 'templates.product.details' | t }}</summary>
+          <div class="product-description">{{ product.description }}</div>
+        </details>
+      {% endif %}
+
+      <div class="trust-row">
+        <div class="trust"><strong>{{ 'templates.product.shipping_title' | t }}</strong><span>{{ 'templates.product.shipping_text' | t }}</span></div>
+        <div class="trust"><strong>{{ 'templates.product.returns_title' | t }}</strong><span>{{ 'templates.product.returns_text' | t }}</span></div>
+        <div class="trust"><strong>{{ 'templates.product.secure_title' | t }}</strong><span>{{ 'templates.product.secure_text' | t }}</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.product-price{display:flex;align-items:center;gap:.65rem;font-size:1.25rem;font-weight:700;margin:1rem 0}.product-price s{color:var(--muted);font-weight:400}.sale-note{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}.product-form{display:grid;gap:1rem}.field{display:grid;gap:.45rem}.field select,.quantity-field input{width:100%;padding:.8rem;border:1px solid var(--line);background:var(--paper);font:inherit}.purchase-row{display:grid;grid-template-columns:110px 1fr;gap:.75rem;align-items:end}.quantity-field{display:grid;gap:.45rem}.add-to-cart{width:100%;min-height:50px;font-size:1rem}.product-details{border-block:1px solid var(--line);padding:1rem 0;margin-top:1.5rem}.product-details summary{cursor:pointer;font-weight:700}.product-description{margin-top:1rem;color:var(--muted)}.trust-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem}.trust{display:grid;gap:.25rem;font-size:.82rem;padding-top:1rem;border-top:1px solid var(--line)}.trust span{color:var(--muted)}
+@media(max-width:749px){.product-layout{display:block}.product-media{display:grid;gap:.5rem}.product-info{padding-top:1.25rem}.purchase-row{grid-template-columns:90px 1fr}.trust-row{grid-template-columns:1fr 1fr}.trust:last-child{grid-column:1/-1}}
+{% endstylesheet %}
+
 {% schema %}{"name":"t:sections.main_product.name"}{% endschema %}
