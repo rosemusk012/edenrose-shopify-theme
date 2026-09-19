@@ -1,4 +1,4 @@
-<section class="product-page">
+{% render 'breadcrumbs' %}<section class="product-page">
   <div class="page-width product-layout">
     <div class="product-media">
       {% for image in product.images %}<figure class="product-media-item">{% if forloop.first %}{{ image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '700,1000,1400', sizes: '(min-width: 750px) 55vw, 100vw', alt: image.alt | default: product.title }}{% else %}{{ image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '700,1000,1400', sizes: '(min-width: 750px) 55vw, 100vw', alt: image.alt | default: product.title }}{% endif %}</figure>{% endfor %}
