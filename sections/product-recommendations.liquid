@@ -1,7 +1,7 @@
 <section class="product-recommendations" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}">
   <div class="page-width">
     <div class="recommendation-heading"><div><p class="eyebrow">EdenRose</p><h2>{{ section.settings.heading | escape }}</h2>{% if section.settings.subheading != blank %}<p>{{ section.settings.subheading | escape }}</p>{% endif %}</div></div>
-    <div class="recommendation-grid">
+    <div class="recommendation-grid" aria-live="polite">
       {% if recommendations.performed %}{% for product in recommendations.products limit: section.settings.products_to_show %}{% render 'card-product', product: product %}{% endfor %}{% endif %}
     </div>
   </div>
