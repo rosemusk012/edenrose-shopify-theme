@@ -1,1 +1,1 @@
-[{"name":"t:settings.general.name","settings":[{"type":"text","id":"announcement","label":"t:settings.general.announcement","default":"Free delivery information is shown at checkout."}]}]
+[{"name":"t:settings.general.name","settings":[{"type":"text","id":"announcement","label":"t:settings.general.announcement","default":"Delivery information shown at checkout."}]}]
