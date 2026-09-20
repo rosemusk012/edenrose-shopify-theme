@@ -125,6 +125,16 @@
       }
 
       dropdowns.forEach(function(dropdown){
+        var trigger=dropdown.querySelector(':scope > summary');
+        if(trigger){
+          trigger.addEventListener('click',function(event){
+            event.preventDefault();
+            event.stopPropagation();
+            closeDropdowns(dropdown);
+            dropdown.open=!dropdown.open;
+            setExpanded(dropdown);
+          });
+        }
         dropdown.addEventListener('toggle',function(){
           setExpanded(dropdown);
           if(dropdown.open) closeDropdowns(dropdown);
