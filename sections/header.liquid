@@ -196,7 +196,10 @@
 </script>
 
 {% stylesheet %}
+.shopify-section:has(.site-header){position:relative;z-index:10000;overflow:visible}
+#header-group{position:relative;z-index:10000;overflow:visible}
 .site-header{position:sticky;top:0;z-index:10000;overflow:visible;isolation:isolate}
+.shopify-section:has(.site-header) .site-header{z-index:10001}
 .site-header .header-row{overflow:visible;position:relative;z-index:10001}
 .header-row{min-height:82px}
 .brand{display:inline-flex;align-items:center;min-width:0}
