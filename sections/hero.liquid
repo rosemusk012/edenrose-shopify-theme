@@ -1,6 +1,6 @@
 <section class="hero" aria-labelledby="HeroHeading">
   <div class="page-width">
-    <div class="hero-banner">
+    <div class="hero-banner{% if section.settings.image == blank %} hero-banner--no-image{% endif %}">
       <div class="hero-content">
         {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}
         <h1 id="HeroHeading">{{ section.settings.heading | escape }}</h1>
@@ -15,23 +15,18 @@
           <span>{{ 'sections.hero.proof_new_arrivals' | t }}</span>
         </div>
       </div>
-      <div class="hero-visual">
-        {% if section.settings.image != blank %}
+      {% if section.settings.image != blank %}
+        <div class="hero-visual">
           {{ section.settings.image | image_url: width: 1800 | image_tag: loading: 'eager', widths: '600,900,1200,1500,1800', sizes: '(min-width: 750px) 50vw, 100vw', class: 'hero-image', alt: section.settings.heading }}
-        {% else %}
-          <div class="hero-visual-fallback" aria-hidden="true">
-            <span class="hero-visual-word">EDENROSE</span>
-            <span class="hero-visual-sub">NEW COLLECTION</span>
-          </div>
-        {% endif %}
-      </div>
+        </div>
+      {% endif %}
     </div>
   </div>
 </section>
 {% stylesheet %}
 .hero{padding:clamp(2rem,5vw,5rem) 0}
 .hero-banner{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:clamp(460px,55vw,680px);overflow:hidden;border-radius:16px;background:var(--soft);box-shadow:0 18px 50px rgba(33,26,27,.08)}
-.hero-content{display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,6vw,6rem);background:linear-gradient(135deg,#fbf7f3 0%,#f3e5e3 100%)}
+.hero-banner--no-image{grid-template-columns:1fr}.hero-content{display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,6vw,6rem);background:linear-gradient(135deg,#fbf7f3 0%,#f3e5e3 100%)}
 .hero h1{font-size:clamp(3rem,5.5vw,6rem);line-height:.94;letter-spacing:-.06em;margin:.5rem 0 1.35rem;max-width:11ch;overflow-wrap:anywhere;word-break:normal}
 .hero-text{font-size:clamp(1rem,1.4vw,1.18rem);line-height:1.6;color:var(--muted);max-width:34rem;margin:0}
 .hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.8rem}
@@ -41,14 +36,11 @@
 .hero-proof span:last-child{border-right:0}
 .hero-visual{position:relative;min-width:0;min-height:100%;overflow:hidden;background:linear-gradient(145deg,#ead2d6,#d8b9bd)}
 .hero-image{display:block;width:100%;height:100%;min-width:0;min-height:clamp(460px,55vw,680px);object-fit:cover}
-.hero-visual-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle at 30% 25%,#fbf7f3 0%,#ead2d6 42%,#b9828e 100%);color:var(--wine)}
-.hero-visual-word{font-family:var(--display);font-size:clamp(3rem,7vw,7rem);line-height:.9;letter-spacing:-.07em}
-.hero-visual-sub{margin-top:1.2rem;font-size:.68rem;letter-spacing:.2em}
 .hero-actions .button{min-height:48px;border-radius:999px;min-width:0}
 .hero-actions .button--quiet{background:rgba(255,255,255,.45);backdrop-filter:blur(8px)}
 @media(max-width:749px){
   .hero{padding:1rem 0 2.5rem}
-  .hero-banner{grid-template-columns:1fr;min-height:0;border-radius:12px}
+  .hero-banner{grid-template-columns:1fr;min-height:0;border-radius:12px}.hero-banner--no-image .hero-content{padding-bottom:2.5rem}
   .hero-content{padding:2.25rem 1.4rem 2rem;order:1;min-width:0}
   .hero h1{font-size:clamp(2.8rem,13vw,4.2rem);max-width:9ch}
   .hero-text{font-size:.98rem}
