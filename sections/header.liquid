@@ -4,17 +4,63 @@
 
     <nav class="nav nav-desktop" aria-label="{{ 'accessibility.main_navigation' | t }}">
       <span class="nav-label" aria-hidden="true">{{ 'general.shop' | t }}</span>
-      {% for link in linklists[section.settings.menu].links %}
-        {% if link.links != blank %}
+      {% assign edenrose_categories = 'New Arrivals|new-arrivals,Clothing|apparel,Jewellery|jewelry,Shoes|shoes,Accessories|earrings,The Edit|new-arrivals' | split: ',' %}
+      {% for item in edenrose_categories %}
+        {% assign item_parts = item | split: '|' %}
+        {% assign item_title = item_parts[0] %}
+        {% assign item_handle = item_parts[1] %}
+        {% if item_title == 'Clothing' %}
           <details class="nav-dropdown">
-            <summary aria-expanded="false"{% if link.current %} aria-current="page"{% endif %}>
-              {{ link.title | escape }}<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span>
-            </summary>
+            <summary aria-expanded="false">Clothing<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
             <div class="nav-dropdown__menu">
-              <span class="nav-dropdown__label">{{ 'general.the_edit' | t }}</span>
-              {% for child_link in link.links %}
-                <a href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a>
-              {% endfor %}
+              <span class="nav-dropdown__label">Shop Clothing</span>
+              <a href="{{ collections['apparel'].url }}">All Clothing</a>
+              <a href="{{ collections['dresses-1'].url }}">Dresses</a>
+              <a href="{{ collections['tops-blouses'].url }}">Tops &amp; Blouses</a>
+              <a href="{{ collections['bottoms-sets'].url }}">Bottoms &amp; Sets</a>
+              <a href="{{ collections['jumpsuits-rompers'].url }}">Jumpsuits &amp; Rompers</a>
+              <a href="{{ collections['sweaters-hoodies'].url }}">Sweaters &amp; Hoodies</a>
+              <a href="{{ collections['plus-size'].url }}">Plus Size</a>
+            </div>
+          </details>
+        {% elsif item_title == 'Jewellery' %}
+          <details class="nav-dropdown">
+            <summary aria-expanded="false">Jewellery<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
+            <div class="nav-dropdown__menu">
+              <span class="nav-dropdown__label">Shop Jewellery</span>
+              <a href="{{ collections['jewelry'].url }}">All Jewellery</a>
+              <a href="{{ collections['rings'].url }}">Rings</a>
+              <a href="{{ collections['earrings'].url }}">Earrings</a>
+              <a href="{{ collections['necklaces'].url }}">Necklaces</a>
+            </div>
+          </details>
+        {% elsif item_title == 'Accessories' %}
+          <details class="nav-dropdown">
+            <summary aria-expanded="false">Accessories<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
+            <div class="nav-dropdown__menu">
+              <span class="nav-dropdown__label">More to Discover</span>
+              <a href="{{ collections['earrings'].url }}">Earrings</a>
+              <a href="{{ collections['necklaces'].url }}">Necklaces</a>
+              <a href="{{ collections['socks'].url }}">Socks</a>
+              <a href="{{ collections['gift-ideas'].url }}">Gift Ideas</a>
+            </div>
+          </details>
+        {% elsif item_title == 'The Edit' %}
+          <details class="nav-dropdown">
+            <summary aria-expanded="false">The Edit<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
+            <div class="nav-dropdown__menu">
+              <span class="nav-dropdown__label">EdenRose Edit</span>
+              <a href="{{ collections['new-arrivals'].url }}">Trending Now</a>
+              <a href="{{ collections['dresses-1'].url }}">Going Out</a>
+              <a href="{{ collections['statement-pieces'].url }}">Statement Pieces</a>
+              <a href="{{ collections['under-50'].url }}">Under $50</a>
+              <a href="{{ collections['gift-ideas'].url }}">Gift Ideas</a>
+            </div>
+          </details>
+        {% else %}
+          <a href="{{ collections[item_handle].url }}">{{ item_title }}</a>
+        {% endif %}
+      {% endfor %}
             </div>
           </details>
         {% else %}
@@ -56,14 +102,59 @@
         </summary>
         <nav id="MobileNavigation-{{ section.id }}" class="mobile-nav" aria-label="{{ 'accessibility.main_navigation' | t }}">
           <div class="mobile-nav-links">
-            {% for link in linklists[section.settings.menu].links %}
-              {% if link.links != blank %}
+            {% assign edenrose_mobile_categories = 'New Arrivals|new-arrivals,Clothing|apparel,Jewellery|jewelry,Shoes|shoes,Accessories|earrings,The Edit|new-arrivals' | split: ',' %}
+            {% for item in edenrose_mobile_categories %}
+              {% assign item_parts = item | split: '|' %}
+              {% assign item_title = item_parts[0] %}
+              {% assign item_handle = item_parts[1] %}
+              {% if item_title == 'Clothing' %}
                 <details class="mobile-nav-group">
-                  <summary aria-expanded="false">{{ link.title | escape }}<span aria-hidden="true">⌄</span></summary>
+                  <summary aria-expanded="false">Clothing<span aria-hidden="true">⌄</span></summary>
                   <div class="mobile-nav-sub-links">
-                    {% for child_link in link.links %}
-                      <a href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a>
-                    {% endfor %}
+                    <a href="{{ collections['apparel'].url }}">All Clothing</a>
+                    <a href="{{ collections['dresses-1'].url }}">Dresses</a>
+                    <a href="{{ collections['tops-blouses'].url }}">Tops &amp; Blouses</a>
+                    <a href="{{ collections['bottoms-sets'].url }}">Bottoms &amp; Sets</a>
+                    <a href="{{ collections['jumpsuits-rompers'].url }}">Jumpsuits &amp; Rompers</a>
+                    <a href="{{ collections['sweaters-hoodies'].url }}">Sweaters &amp; Hoodies</a>
+                    <a href="{{ collections['plus-size'].url }}">Plus Size</a>
+                  </div>
+                </details>
+              {% elsif item_title == 'Jewellery' %}
+                <details class="mobile-nav-group">
+                  <summary aria-expanded="false">Jewellery<span aria-hidden="true">⌄</span></summary>
+                  <div class="mobile-nav-sub-links">
+                    <a href="{{ collections['jewelry'].url }}">All Jewellery</a>
+                    <a href="{{ collections['rings'].url }}">Rings</a>
+                    <a href="{{ collections['earrings'].url }}">Earrings</a>
+                    <a href="{{ collections['necklaces'].url }}">Necklaces</a>
+                  </div>
+                </details>
+              {% elsif item_title == 'Accessories' %}
+                <details class="mobile-nav-group">
+                  <summary aria-expanded="false">Accessories<span aria-hidden="true">⌄</span></summary>
+                  <div class="mobile-nav-sub-links">
+                    <a href="{{ collections['earrings'].url }}">Earrings</a>
+                    <a href="{{ collections['necklaces'].url }}">Necklaces</a>
+                    <a href="{{ collections['socks'].url }}">Socks</a>
+                    <a href="{{ collections['gift-ideas'].url }}">Gift Ideas</a>
+                  </div>
+                </details>
+              {% elsif item_title == 'The Edit' %}
+                <details class="mobile-nav-group">
+                  <summary aria-expanded="false">The Edit<span aria-hidden="true">⌄</span></summary>
+                  <div class="mobile-nav-sub-links">
+                    <a href="{{ collections['new-arrivals'].url }}">Trending Now</a>
+                    <a href="{{ collections['dresses-1'].url }}">Going Out</a>
+                    <a href="{{ collections['statement-pieces'].url }}">Statement Pieces</a>
+                    <a href="{{ collections['under-50'].url }}">Under $50</a>
+                    <a href="{{ collections['gift-ideas'].url }}">Gift Ideas</a>
+                  </div>
+                </details>
+              {% else %}
+                <a href="{{ collections[item_handle].url }}">{{ item_title }}<span aria-hidden="true">→</span></a>
+              {% endif %}
+            {% endfor %}
                   </div>
                 </details>
               {% else %}
