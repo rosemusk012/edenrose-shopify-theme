@@ -8,31 +8,276 @@
  * ------------------------------------------------------------
  */
 {
-  "accessibility":{"skip_to_content":"Skip to content","main_navigation":"Main navigation","menu":"Menu"},
-  "general":{"search":"Search","cart":"Cart","view_all":"View all","home":"Home","breadcrumbs":"Breadcrumb","shop":"Shop","the_edit":"The edit","language":"Language"},
-  "settings":{"general":{"name":"General","announcement":"Announcement"}},
-  "sections":{
-    "header":{"name":"Header","settings":{"menu":"Menu","logo":"Logo"}},
-    "promo_banner":{"aria_label":"Current EdenRose promotion","message":"10% off your EdenRose order","use_code":"Use code","shop_now":"Shop now"},
-    "recently_viewed":{"name":"Recently viewed","eyebrow":"EdenRose","settings":{"heading":"Heading"}},
-    "footer":{"settings":{"menu":"Menu"},"note":"A simple, considered shopping experience for EdenRose.","shop":"Shop","help":"Help","shipping_title":"Shipping","shipping_text":"Delivery details are available at checkout.","returns_title":"Returns","returns_text":"Review the store return policy before purchase.","secure_title":"Secure checkout","secure_text":"Checkout is handled securely by Shopify.","back_to_store":"Back to store","privacy":"Privacy","terms":"Terms"},
-    "hero":{"name":"Hero","settings":{"eyebrow":"Eyebrow","heading":"Heading","text":"Text","button_label":"Button label","button_link":"Button link","secondary_label":"Secondary button","secondary_link":"Secondary link","image":"Image"},"art_note":"Clothing, jewellery & new arrivals","proof_clothing":"Clothing","proof_jewellery":"Jewellery","proof_new_arrivals":"New arrivals"},
-    "benefits":{"aria_label":"EdenRose shopping benefits","editor_name":"Store benefits","settings":{"eyebrow":"Eyebrow","heading":"Heading"},"blocks":{"benefit":"Benefit","title":"Title","text":"Text","link_label":"Link label","link":"Link"}},
-    "shop_by_category":{"name":"Shop by category","settings":{"eyebrow":"Eyebrow","heading":"Heading","intro":"Intro"},"blocks":{"category":"Category","collection":"Collection"}},
-    "featured_collection":{"name":"Featured collection","settings":{"collection":"Collection","heading":"Heading","products_to_show":"Products to show","subheading":"Subheading"},"eyebrow":"Featured","choose_collection":"Choose a collection to show products."},
-    "main_collection":{"name":"Collection"},"main_product":{"name":"Product"},"main_page":{"name":"Page"},"main_cart":{"name":"Cart"},"search":{"name":"Search"},
-    "product_recommendations":{"name":"Product recommendations","settings":{"heading":"Heading","subheading":"Subheading","products_to_show":"Products to show"}},
-    "edenrose_marquee":{"text":"EDENROSE ✦ NEW ARRIVALS ✦ EDENROSE10 ✦ 10% OFF"},
-    "editorial_feature":{"eyebrow":"The EdenRose edit","shop":"Shop this piece","tag_one":"Featured piece"},
-    "editorial_break":{"eyebrow":"EdenRose"}
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "main_navigation": "Main navigation",
+    "menu": "Menu"
   },
-  "templates":{
-    "404":{"eyebrow":"Page not found","title":"We couldn't find that page.","text":"The page may have moved, or the link may no longer be available.","home":"Back home","shop":"Shop"},
-    "collection":{"eyebrow":"Collection","products":"products","sort_by":"Sort by","featured":"Featured","price_low":"Price, low to high","price_high":"Price, high to low","newest":"Newest","filter":"Filter","refine":"Refine","clear_filters":"Clear filters","close_filters":"Close filters","min":"Min","no_products":"No products found. Try removing a filter.","max":"Max","apply_filters":"Apply filters"},
-    "product":{"recommended_eyebrow":"You may also like","variant":"Option","sold_out":"Sold out","quantity":"Quantity","add_to_cart":"Add to cart","on_sale":"Sale","details":"Details","available":"Available","shipping_title":"Shipping","shipping_text":"Delivery details are available at checkout.","returns_title":"Returns","returns_text":"Review the store return policy before purchase.","secure_title":"Secure checkout","secure_text":"Checkout is handled securely by Shopify.","left":"left","size_fit_title":"Size & fit","size_fit_text":"Check the product details and measurements before choosing your size. If you need help, review the store policies or contact EdenRose.","view_policy":"View policy"},
-    "cart":{"eyebrow":"Shopping bag","title":"Your cart","empty":"Your cart is currently empty.","continue":"Continue shopping","continue_shopping":"Continue shopping","quantity":"Quantity","item_count":"{{ count }} items","subtotal":"Subtotal","update":"Update cart","checkout":"Checkout","remove":"Remove","summary":"Order summary","shipping_note":"Shipping and taxes are calculated at checkout.","line_total":"Line total","order_progress":"Almost there","shipping_calculated":"Shipping and taxes are calculated at checkout.","browse_categories":"Browse categories","quantity_for":"Quantity for {{ product }}"},
-    "search":{"eyebrow":"Search","title":"Find something you love","intro":"Search clothing, jewellery and new arrivals across EdenRose.","placeholder":"What are you looking for?","results":"results","clear":"Clear search","open_result":"Open result","no_results":"Nothing matched that search.","try_again":"Try another search, or browse the full collection.","browse_all":"Browse everything"}
+  "general": {
+    "search": "Search",
+    "cart": "Cart",
+    "view_all": "View all",
+    "home": "Home",
+    "breadcrumbs": "Breadcrumb",
+    "shop": "Shop",
+    "the_edit": "The edit",
+    "language": "Language"
   },
-  "snippets":{"product_card":{"add_to_cart":"Add to cart","choose_options":"Choose options"}},
-  "products":{"product":{"sold_out":"Sold out","sale":"Sale","add_to_cart":"Add to cart","choose_options":"Choose options","view":"View","new":"New"}}
+  "settings": {
+    "general": {
+      "name": "General",
+      "announcement": "Announcement"
+    }
+  },
+  "sections": {
+    "header": {
+      "name": "Header",
+      "settings": {
+        "menu": "Menu",
+        "logo": "Logo"
+      }
+    },
+    "promo_banner": {
+      "aria_label": "Current EdenRose promotion",
+      "message": "10% off your EdenRose order",
+      "use_code": "Use code",
+      "shop_now": "Shop now"
+    },
+    "recently_viewed": {
+      "name": "Recently viewed",
+      "eyebrow": "EdenRose",
+      "settings": {
+        "heading": "Heading"
+      }
+    },
+    "footer": {
+      "settings": {
+        "menu": "Menu"
+      },
+      "note": "A simple, considered shopping experience for EdenRose.",
+      "shop": "Shop",
+      "help": "Help",
+      "shipping_title": "Shipping",
+      "shipping_text": "Delivery details are available at checkout.",
+      "returns_title": "Returns",
+      "returns_text": "Review the store return policy before purchase.",
+      "secure_title": "Secure checkout",
+      "secure_text": "Checkout is handled securely by Shopify.",
+      "back_to_store": "Back to store",
+      "privacy": "Privacy",
+      "terms": "Terms"
+    },
+    "hero": {
+      "name": "Hero",
+      "settings": {
+        "eyebrow": "Eyebrow",
+        "heading": "Heading",
+        "text": "Text",
+        "button_label": "Button label",
+        "button_link": "Button link",
+        "secondary_label": "Secondary button",
+        "secondary_link": "Secondary link",
+        "image": "Image"
+      },
+      "art_note": "Clothing, jewellery & new arrivals",
+      "proof_clothing": "Clothing",
+      "proof_jewellery": "Jewellery",
+      "proof_new_arrivals": "New arrivals"
+    },
+    "benefits": {
+      "aria_label": "EdenRose shopping benefits",
+      "editor_name": "Store benefits",
+      "settings": {
+        "eyebrow": "Eyebrow",
+        "heading": "Heading"
+      },
+      "blocks": {
+        "benefit": "Benefit",
+        "title": "Title",
+        "text": "Text",
+        "link_label": "Link label",
+        "link": "Link"
+      }
+    },
+    "shop_by_category": {
+      "name": "Shop by category",
+      "settings": {
+        "eyebrow": "Eyebrow",
+        "heading": "Heading",
+        "intro": "Intro"
+      },
+      "blocks": {
+        "category": "Category",
+        "collection": "Collection"
+      }
+    },
+    "featured_collection": {
+      "name": "Featured collection",
+      "settings": {
+        "collection": "Collection",
+        "heading": "Heading",
+        "products_to_show": "Products to show",
+        "subheading": "Subheading"
+      },
+      "eyebrow": "Featured",
+      "choose_collection": "Choose a collection to show products."
+    },
+    "main_collection": {
+      "name": "Collection"
+    },
+    "main_product": {
+      "name": "Product"
+    },
+    "main_page": {
+      "name": "Page"
+    },
+    "main_cart": {
+      "name": "Cart"
+    },
+    "search": {
+      "name": "Search"
+    },
+    "product_recommendations": {
+      "name": "Product recommendations",
+      "settings": {
+        "heading": "Heading",
+        "subheading": "Subheading",
+        "products_to_show": "Products to show"
+      }
+    },
+    "edenrose_marquee": {
+      "text": "EDENROSE ✦ NEW ARRIVALS ✦ EDENROSE10 ✦ 10% OFF"
+    },
+    "editorial_feature": {
+      "eyebrow": "The EdenRose edit",
+      "shop": "Shop this piece",
+      "tag_one": "Featured piece"
+    },
+    "editorial_break": {
+      "eyebrow": "EdenRose"
+    }
+  },
+  "templates": {
+    "404": {
+      "eyebrow": "Page not found",
+      "title": "We couldn't find that page.",
+      "text": "The page may have moved, or the link may no longer be available.",
+      "home": "Back home",
+      "shop": "Shop"
+    },
+    "collection": {
+      "eyebrow": "Collection",
+      "products": "products",
+      "sort_by": "Sort by",
+      "featured": "Featured",
+      "price_low": "Price, low to high",
+      "price_high": "Price, high to low",
+      "newest": "Newest",
+      "filter": "Filter",
+      "refine": "Refine",
+      "clear_filters": "Clear filters",
+      "close_filters": "Close filters",
+      "min": "Min",
+      "no_products": "No products found. Try removing a filter.",
+      "max": "Max",
+      "apply_filters": "Apply filters"
+    },
+    "product": {
+      "recommended_eyebrow": "You may also like",
+      "variant": "Option",
+      "sold_out": "Sold out",
+      "quantity": "Quantity",
+      "add_to_cart": "Add to cart",
+      "on_sale": "Sale",
+      "details": "Details",
+      "available": "Available",
+      "shipping_title": "Shipping",
+      "shipping_text": "Delivery details are available at checkout.",
+      "returns_title": "Returns",
+      "returns_text": "Review the store return policy before purchase.",
+      "secure_title": "Secure checkout",
+      "secure_text": "Checkout is handled securely by Shopify.",
+      "left": "left",
+      "size_fit_title": "Size & fit",
+      "size_fit_text": "Check the product details and measurements before choosing your size. If you need help, review the store policies or contact EdenRose.",
+      "view_policy": "View policy"
+    },
+    "cart": {
+      "eyebrow": "Shopping bag",
+      "title": "Your cart",
+      "empty": "Your cart is currently empty.",
+      "continue": "Continue shopping",
+      "continue_shopping": "Continue shopping",
+      "quantity": "Quantity",
+      "item_count": "{{ count }} items",
+      "subtotal": "Subtotal",
+      "update": "Update cart",
+      "checkout": "Checkout",
+      "remove": "Remove",
+      "summary": "Order summary",
+      "shipping_note": "Shipping and taxes are calculated at checkout.",
+      "line_total": "Line total",
+      "order_progress": "Almost there",
+      "shipping_calculated": "Shipping and taxes are calculated at checkout.",
+      "browse_categories": "Browse categories",
+      "quantity_for": "Quantity for {{ product }}"
+    },
+    "search": {
+      "eyebrow": "Search",
+      "title": "Find something you love",
+      "intro": "Search clothing, jewellery and new arrivals across EdenRose.",
+      "placeholder": "What are you looking for?",
+      "results": "results",
+      "clear": "Clear search",
+      "open_result": "Open result",
+      "no_results": "Nothing matched that search.",
+      "try_again": "Try another search, or browse the full collection.",
+      "browse_all": "Browse everything"
+    }
+  },
+  "snippets": {
+    "product_card": {
+      "add_to_cart": "Add to cart",
+      "choose_options": "Choose options"
+    }
+  },
+  "products": {
+    "product": {
+      "sold_out": "Sold out",
+      "sale": "Sale",
+      "add_to_cart": "Add to cart",
+      "choose_options": "Choose options",
+      "view": "View",
+      "new": "New"
+    }
+  },
+  "navigation": {
+    "new_arrivals": "New Arrivals",
+    "clothing": "Clothing",
+    "jewellery": "Jewellery",
+    "shoes": "Shoes",
+    "accessories": "Accessories",
+    "the_edit": "The Edit",
+    "shop_clothing": "Shop Clothing",
+    "all_clothing": "All Clothing",
+    "dresses": "Dresses",
+    "tops_blouses": "Tops & Blouses",
+    "bottoms_sets": "Bottoms & Sets",
+    "jumpsuits_rompers": "Jumpsuits & Rompers",
+    "sweaters_hoodies": "Sweaters & Hoodies",
+    "plus_size": "Plus Size",
+    "shop_jewellery": "Shop Jewellery",
+    "all_jewellery": "All Jewellery",
+    "rings": "Rings",
+    "earrings": "Earrings",
+    "necklaces": "Necklaces",
+    "more_to_discover": "More to Discover",
+    "socks": "Socks",
+    "gift_ideas": "Gift Ideas",
+    "edenrose_edit": "EdenRose Edit",
+    "trending_now": "Trending Now",
+    "going_out": "Going Out",
+    "statement_pieces": "Statement Pieces",
+    "under_50": "Under $50"
+  }
 }
