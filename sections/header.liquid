@@ -58,7 +58,7 @@
             </div>
           </details>
         {% else %}
-          <a href="{{ collections[item_handle].url }}">{{ item_title | replace: 'new_arrivals', 'New Arrivals' | replace: 'the_edit', 'The Edit' | replace: 'shoes', 'Shoes' }}</a>
+          <a href="{{ collections[item_handle].url }}">{% case item_title %}{% when 'new_arrivals' %}{{ 'navigation.new_arrivals' | t }}{% when 'shoes' %}{{ 'navigation.shoes' | t }}{% when 'the_edit' %}{{ 'navigation.the_edit' | t }}{% endcase %}</a>
         {% endif %}
       {% endfor %}
     </nav>
@@ -146,7 +146,7 @@
                   </div>
                 </details>
               {% else %}
-                <a href="{{ collections[item_handle].url }}">{{ item_title | replace: 'new_arrivals', 'New Arrivals' | replace: 'the_edit', 'The Edit' | replace: 'shoes', 'Shoes' }}<span aria-hidden="true">→</span></a>
+                <a href="{{ collections[item_handle].url }}">{% case item_title %}{% when 'new_arrivals' %}{{ 'navigation.new_arrivals' | t }}{% when 'shoes' %}{{ 'navigation.shoes' | t }}{% when 'the_edit' %}{{ 'navigation.the_edit' | t }}{% endcase %}<span aria-hidden="true">→</span></a>
               {% endif %}
             {% endfor %}
           </div>
