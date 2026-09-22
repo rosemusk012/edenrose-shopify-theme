@@ -1,0 +1,28 @@
+<section class="sale-collection-promo" aria-labelledby="sale-collection-promo-heading">
+  <div class="page-width sale-collection-promo__inner">
+    <div class="sale-collection-promo__copy">
+      <p class="sale-collection-promo__eyebrow">Selected styles</p>
+      <h2 id="sale-collection-promo-heading">15% off selected styles</h2>
+      <p>Enjoy 15% off the selected EdenRose edit with code <strong>EDENROSE15</strong>.</p>
+      <a class="sale-collection-promo__button" href="/collections/15-off-selected-styles">Shop 15% off styles <span aria-hidden="true">↗</span></a>
+      <p class="sale-collection-promo__note">Storewide offer: 10% off is also available across EdenRose.</p>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.sale-collection-promo{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--soft)}
+.sale-collection-promo__inner{padding:3rem 16px;text-align:center}
+.sale-collection-promo__copy{max-width:680px;margin:0 auto}
+.sale-collection-promo__eyebrow{margin:0 0 .6rem;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.sale-collection-promo h2{margin:0 0 .75rem;font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.05}
+.sale-collection-promo__copy>p:not(.sale-collection-promo__eyebrow):not(.sale-collection-promo__note){margin:0 auto 1.25rem;max-width:560px;color:var(--muted)}
+.sale-collection-promo__button{display:inline-block;padding:.75rem 1.1rem;border:1px solid var(--ink);color:var(--ink);text-decoration:none;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase}
+.sale-collection-promo__button span{margin-left:.25rem}
+.sale-collection-promo__note{margin:1rem 0 0;font-size:.7rem;color:var(--muted)}
+@media(max-width:749px){.sale-collection-promo__inner{padding:2.25rem 12px}}
+{% endstylesheet %}
+
+{% schema %}
+{"name":"15% off selected styles","presets":[{"name":"15% off selected styles"}]}
+{% endschema %}
