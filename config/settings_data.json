@@ -1,1 +1,48 @@
-{"current":{"settings":{"announcement":"Delivery information shown at checkout."}}}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "settings": {
+      "announcement": "Free delivery information is shown at checkout."
+    },
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "menu": "footer"
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "12075128526103414267": {
+        "type": "shopify://apps/bundlex-bundles/blocks/volume-discount-embed/c017a4b2-071a-4809-a2c2-1c5768f46bb9",
+        "disabled": false,
+        "settings": {
+          "show_advanced": false,
+          "hide_quantity": false,
+          "custom_placement_selector": "",
+          "add_to_cart_button_selector": "",
+          "quantity_container_selector": "",
+          "quantity_input_selector": "",
+          "variants_container_selector": "",
+          "product_form_selector": "",
+          "custom_css": ""
+        }
+      }
+    }
+  }
+}

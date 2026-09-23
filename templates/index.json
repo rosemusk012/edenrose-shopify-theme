@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "promo": {
@@ -11,9 +20,7 @@
         "heading": "Find something that feels like you.",
         "text": "Clothing and jewellery, brought together in one easy-to-browse collection.",
         "button_label": "Shop clothing & jewellery",
-        "button_link": "/collections/all",
-        "secondary_label": "New arrivals",
-        "secondary_link": "/collections/new-arrivals"
+        "button_link": "/collections/all"
       }
     },
     "sale_promo": {
@@ -32,33 +39,150 @@
     "categories": {
       "type": "shop-by-category",
       "blocks": {
-        "category-1": {"type": "category", "settings": {"collection": "apparel"}},
-        "category-2": {"type": "category", "settings": {"collection": "dresses-1"}},
-        "category-3": {"type": "category", "settings": {"collection": "tops-blouses"}},
-        "category-4": {"type": "category", "settings": {"collection": "bottoms-sets"}},
-        "category-5": {"type": "category", "settings": {"collection": "jumpsuits-rompers"}},
-        "category-6": {"type": "category", "settings": {"collection": "sweaters-hoodies"}},
-        "category-7": {"type": "category", "settings": {"collection": "plus-size"}},
-        "category-8": {"type": "category", "settings": {"collection": "shoes"}},
-        "category-9": {"type": "category", "settings": {"collection": "jewelry"}},
-        "category-10": {"type": "category", "settings": {"collection": "rings"}},
-        "category-11": {"type": "category", "settings": {"collection": "necklaces"}},
-        "category-12": {"type": "category", "settings": {"collection": "earrings"}},
-        "category-13": {"type": "category", "settings": {"collection": "new-arrivals"}}
+        "category-1": {
+          "type": "category",
+          "settings": {
+            "collection": "apparel"
+          }
+        },
+        "category-2": {
+          "type": "category",
+          "settings": {
+            "collection": "dresses-1"
+          }
+        },
+        "category-3": {
+          "type": "category",
+          "settings": {
+            "collection": "tops-blouses"
+          }
+        },
+        "category-4": {
+          "type": "category",
+          "settings": {
+            "collection": "bottoms-sets"
+          }
+        },
+        "category-5": {
+          "type": "category",
+          "settings": {
+            "collection": "jumpsuits-rompers"
+          }
+        },
+        "category-6": {
+          "type": "category",
+          "settings": {
+            "collection": "sweaters-hoodies"
+          }
+        },
+        "category-7": {
+          "type": "category",
+          "settings": {
+            "collection": "plus-size"
+          }
+        },
+        "category-8": {
+          "type": "category",
+          "settings": {
+            "collection": "shoes"
+          }
+        },
+        "category-9": {
+          "type": "category",
+          "settings": {
+            "collection": "jewelry"
+          }
+        },
+        "category-10": {
+          "type": "category",
+          "settings": {
+            "collection": "rings"
+          }
+        },
+        "category-11": {
+          "type": "category",
+          "settings": {
+            "collection": "necklaces"
+          }
+        },
+        "category-12": {
+          "type": "category",
+          "settings": {
+            "collection": "earrings"
+          }
+        },
+        "category-13": {
+          "type": "category",
+          "settings": {
+            "collection": "new-arrivals"
+          }
+        }
       },
-      "block_order": ["category-1","category-2","category-3","category-4","category-5","category-6","category-7","category-8","category-9","category-10","category-11","category-12","category-13"]
+      "block_order": [
+        "category-1",
+        "category-2",
+        "category-3",
+        "category-4",
+        "category-5",
+        "category-6",
+        "category-7",
+        "category-8",
+        "category-9",
+        "category-10",
+        "category-11",
+        "category-12",
+        "category-13"
+      ],
+      "settings": {}
     },
     "floating": {
       "type": "floating-collections",
       "blocks": {
-        "float-1": {"type": "collection", "settings": {"collection": "new-arrivals"}},
-        "float-2": {"type": "collection", "settings": {"collection": "dresses-1"}},
-        "float-3": {"type": "collection", "settings": {"collection": "jewelry"}},
-        "float-4": {"type": "collection", "settings": {"collection": "shoes"}},
-        "float-5": {"type": "collection", "settings": {"collection": "rings"}},
-        "float-6": {"type": "collection", "settings": {"collection": "earrings"}}
+        "float-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "new-arrivals"
+          }
+        },
+        "float-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "dresses-1"
+          }
+        },
+        "float-3": {
+          "type": "collection",
+          "settings": {
+            "collection": "jewelry"
+          }
+        },
+        "float-4": {
+          "type": "collection",
+          "settings": {
+            "collection": "shoes"
+          }
+        },
+        "float-5": {
+          "type": "collection",
+          "settings": {
+            "collection": "rings"
+          }
+        },
+        "float-6": {
+          "type": "collection",
+          "settings": {
+            "collection": "earrings"
+          }
+        }
       },
-      "block_order": ["float-1","float-2","float-3","float-4","float-5","float-6"],
+      "block_order": [
+        "float-1",
+        "float-2",
+        "float-3",
+        "float-4",
+        "float-5",
+        "float-6"
+      ],
       "settings": {
         "eyebrow": "The EdenRose edit",
         "heading": "Pick your mood.",
@@ -110,8 +234,14 @@
         "link": "/collections/all"
       }
     },
-    "apps": {"type": "apps", "settings": {}},
-    "benefits": {"type": "benefits", "settings": {}}
+    "apps": {
+      "type": "apps",
+      "settings": {}
+    },
+    "benefits": {
+      "type": "benefits",
+      "settings": {}
+    }
   },
   "order": [
     "promo",
