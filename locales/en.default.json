@@ -250,7 +250,10 @@
       "order_progress": "Almost there",
       "shipping_calculated": "Shipping and taxes are calculated at checkout.",
       "browse_categories": "Browse categories",
-      "quantity_for": "Quantity for {{ product }}"
+      "quantity_for": "Quantity for {{ product }}",
+      "trust_label": "Secure checkout reassurance",
+      "trust_heading": "Secure checkout",
+      "trust_text": "Shopify handles your payment securely. Available shipping options and final costs are shown before payment."
     },
     "search": {
       "eyebrow": "Search",
