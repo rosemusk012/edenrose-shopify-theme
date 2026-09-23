@@ -6,6 +6,7 @@
 <title>{{ page_title }}{% unless page_title contains shop.name %} — {{ shop.name }}{% endunless %}</title>
 {% if page_description != blank %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
 {{ content_for_header }}
+<script src="{{ 'edenrose-search.js' | asset_url }}" defer></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
 :root{--ink:#211a1b;--paper:#fbf7f3;--soft:#eee3df;--muted:#776b69;--line:#dfd2cf;--accent:#9b596b;--rose:#ead2d6;--wine:#542a35;--max:1280px;--radius:3px;--focus:2px solid var(--accent);--display:'Playfair Display',Georgia,serif;--body:'DM Sans',Arial,sans-serif}
