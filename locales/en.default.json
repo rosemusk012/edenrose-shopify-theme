@@ -84,11 +84,11 @@
       "shop": "Shop",
       "help": "Help",
       "shipping_title": "Shipping",
-      "shipping_text": "Delivery details are available at checkout.",
+      "shipping_text": "Shipping options and costs are shown clearly at checkout before you pay.",
       "returns_title": "Returns",
-      "returns_text": "Review the store return policy before purchase.",
+      "returns_text": "Check the EdenRose return policy before purchase. You can review it before completing checkout.",
       "secure_title": "Secure checkout",
-      "secure_text": "Checkout is handled securely by Shopify.",
+      "secure_text": "Secure checkout is provided by Shopify, with payment details handled through Shopify checkout.",
       "back_to_store": "Back to store",
       "privacy": "Privacy",
       "terms": "Terms"
@@ -225,7 +225,7 @@
       "secure_text": "Checkout is handled securely by Shopify.",
       "left": "left",
       "size_fit_title": "Size & fit",
-      "size_fit_text": "Check the product details and measurements before choosing your size. If you need help, review the store policies or contact EdenRose.",
+      "size_fit_text": "Fit can vary by style and supplier. Please check the measurements and product details before choosing your size. If you are between sizes, compare the garment measurements with a similar item you already own.",
       "view_policy": "View policy"
     },
     "cart": {
@@ -241,7 +241,7 @@
       "checkout": "Checkout",
       "remove": "Remove",
       "summary": "Order summary",
-      "shipping_note": "Shipping and taxes are calculated at checkout.",
+      "shipping_note": "Your available shipping options, delivery costs and taxes are shown at checkout before payment.",
       "line_total": "Line total",
       "order_progress": "Almost there",
       "shipping_calculated": "Shipping and taxes are calculated at checkout.",
