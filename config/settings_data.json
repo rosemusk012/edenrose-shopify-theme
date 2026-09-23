@@ -42,6 +42,32 @@
           "product_form_selector": "",
           "custom_css": ""
         }
+      },
+      "11556762269829088362": {
+        "type": "shopify://apps/indexgpt/blocks/schema_markup/019ff2af-aa2f-763f-82f0-dea6ed984c56",
+        "disabled": false,
+        "settings": {}
+      },
+      "8023178096671368477": {
+        "type": "shopify://apps/smart-discounts/blocks/embed/019d1c1c-2c4b-704e-be88-ea7fd20c9afb",
+        "disabled": false,
+        "settings": {}
+      },
+      "14494032640169117832": {
+        "type": "shopify://apps/instagram-shop-ai/blocks/app-embed/8af8f5ee-21cb-48a3-80e7-13a99e2519b5",
+        "disabled": false,
+        "settings": {}
+      },
+      "6159598353363395418": {
+        "type": "shopify://apps/google-youtube/blocks/store_widget/14ec7bd0-ac77-49a9-9417-90752398bdff",
+        "disabled": false,
+        "settings": {
+          "widget_position": "LEFT_BOTTOM",
+          "side_margin": 36,
+          "bottom_margin": 36,
+          "mobile_side_margin": 16,
+          "mobile_bottom_margin": 46
+        }
       }
     }
   }
