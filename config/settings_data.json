@@ -63,8 +63,8 @@
         "disabled": false,
         "settings": {
           "widget_position": "RIGHT_BOTTOM",
-          "side_margin": 36,
-          "bottom_margin": 36,
+          "side_margin": 24,
+          "bottom_margin": 21,
           "mobile_side_margin": 16,
           "mobile_bottom_margin": 46
         }
