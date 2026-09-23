@@ -20,158 +20,6 @@
       "type": "sale-collection-promo",
       "settings": {}
     },
-    "categories": {
-      "type": "shop-by-category",
-      "blocks": {
-        "category-1": {
-          "type": "category",
-          "settings": {
-            "collection": "apparel"
-          }
-        },
-        "category-2": {
-          "type": "category",
-          "settings": {
-            "collection": "dresses-1"
-          }
-        },
-        "category-3": {
-          "type": "category",
-          "settings": {
-            "collection": "tops-blouses"
-          }
-        },
-        "category-4": {
-          "type": "category",
-          "settings": {
-            "collection": "bottoms-sets"
-          }
-        },
-        "category-5": {
-          "type": "category",
-          "settings": {
-            "collection": "jumpsuits-rompers"
-          }
-        },
-        "category-6": {
-          "type": "category",
-          "settings": {
-            "collection": "sweaters-hoodies"
-          }
-        },
-        "category-7": {
-          "type": "category",
-          "settings": {
-            "collection": "plus-size"
-          }
-        },
-        "category-8": {
-          "type": "category",
-          "settings": {
-            "collection": "shoes"
-          }
-        },
-        "category-9": {
-          "type": "category",
-          "settings": {
-            "collection": "jewelry"
-          }
-        },
-        "category-10": {
-          "type": "category",
-          "settings": {
-            "collection": "rings"
-          }
-        },
-        "category-11": {
-          "type": "category",
-          "settings": {
-            "collection": "necklaces"
-          }
-        },
-        "category-12": {
-          "type": "category",
-          "settings": {
-            "collection": "earrings"
-          }
-        },
-        "category-13": {
-          "type": "category",
-          "settings": {
-            "collection": "new-arrivals"
-          }
-        }
-      },
-      "block_order": [
-        "category-1",
-        "category-2",
-        "category-3",
-        "category-4",
-        "category-5",
-        "category-6",
-        "category-7",
-        "category-8",
-        "category-9",
-        "category-10",
-        "category-11",
-        "category-12",
-        "category-13"
-      ]
-    },
-    "floating": {
-      "type": "floating-collections",
-      "blocks": {
-        "float-1": {
-          "type": "collection",
-          "settings": {
-            "collection": "new-arrivals"
-          }
-        },
-        "float-2": {
-          "type": "collection",
-          "settings": {
-            "collection": "dresses-1"
-          }
-        },
-        "float-3": {
-          "type": "collection",
-          "settings": {
-            "collection": "jewelry"
-          }
-        },
-        "float-4": {
-          "type": "collection",
-          "settings": {
-            "collection": "shoes"
-          }
-        },
-        "float-5": {
-          "type": "collection",
-          "settings": {
-            "collection": "rings"
-          }
-        },
-        "float-6": {
-          "type": "collection",
-          "settings": {
-            "collection": "earrings"
-          }
-        }
-      },
-      "block_order": [
-        "float-1",
-        "float-2",
-        "float-3",
-        "float-4",
-        "float-5",
-        "float-6"
-      ],
-      "settings": {
-        "eyebrow": "The EdenRose edit",
-        "heading": "Pick your mood.",
-        "text": "A little inspiration before you keep exploring."
-      }
-    },
     "featured": {
       "type": "featured-collection",
       "settings": {
@@ -179,6 +27,42 @@
         "heading": "New arrivals",
         "subheading": "A fresh edit of pieces to discover now.",
         "products_to_show": 12
+      }
+    },
+    "categories": {
+      "type": "shop-by-category",
+      "blocks": {
+        "category-1": {"type": "category", "settings": {"collection": "apparel"}},
+        "category-2": {"type": "category", "settings": {"collection": "dresses-1"}},
+        "category-3": {"type": "category", "settings": {"collection": "tops-blouses"}},
+        "category-4": {"type": "category", "settings": {"collection": "bottoms-sets"}},
+        "category-5": {"type": "category", "settings": {"collection": "jumpsuits-rompers"}},
+        "category-6": {"type": "category", "settings": {"collection": "sweaters-hoodies"}},
+        "category-7": {"type": "category", "settings": {"collection": "plus-size"}},
+        "category-8": {"type": "category", "settings": {"collection": "shoes"}},
+        "category-9": {"type": "category", "settings": {"collection": "jewelry"}},
+        "category-10": {"type": "category", "settings": {"collection": "rings"}},
+        "category-11": {"type": "category", "settings": {"collection": "necklaces"}},
+        "category-12": {"type": "category", "settings": {"collection": "earrings"}},
+        "category-13": {"type": "category", "settings": {"collection": "new-arrivals"}}
+      },
+      "block_order": ["category-1","category-2","category-3","category-4","category-5","category-6","category-7","category-8","category-9","category-10","category-11","category-12","category-13"]
+    },
+    "floating": {
+      "type": "floating-collections",
+      "blocks": {
+        "float-1": {"type": "collection", "settings": {"collection": "new-arrivals"}},
+        "float-2": {"type": "collection", "settings": {"collection": "dresses-1"}},
+        "float-3": {"type": "collection", "settings": {"collection": "jewelry"}},
+        "float-4": {"type": "collection", "settings": {"collection": "shoes"}},
+        "float-5": {"type": "collection", "settings": {"collection": "rings"}},
+        "float-6": {"type": "collection", "settings": {"collection": "earrings"}}
+      },
+      "block_order": ["float-1","float-2","float-3","float-4","float-5","float-6"],
+      "settings": {
+        "eyebrow": "The EdenRose edit",
+        "heading": "Pick your mood.",
+        "text": "A little inspiration before you keep exploring."
       }
     },
     "editorial_1": {
@@ -197,7 +81,7 @@
         "collection": "apparel",
         "heading": "Clothing",
         "subheading": "Explore the full EdenRose clothing collection.",
-        "products_to_show": 12
+        "products_to_show": 8
       }
     },
     "jewellery_edit": {
@@ -206,7 +90,7 @@
         "collection": "jewelry",
         "heading": "Jewellery",
         "subheading": "Explore rings, necklaces and earrings.",
-        "products_to_show": 12
+        "products_to_show": 8
       }
     },
     "shoes_edit": {
@@ -215,7 +99,7 @@
         "collection": "shoes",
         "heading": "Shoes",
         "subheading": "Finish the look with something new.",
-        "products_to_show": 12
+        "products_to_show": 8
       }
     },
     "break_1": {
@@ -226,21 +110,16 @@
         "link": "/collections/all"
       }
     },
-    "apps": {
-      "type": "apps",
-      "settings": {}
-    },
-    "benefits": {
-      "type": "benefits",
-      "settings": {}
-    }
+    "apps": {"type": "apps", "settings": {}},
+    "benefits": {"type": "benefits", "settings": {}}
   },
   "order": [
     "promo",
     "hero",
     "sale_promo",
-    "categories",
     "featured",
+    "categories",
+    "floating",
     "editorial_1",
     "clothing_edit",
     "jewellery_edit",
