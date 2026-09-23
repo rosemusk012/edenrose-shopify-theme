@@ -226,7 +226,11 @@
       "left": "left",
       "size_fit_title": "Size & fit",
       "size_fit_text": "Fit can vary by style and supplier. Please check the measurements and product details before choosing your size. If you are between sizes, compare the garment measurements with a similar item you already own.",
-      "view_policy": "View policy"
+      "view_policy": "View policy",
+      "trust_label": "EdenRose purchase reassurance",
+      "trust_secure": "Secure Shopify checkout",
+      "trust_returns": "Clear returns",
+      "trust_shipping": "Shipping shown before payment"
     },
     "cart": {
       "eyebrow": "Shopping bag",
