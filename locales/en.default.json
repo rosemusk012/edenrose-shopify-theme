@@ -172,7 +172,7 @@
       }
     },
     "edenrose_marquee": {
-      "text": "EDENROSE ✦ NEW ARRIVALS ✦ EDENROSE10 ✦ 10% OFF"
+      "text": "EDENROSE ✦ NEW ARRIVALS ✦ 10% OFF"
     },
     "editorial_feature": {
       "eyebrow": "The EdenRose edit",
@@ -253,7 +253,11 @@
       "quantity_for": "Quantity for {{ product }}",
       "trust_label": "Secure checkout reassurance",
       "trust_heading": "Secure checkout",
-      "trust_text": "Shopify handles your payment securely. Available shipping options and final costs are shown before payment."
+      "trust_text": "Shopify handles your payment securely. Available shipping options and final costs are shown before payment.",
+      "policy_note": "Review store policies before completing your order.",
+      "policy_links_label": "Store policies",
+      "returns_policy": "Returns policy",
+      "shipping_policy": "Shipping policy"
     },
     "search": {
       "eyebrow": "Search",
