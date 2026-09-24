@@ -16,12 +16,12 @@
           {% assign category_image = category.featured_image %}
           {% assign category_image_key = blank %}
           {% if category_image != blank %}
-            {% assign category_image_key = category_image | image_url: width: 1200 %}
+            {% assign category_image_key = category_image | image_url: width: 900 %}
           {% endif %}
           {% if category_image == blank or used_category_images contains category_image_key %}
             {% for product in category.products limit: 12 %}
               {% if product.featured_image != blank %}
-                {% assign candidate_key = product.featured_image | image_url: width: 1200 %}
+                {% assign candidate_key = product.featured_image | image_url: width: 900 %}
                 {% unless used_category_images contains candidate_key %}
                   {% assign category_image = product.featured_image %}
                   {% assign category_image_key = candidate_key %}
@@ -36,7 +36,7 @@
           <a class="category-card category-card--{{ forloop.index }}" href="{{ category.url }}" {{ block.shopify_attributes }}>
             <div class="category-card__media">
               {% if category_image != blank %}
-                {{ category_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 750px) 33vw, 100vw', decoding: 'async', alt: category.title | escape }}
+                {{ category_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 750px) 33vw, 100vw', decoding: 'async', alt: category.title | escape }}
               {% else %}
                 <div class="category-card__placeholder" aria-hidden="true"><span>{{ category.title | slice: 0 | escape }}</span></div>
               {% endif %}
