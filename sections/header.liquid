@@ -47,7 +47,6 @@
               <a href="{{ collections['earrings'].url }}">Earrings</a>
               <a href="{{ collections['necklaces'].url }}">Necklaces</a>
               <a href="{{ collections['pendants'].url }}">Pendants</a>
-              <span class="nav-dropdown__sub-label">More jewellery</span>
             </div>
           </details>
         {% elsif item_title == 'accessories' %}
@@ -116,7 +115,7 @@
         </summary>
         <nav id="MobileNavigation-{{ section.id }}" class="mobile-nav" aria-label="{{ 'accessibility.main_navigation' | t }}">
           <div class="mobile-nav-links">
-            {% assign edenrose_mobile_categories = 'new_arrivals|new-arrivals,clothing|apparel,jewellery|jewelry,shoes|shoes,accessories|earrings,the_edit|new-arrivals' | split: ',' %}
+            {% assign edenrose_mobile_categories = 'new_arrivals|new-arrivals,clothing|apparel,jewellery|jewelry,shoes|shoes,accessories|accessories,the_edit|new-arrivals' | split: ',' %}
             {% for item in edenrose_mobile_categories %}
               {% assign item_parts = item | split: '|' %}
               {% assign item_title = item_parts[0] %}
