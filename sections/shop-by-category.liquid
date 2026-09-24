@@ -9,10 +9,12 @@
     </div>
 
     {% assign used_category_images = '|' %}
+    {% assign visible_categories = 0 %}
     {% comment %}Customer-facing landing categories use the main Shopify collections; granular filter collections stay in collection pages/navigation. {% endcomment %}
     <div class="category-grid category-grid--all">
       {% for block in section.blocks %}
         {% if block.settings.collection != blank %}
+          {% assign visible_categories = visible_categories | plus: 1 %}
           {% assign category = block.settings.collection %}
           {% assign category_image = category.featured_image %}
           {% assign category_image_key = blank %}
@@ -20,16 +22,14 @@
             {% assign category_image_key = category_image | image_url: width: 1200 %}
           {% endif %}
           {% if category_image == blank or used_category_images contains category_image_key %}
-            {% for product in category.products limit: 12 %}
-              {% if product.featured_image != blank %}
-                {% assign candidate_key = product.featured_image | image_url: width: 1200 %}
-                {% unless used_category_images contains candidate_key %}
-                  {% assign category_image = product.featured_image %}
-                  {% assign category_image_key = candidate_key %}
-                  {% break %}
-                {% endunless %}
-              {% endif %}
-            {% endfor %}
+            {% assign fallback_product = category.products.first %}
+            {% if fallback_product != blank and fallback_product.featured_image != blank %}
+              {% assign candidate_key = fallback_product.featured_image | image_url: width: 1200 %}
+              {% unless used_category_images contains candidate_key %}
+                {% assign category_image = fallback_product.featured_image %}
+                {% assign category_image_key = candidate_key %}
+              {% endunless %}
+            {% endif %}
           {% endif %}
           {% if category_image != blank and category_image_key != blank %}
             {% assign used_category_images = used_category_images | append: category_image_key | append: '|' %}
@@ -52,7 +52,7 @@
         {% endif %}
       {% endfor %}
     </div>
-    {% assign visible_categories = 0 %}{% for block in section.blocks %}{% if block.settings.collection != blank %}{% assign visible_categories = visible_categories | plus: 1 %}{% endif %}{% endfor %}{% if visible_categories > 6 %}<div class="category-more"><button class="button" type="button" data-category-toggle aria-expanded="false" data-show-all="Show all collections" data-show-fewer="Show fewer collections">Show all collections</button></div>{% endif %}
+    {% if visible_categories > 6 %}<div class="category-more"><button class="button" type="button" data-category-toggle aria-expanded="false" data-show-all="Show all collections" data-show-fewer="Show fewer collections">Show all collections</button></div>{% endif %}
   </div>
 </section>
 
