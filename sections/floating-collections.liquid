@@ -12,9 +12,9 @@
           <a class="floating-card floating-card--{{ forloop.index }}" href="{{ collection.url }}" {{ block.shopify_attributes }}>
             <div class="floating-card__image">
               {% if collection.featured_image %}
-                {{ collection.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450,650,900', sizes: '(min-width: 750px) 32vw, 85vw', decoding: 'async', alt: collection.title }}
+                {{ collection.featured_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '450,650,900', sizes: '(min-width: 750px) 32vw, 85vw', decoding: 'async', alt: collection.title }}
               {% elsif collection.products.first.featured_image %}
-                {{ collection.products.first.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450,650,900', sizes: '(min-width: 750px) 32vw, 85vw', decoding: 'async', alt: collection.title }}
+                {{ collection.products.first.featured_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '450,650,900', sizes: '(min-width: 750px) 32vw, 85vw', decoding: 'async', alt: collection.title }}
               {% endif %}
             </div>
             <div class="floating-card__label">
