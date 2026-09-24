@@ -230,7 +230,8 @@
       "trust_label": "EdenRose purchase reassurance",
       "trust_secure": "Secure Shopify checkout",
       "trust_returns": "Clear returns",
-      "trust_shipping": "Shipping shown before payment"
+      "trust_shipping": "Shipping shown before payment",
+      "choose_options": "Choose options"
     },
     "cart": {
       "eyebrow": "Shopping bag",
