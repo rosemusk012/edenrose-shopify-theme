@@ -89,10 +89,10 @@
   var toggle=document.querySelector('.filter-toggle');
   var panel=document.getElementById('CollectionFilters');
   var close=panel&&panel.querySelector('.filter-close');
-  if(!toggle||!panel)return;
-  function setOpen(open){panel.classList.toggle('is-open',open);toggle.setAttribute('aria-expanded',open?'true':'false');document.body.classList.toggle('collection-filters-open',open);}
+  if(!toggle||!panel)return; panel.setAttribute('aria-hidden','true');
+  function setOpen(open){panel.classList.toggle('is-open',open);toggle.setAttribute('aria-expanded',open?'true':'false');document.body.classList.toggle('collection-filters-open',open);if(open){panel.setAttribute('aria-hidden','false');}else{panel.setAttribute('aria-hidden','true');}}
   toggle.addEventListener('click',function(){setOpen(!panel.classList.contains('is-open'));});
-  if(close)close.addEventListener('click',function(){setOpen(false);});
+  if(close)close.addEventListener('click',function(){setOpen(false);}); document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('is-open'))setOpen(false);});
 })();
 </script>
 
@@ -146,8 +146,8 @@
   .sort-form{justify-content:flex-end}
   .sort-form select{max-width:180px}
   .collection-layout{display:block}
-  .filter-panel{display:none;position:fixed;inset:0 0 0 auto;width:min(88vw,380px);z-index:100;background:var(--paper);padding:1.25rem;overflow:auto;box-shadow:-12px 0 30px rgba(23,20,17,.12)}
-  .filter-panel.is-open{display:block}
+  .collection-filters-open{overflow:hidden}.filter-panel{display:none;position:fixed;inset:0 0 0 auto;width:min(88vw,380px);z-index:100;background:var(--paper);padding:1.25rem;overflow:auto;box-shadow:-12px 0 30px rgba(23,20,17,.12)}
+  .filter-panel.is-open{display:block}.filter-panel.is-open:before{content:'';position:fixed;inset:0;background:rgba(23,20,17,.18);z-index:-1}
   .filter-close{display:block}
   .collection-results .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}
   .collection-count{font-size:.9rem}
