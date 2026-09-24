@@ -4,7 +4,7 @@
 
     <nav class="nav nav-desktop" aria-label="{{ 'accessibility.main_navigation' | t }}">
       <span class="nav-label" aria-hidden="true">Shop</span>
-      {% assign edenrose_categories = 'new_arrivals|new-arrivals,clothing|apparel,jewellery|jewelry,shoes|shoes,accessories|earrings,the_edit|new-arrivals' | split: ',' %}
+      {% assign edenrose_categories = 'new_arrivals|new-arrivals,clothing|apparel,jewellery|jewelry,shoes|shoes,accessories|accessories,the_edit|new-arrivals' | split: ',' %}
       {% for item in edenrose_categories %}
         {% assign item_parts = item | split: '|' %}
         {% assign item_title = item_parts[0] %}
@@ -47,8 +47,7 @@
               <a href="{{ collections['earrings'].url }}">Earrings</a>
               <a href="{{ collections['necklaces'].url }}">Necklaces</a>
               <a href="{{ collections['pendants'].url }}">Pendants</a>
-              <span class="nav-dropdown__sub-label">Jewellery filters</span>
-              <a href="{{ collections['socks'].url }}">Socks</a>
+              <span class="nav-dropdown__sub-label">More jewellery</span>
             </div>
           </details>
         {% elsif item_title == 'accessories' %}
@@ -56,9 +55,6 @@
             <summary aria-expanded="false">Accessories<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
             <div class="nav-dropdown__menu">
               <span class="nav-dropdown__label">More to Discover</span>
-              <a href="{{ collections['earrings'].url }}">Earrings</a>
-              <a href="{{ collections['necklaces'].url }}">Necklaces</a>
-              <a href="{{ collections['socks'].url }}">Socks</a>
               <a href="{{ collections['gift-ideas'].url }}">Gift Ideas</a>
               <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
             </div>
@@ -164,10 +160,8 @@
                 <details class="mobile-nav-group">
                   <summary aria-expanded="false">Accessories<span aria-hidden="true">⌄</span></summary>
                   <div class="mobile-nav-sub-links">
-                    <a href="{{ collections['earrings'].url }}">Earrings</a>
-                    <a href="{{ collections['necklaces'].url }}">Necklaces</a>
-                    <a href="{{ collections['socks'].url }}">Socks</a>
                     <a href="{{ collections['gift-ideas'].url }}">Gift Ideas</a>
+                    <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
                   </div>
                 </details>
               {% elsif item_title == 'the_edit' %}
