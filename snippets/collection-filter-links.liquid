@@ -1,0 +1,68 @@
+{% doc %}
+Renders EdenRose collection links as a reliable collection-based filter/navigation layer.
+{% enddoc %}
+
+<nav class="edenrose-collection-filters" aria-label="Shop by collection">
+  <details class="collection-filter-group" open>
+    <summary><span>Clothing</span><span aria-hidden="true">+</span></summary>
+    <div class="collection-filter-links">
+      {% assign clothing_handles = 'apparel,dresses-1,maxi-dresses,midi-dresses,mini-dresses,tops-blouses,shirts,cami-tank-tops,active-tops,crop-tops-1,sweaters-hoodies,hoodies-1,cardigans-1,bottoms-sets,pants,jeans,shorts-1,denim-shorts-1,skirts-1,leggings,jumpsuits-rompers,jumpsuits,rompers-1,two-piece-sets-1' | split: ',' %}
+      {% for handle in clothing_handles %}
+        {% assign linked_collection = collections[handle] %}
+        {% if linked_collection != blank and linked_collection.products_count > 0 %}
+          <a href="{{ linked_collection.url }}"{% if linked_collection.handle == collection.handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </details>
+
+  <details class="collection-filter-group">
+    <summary><span>Jewellery</span><span aria-hidden="true">+</span></summary>
+    <div class="collection-filter-links">
+      {% assign jewellery_handles = 'jewelry,rings,earrings,necklaces,pendants,chokers,anklets' | split: ',' %}
+      {% for handle in jewellery_handles %}
+        {% assign linked_collection = collections[handle] %}
+        {% if linked_collection != blank and linked_collection.products_count > 0 %}
+          <a href="{{ linked_collection.url }}"{% if linked_collection.handle == collection.handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </details>
+
+  <details class="collection-filter-group">
+    <summary><span>Shoes & swim</span><span aria-hidden="true">+</span></summary>
+    <div class="collection-filter-links">
+      {% assign shoes_swim_handles = 'shoes,sneakers,boots,sandals,heels,loafers,swimwear,bikinis,one-piece-swimwear,swim-sets,swim-dresses,cover-ups' | split: ',' %}
+      {% for handle in shoes_swim_handles %}
+        {% assign linked_collection = collections[handle] %}
+        {% if linked_collection != blank and linked_collection.products_count > 0 %}
+          <a href="{{ linked_collection.url }}"{% if linked_collection.handle == collection.handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </details>
+
+  <details class="collection-filter-group">
+    <summary><span>Shop by edit</span><span aria-hidden="true">+</span></summary>
+    <div class="collection-filter-links">
+      {% assign edit_handles = 'new-arrivals,plus-size,gift-ideas,statement-pieces,under-50,15-off-selected-styles,socks' | split: ',' %}
+      {% for handle in edit_handles %}
+        {% assign linked_collection = collections[handle] %}
+        {% if linked_collection != blank and linked_collection.products_count > 0 %}
+          <a href="{{ linked_collection.url }}"{% if linked_collection.handle == collection.handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </details>
+</nav>
+
+{% stylesheet %}
+.edenrose-collection-filters{margin-bottom:1rem}
+.collection-filter-group{border-bottom:1px solid var(--line);padding:.9rem 0}
+.collection-filter-group summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+.collection-filter-group summary::-webkit-details-marker{display:none}
+.collection-filter-links{display:grid;gap:.1rem;padding-top:.55rem}
+.collection-filter-links a{display:flex;justify-content:space-between;gap:.75rem;padding:.38rem 0;font-size:.88rem;text-decoration:none;color:inherit}
+.collection-filter-links a:hover,.collection-filter-links a[aria-current="page"]{text-decoration:underline;text-underline-offset:3px}
+.collection-filter-links span{color:var(--muted);font-size:.76rem}
+{% endstylesheet %}
