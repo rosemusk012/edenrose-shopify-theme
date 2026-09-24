@@ -20,9 +20,7 @@
         <div class="collection-toolbar">
           <div class="collection-count"><strong>{{ collection.products_count }}</strong> <span>{{ 'templates.collection.products' | t }}</span></div>
           <div class="collection-actions">
-            {% if collection.filters.size > 0 %}
-              <button type="button" class="filter-toggle button button--secondary" aria-expanded="false" aria-controls="CollectionFilters">Filter</button>
-            {% endif %}
+            <button type="button" class="filter-toggle button button--secondary" aria-expanded="false" aria-controls="CollectionFilters">{{ 'templates.collection.filter' | t }}</button>
             <div class="sort-form">
               <label for="SortBy">{{ 'templates.collection.sort_by' | t }}</label>
               <select id="SortBy" name="sort_by" onchange="this.form.submit()">
@@ -36,9 +34,9 @@
         </div>
 
         <div class="collection-layout">
-          {% if collection.filters.size > 0 %}
-            <aside id="CollectionFilters" class="filter-panel" aria-label="Filter products">
-              <div class="filter-heading"><strong>Filter</strong><button type="button" class="filter-close" aria-label="Close filters">×</button></div>
+          <aside id="CollectionFilters" class="filter-panel" aria-label="{{ 'templates.collection.filter' | t }}">
+              <div class="filter-heading"><strong>{{ 'templates.collection.filter' | t }}</strong><button type="button" class="filter-close" aria-label="{{ 'templates.collection.close_filters' | t }}">×</button></div>
+              {% render 'collection-filter-links' %}
               {% for filter in collection.filters %}
                 <details class="filter-group" {% if filter.active_values.size > 0 %}open{% endif %}>
                   <summary><span>{{ filter.label }}</span><span aria-hidden="true">+</span></summary>
@@ -60,10 +58,11 @@
                   </div>
                 </details>
               {% endfor %}
-              <button type="submit" class="button filter-apply">Apply filters</button>
-              {% if collection.filters.size > 0 %}<a class="filter-clear" href="{{ collection.url }}">Clear all</a>{% endif %}
+              {% if collection.filters.size > 0 %}
+                <button type="submit" class="button filter-apply">{{ 'templates.collection.apply_filters' | t }}</button>
+                <a class="filter-clear" href="{{ collection.url }}">{{ 'templates.collection.clear_filters' | t }}</a>
+              {% endif %}
             </aside>
-          {% endif %}
 
           <div class="collection-results">
             <div class="product-grid">
