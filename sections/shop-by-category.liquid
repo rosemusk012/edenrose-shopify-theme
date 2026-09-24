@@ -36,7 +36,7 @@
           <a class="category-card category-card--{{ forloop.index }}" href="{{ category.url }}" {{ block.shopify_attributes }}>
             <div class="category-card__media">
               {% if category_image != blank %}
-                {{ category_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 750px) 33vw, 100vw', alt: category.title | escape }}
+                {{ category_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 750px) 33vw, 100vw', decoding: 'async', alt: category.title | escape }}
               {% else %}
                 <div class="category-card__placeholder" aria-hidden="true"><span>{{ category.title | slice: 0 | escape }}</span></div>
               {% endif %}
