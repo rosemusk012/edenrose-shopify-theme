@@ -1,5 +1,6 @@
 {% doc %}
-Renders EdenRose collection links as a reliable collection-based filter/navigation layer.
+Renders EdenRose collection links as a reliable, collection-based filter/navigation layer.
+Collection groups are kept separate so unrelated collections do not appear inside another category.
 {% enddoc %}
 
 <nav class="edenrose-collection-filters" aria-label="Shop by collection">
@@ -43,9 +44,22 @@ Renders EdenRose collection links as a reliable collection-based filter/navigati
   </details>
 
   <details class="collection-filter-group">
+    <summary><span>Accessories</span><span aria-hidden="true">+</span></summary>
+    <div class="collection-filter-links">
+      {% assign accessory_handles = 'socks' | split: ',' %}
+      {% for handle in accessory_handles %}
+        {% assign linked_collection = collections[handle] %}
+        {% if linked_collection != blank and linked_collection.products_count > 0 %}
+          <a href="{{ linked_collection.url }}"{% if linked_collection.handle == collection.handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </details>
+
+  <details class="collection-filter-group">
     <summary><span>Shop by edit</span><span aria-hidden="true">+</span></summary>
     <div class="collection-filter-links">
-      {% assign edit_handles = 'new-arrivals,plus-size,gift-ideas,statement-pieces,under-50,15-off-selected-styles,socks' | split: ',' %}
+      {% assign edit_handles = 'new-arrivals,plus-size,gift-ideas,statement-pieces,under-50,15-off-selected-styles' | split: ',' %}
       {% for handle in edit_handles %}
         {% assign linked_collection = collections[handle] %}
         {% if linked_collection != blank and linked_collection.products_count > 0 %}
