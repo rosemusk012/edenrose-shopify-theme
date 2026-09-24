@@ -40,10 +40,11 @@
           .then(function(data){render(data,term)})
           .catch(function(e){if(e.name!=='AbortError')close()});
       }
-      input.addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(search,220)});
+      input.addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(search,300)});
       input.addEventListener('focus',function(){if(input.value.trim().length>=2)search()});
       document.addEventListener('click',function(e){if(!form.contains(e.target))close()});
       document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+      form.addEventListener('submit',function(){clearTimeout(timer);if(controller)controller.abort();});
     });
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initSearch);else initSearch();
