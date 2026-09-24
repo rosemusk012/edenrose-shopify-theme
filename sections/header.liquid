@@ -276,11 +276,6 @@
           if(nav) nav.inert=!menu.open;
         });
 
-        menu.addEventListener('click',function(event){
-          var group=event.target.closest('.mobile-nav-group');
-          if(group) setExpanded(group);
-        });
-
         if(nav) nav.inert=true;
       }
 
@@ -297,7 +292,10 @@
         }
       });
 
-      window.addEventListener('scroll',positionOpenDropdowns,{passive:true});
+      window.addEventListener('scroll',function(){
+        var hasOpenDropdown=dropdowns.some(function(dropdown){ return dropdown.open; });
+        if(hasOpenDropdown) positionOpenDropdowns();
+      },{passive:true});
       window.addEventListener('resize',function(){
         syncPosition();
         positionOpenDropdowns();
