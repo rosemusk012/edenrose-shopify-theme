@@ -86,11 +86,25 @@
 (function(){
   var toggle=document.querySelector('.filter-toggle');
   var panel=document.getElementById('CollectionFilters');
-  var close=panel&&panel.querySelector('.filter-close'); var overlay=document.createElement('div'); overlay.className='collection-filter-overlay'; document.body.appendChild(overlay);
-  if(!toggle||!panel)return; panel.setAttribute('aria-hidden','true');
-  function setOpen(open){panel.classList.toggle('is-open',open);overlay.classList.toggle('is-open',open);toggle.setAttribute('aria-expanded',open?'true':'false');document.body.classList.toggle('collection-filters-open',open);if(open){panel.setAttribute('aria-hidden','false');}else{panel.setAttribute('aria-hidden','true');}}
+  if(!toggle||!panel)return;
+  var close=panel.querySelector('.filter-close');
+  var overlay=document.createElement('div');
+  overlay.className='collection-filter-overlay';
+  document.body.appendChild(overlay);
+  panel.setAttribute('aria-hidden','true');
+  function setOpen(open){
+    panel.classList.toggle('is-open',open);
+    overlay.classList.toggle('is-open',open);
+    toggle.setAttribute('aria-expanded',open?'true':'false');
+    document.body.classList.toggle('collection-filters-open',open);
+    panel.setAttribute('aria-hidden',open?'false':'true');
+  }
   toggle.addEventListener('click',function(){setOpen(!panel.classList.contains('is-open'));});
-  if(close)close.addEventListener('click',function(){setOpen(false);}); overlay.addEventListener('click',function(){setOpen(false);}); document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('is-open'))setOpen(false);});
+  if(close)close.addEventListener('click',function(){setOpen(false);});
+  overlay.addEventListener('click',function(){setOpen(false);});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&panel.classList.contains('is-open'))setOpen(false);
+  });
 })();
 </script>
 
