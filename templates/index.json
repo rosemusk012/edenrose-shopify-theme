@@ -33,7 +33,7 @@
         "collection": "new-arrivals",
         "heading": "New arrivals",
         "subheading": "A fresh edit of pieces to discover now.",
-        "products_to_show": 12
+        "products_to_show": 8
       }
     },
     "categories": {
@@ -205,7 +205,7 @@
         "collection": "apparel",
         "heading": "Clothing",
         "subheading": "Explore the full EdenRose clothing collection.",
-        "products_to_show": 8
+        "products_to_show": 6
       }
     },
     "jewellery_edit": {
@@ -214,7 +214,7 @@
         "collection": "jewelry",
         "heading": "Jewellery",
         "subheading": "Explore rings, necklaces and earrings.",
-        "products_to_show": 8
+        "products_to_show": 6
       }
     },
     "shoes_edit": {
@@ -223,7 +223,7 @@
         "collection": "shoes",
         "heading": "Shoes",
         "subheading": "Finish the look with something new.",
-        "products_to_show": 8
+        "products_to_show": 6
       }
     },
     "break_1": {
