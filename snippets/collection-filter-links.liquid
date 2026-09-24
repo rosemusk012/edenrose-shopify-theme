@@ -16,7 +16,7 @@ Collection groups are kept separate so unrelated collections do not appear insid
   {% assign jewellery_handles = 'jewelry,rings,earrings,necklaces,pendants' | split: ',' %}
   {% if jewellery_handles contains current_handle %}{% assign is_jewellery_collection = true %}{% endif %}
 
-  {% assign shoes_swim_handles = 'shoes,sneakers,boots,sandals,heels,loafers,swimwear,bikinis,one-piece-swimwear,swim-sets,swim-dresses,cover-ups' | split: ',' %}
+  {% assign shoes_swim_handles = 'shoes,sneakers,boots,sandals,heels,swimwear,bikinis,one-piece-swimwear,swim-sets,swim-dresses,cover-ups' | split: ',' %}
   {% if shoes_swim_handles contains current_handle %}{% assign is_shoes_swim_collection = true %}{% endif %}
 
   {% assign accessory_handles = 'socks' | split: ',' %}
