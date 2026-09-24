@@ -2,7 +2,7 @@
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
  *
- * This file may be updated by the Shopify admin language editor
+ * This file may be updated by the Shopify admin theme editor
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
@@ -242,7 +242,7 @@
       "item_count": "{{ count }} items",
       "subtotal": "Subtotal",
       "update": "Update cart",
-      "checkout": "Checkout",
+      "checkout": "Checkout securely",
       "remove": "Remove",
       "summary": "Order summary",
       "shipping_note": "Your available shipping options, delivery costs and taxes are shown at checkout before payment.",
@@ -253,7 +253,7 @@
       "quantity_for": "Quantity for {{ product }}",
       "trust_label": "Secure checkout reassurance",
       "trust_heading": "Secure checkout",
-      "trust_text": "Shopify handles your payment securely. Available shipping options and final costs are shown before payment.",
+      "trust_text": "Shopify handles your payment securely. Shipping options and final costs are shown before payment.",
       "policy_note": "Review shipping and returns before completing your purchase.",
       "policy_links_label": "Store policies",
       "returns_policy": "Returns policy",
