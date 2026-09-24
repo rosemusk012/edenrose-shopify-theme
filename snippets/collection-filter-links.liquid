@@ -13,7 +13,7 @@ Collection groups are kept separate so unrelated collections do not appear insid
   {% assign clothing_handles = 'apparel,dresses-1,maxi-dresses,midi-dresses,mini-dresses,tops-blouses,shirts,cami-tank-tops,active-tops,crop-tops-1,sweaters-hoodies,hoodies-1,cardigans-1,bottoms-sets,pants,jeans,shorts-1,denim-shorts-1,skirts-1,leggings,jumpsuits-rompers,jumpsuits,rompers-1,two-piece-sets-1' | split: ',' %}
   {% if clothing_handles contains current_handle %}{% assign is_clothing_collection = true %}{% endif %}
 
-  {% assign jewellery_handles = 'jewelry,rings,earrings,necklaces,pendants,chokers,anklets' | split: ',' %}
+  {% assign jewellery_handles = 'jewelry,rings,earrings,necklaces,pendants' | split: ',' %}
   {% if jewellery_handles contains current_handle %}{% assign is_jewellery_collection = true %}{% endif %}
 
   {% assign shoes_swim_handles = 'shoes,sneakers,boots,sandals,heels,loafers,swimwear,bikinis,one-piece-swimwear,swim-sets,swim-dresses,cover-ups' | split: ',' %}
