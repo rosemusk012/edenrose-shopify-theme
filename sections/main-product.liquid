@@ -1,7 +1,7 @@
 {% render 'breadcrumbs' %}<section class="product-page" data-product-section="{{ section.id }}" itemscope itemtype="https://schema.org/Product">
   <div class="page-width product-layout">
     <div class="product-media">
-      {% for image in product.images %}<figure class="product-media-item" itemprop="image">{% if forloop.first %}{{ image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '700,1000,1400', sizes: '(min-width: 750px) 55vw, 100vw', alt: image.alt | default: product.title }}{% else %}{{ image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '700,1000,1400', sizes: '(min-width: 750px) 55vw, 100vw', alt: image.alt | default: product.title }}{% endif %}</figure>{% endfor %}
+      {% for image in product.images %}<figure class="product-media-item" itemprop="image">{% if forloop.first %}{{ image | image_url: width: 1200 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600,900,1200', sizes: '(min-width: 750px) 55vw, 100vw', decoding: 'async', alt: image.alt | default: product.title }}{% else %}{{ image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 750px) 27.5vw, 50vw', decoding: 'async', alt: image.alt | default: product.title }}{% endif %}</figure>{% endfor %}
     </div>
     <div class="product-info">
       <p class="eyebrow">{{ product.type | default: shop.name | escape }}</p><h1>{{ product.title | escape }}</h1>
