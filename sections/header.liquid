@@ -206,6 +206,7 @@
       var dropdowns=[].slice.call(header.querySelectorAll('.nav-dropdown'));
       var summary=menu&&menu.querySelector(':scope > summary');
       var nav=menu&&header.querySelector('#MobileNavigation-{{ section.id }}');
+      var mobileGroups=menu?[].slice.call(menu.querySelectorAll('.mobile-nav-group')):[];
 
       function syncPosition(){
         var r=header.getBoundingClientRect();
@@ -244,9 +245,11 @@
         document.body.classList.remove('mobile-menu-open');
         if(nav) nav.inert=true;
         if(summary) summary.setAttribute('aria-expanded','false');
-        if(menu.querySelectorAll) menu.querySelectorAll('.mobile-nav-group[open]').forEach(function(group){
-          group.removeAttribute('open');
-          setExpanded(group);
+        mobileGroups.forEach(function(group){
+          if(group.open){
+            group.removeAttribute('open');
+            setExpanded(group);
+          }
         });
       }
 
