@@ -15,12 +15,26 @@
             <div class="nav-dropdown__menu">
               <span class="nav-dropdown__label">Shop Clothing</span>
               <a href="{{ collections['apparel'].url }}">All Clothing</a>
-              <a href="{{ collections['dresses-1'].url }}">Dresses</a>
+              <a href="{{ collections['dresses'].url }}">Dresses</a>
               <a href="{{ collections['tops-blouses'].url }}">Tops & Blouses</a>
               <a href="{{ collections['bottoms-sets'].url }}">Bottoms & Sets</a>
               <a href="{{ collections['jumpsuits-rompers'].url }}">Jumpsuits & Rompers</a>
               <a href="{{ collections['sweaters-hoodies'].url }}">Sweaters & Hoodies</a>
               <a href="{{ collections['plus-size'].url }}">Plus Size</a>
+              <span class="nav-dropdown__sub-label">Clothing filters</span>
+              <a href="{{ collections['maxi-dresses'].url }}">Maxi Dresses</a>
+              <a href="{{ collections['midi-dresses'].url }}">Midi Dresses</a>
+              <a href="{{ collections['mini-dresses'].url }}">Mini Dresses</a>
+              <a href="{{ collections['shirts'].url }}">Shirts</a>
+              <a href="{{ collections['cami-tank-tops'].url }}">Cami & Tank Tops</a>
+              <a href="{{ collections['active-tops'].url }}">Active Tops</a>
+              <a href="{{ collections['jeans'].url }}">Jeans</a>
+              <a href="{{ collections['pants'].url }}">Pants</a>
+              <a href="{{ collections['shorts'].url }}">Shorts</a>
+              <a href="{{ collections['skirts'].url }}">Skirts</a>
+              <a href="{{ collections['leggings'].url }}">Leggings</a>
+              <a href="{{ collections['jumpsuits'].url }}">Jumpsuits</a>
+              <a href="{{ collections['rompers'].url }}">Rompers</a>
             </div>
           </details>
         {% elsif item_title == 'jewellery' %}
@@ -32,6 +46,9 @@
               <a href="{{ collections['rings'].url }}">Rings</a>
               <a href="{{ collections['earrings'].url }}">Earrings</a>
               <a href="{{ collections['necklaces'].url }}">Necklaces</a>
+              <a href="{{ collections['pendants'].url }}">Pendants</a>
+              <span class="nav-dropdown__sub-label">Jewellery filters</span>
+              <a href="{{ collections['socks'].url }}">Socks</a>
             </div>
           </details>
         {% elsif item_title == 'accessories' %}
@@ -43,6 +60,7 @@
               <a href="{{ collections['necklaces'].url }}">Necklaces</a>
               <a href="{{ collections['socks'].url }}">Socks</a>
               <a href="{{ collections['gift-ideas'].url }}">Gift Ideas</a>
+              <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
             </div>
           </details>
         {% elsif item_title == 'the_edit' %}
@@ -51,9 +69,10 @@
             <div class="nav-dropdown__menu">
               <span class="nav-dropdown__label">EdenRose Edit</span>
               <a href="{{ collections['new-arrivals'].url }}">Trending Now</a>
-              <a href="{{ collections['dresses-1'].url }}">Going Out</a>
+              <a href="{{ collections['dresses'].url }}">Going Out</a>
               <a href="{{ collections['statement-pieces'].url }}">Statement Pieces</a>
               <a href="{{ collections['under-50'].url }}">Under $50</a>
+              <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
               <a href="{{ collections['gift-ideas'].url }}">Gift Ideas</a>
             </div>
           </details>
@@ -111,12 +130,23 @@
                   <summary aria-expanded="false">Clothing<span aria-hidden="true">⌄</span></summary>
                   <div class="mobile-nav-sub-links">
                     <a href="{{ collections['apparel'].url }}">All Clothing</a>
-                    <a href="{{ collections['dresses-1'].url }}">Dresses</a>
+                    <a href="{{ collections['dresses'].url }}">Dresses</a>
                     <a href="{{ collections['tops-blouses'].url }}">Tops & Blouses</a>
                     <a href="{{ collections['bottoms-sets'].url }}">Bottoms & Sets</a>
                     <a href="{{ collections['jumpsuits-rompers'].url }}">Jumpsuits & Rompers</a>
                     <a href="{{ collections['sweaters-hoodies'].url }}">Sweaters & Hoodies</a>
                     <a href="{{ collections['plus-size'].url }}">Plus Size</a>
+                    <a href="{{ collections['maxi-dresses'].url }}">Maxi Dresses</a>
+                    <a href="{{ collections['midi-dresses'].url }}">Midi Dresses</a>
+                    <a href="{{ collections['mini-dresses'].url }}">Mini Dresses</a>
+                    <a href="{{ collections['shirts'].url }}">Shirts</a>
+                    <a href="{{ collections['cami-tank-tops'].url }}">Cami & Tank Tops</a>
+                    <a href="{{ collections['active-tops'].url }}">Active Tops</a>
+                    <a href="{{ collections['jeans'].url }}">Jeans</a>
+                    <a href="{{ collections['pants'].url }}">Pants</a>
+                    <a href="{{ collections['shorts'].url }}">Shorts</a>
+                    <a href="{{ collections['skirts'].url }}">Skirts</a>
+                    <a href="{{ collections['leggings'].url }}">Leggings</a>
                   </div>
                 </details>
               {% elsif item_title == 'jewellery' %}
@@ -127,6 +157,7 @@
                     <a href="{{ collections['rings'].url }}">Rings</a>
                     <a href="{{ collections['earrings'].url }}">Earrings</a>
                     <a href="{{ collections['necklaces'].url }}">Necklaces</a>
+                    <a href="{{ collections['pendants'].url }}">Pendants</a>
                   </div>
                 </details>
               {% elsif item_title == 'accessories' %}
@@ -320,7 +351,7 @@
 .nav-dropdown__menu{display:none;position:fixed;z-index:2147483647;top:var(--edenrose-dropdown-top,82px);left:var(--edenrose-dropdown-left,0px);min-width:230px;gap:2px;padding:.65rem;background:var(--paper);border:1px solid var(--line);box-shadow:0 16px 35px rgba(23,20,17,.12);margin-top:0}
 .nav-dropdown__menu:after{content:'';position:absolute;left:0;right:0;top:-.75rem;height:.75rem}
 .nav-dropdown[open] .nav-dropdown__menu{display:grid}
-.nav-dropdown__label{display:block;padding:.35rem .8rem .55rem;font-size:.6rem;letter-spacing:.16em;color:var(--muted);border-bottom:1px solid var(--line);margin-bottom:.15rem}
+.nav-dropdown__sub-label{display:block;padding:.55rem .8rem .25rem;font-size:.55rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--line);margin-top:.25rem}.nav-dropdown__label{display:block;padding:.35rem .8rem .55rem;font-size:.6rem;letter-spacing:.16em;color:var(--muted);border-bottom:1px solid var(--line);margin-bottom:.15rem}
 .nav-dropdown__menu a{display:block;padding:.7rem .8rem;white-space:nowrap}
 .nav-dropdown__menu a:hover,.nav-dropdown__menu a:focus-visible{background:var(--soft);text-decoration:none}
 .nav-dropdown__menu a[aria-current="page"]{font-weight:700}
