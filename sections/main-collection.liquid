@@ -15,8 +15,6 @@
   <div class="section page-width">
     {% paginate collection.products by 24 %}
       <form id="CollectionFilterForm" class="collection-form" method="get" action="{{ collection.url }}">
-        {% if collection.sort_by != blank %}<input type="hidden" name="sort_by" value="{{ collection.sort_by }}">{% endif %}
-
         <div class="collection-toolbar">
           <div class="collection-count"><strong>{{ collection.products_count }}</strong> <span>{{ 'templates.collection.products' | t }}</span></div>
           <div class="collection-actions">
