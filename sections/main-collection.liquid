@@ -88,11 +88,11 @@
 (function(){
   var toggle=document.querySelector('.filter-toggle');
   var panel=document.getElementById('CollectionFilters');
-  var close=panel&&panel.querySelector('.filter-close');
+  var close=panel&&panel.querySelector('.filter-close'); var overlay=document.createElement('div'); overlay.className='collection-filter-overlay'; document.body.appendChild(overlay);
   if(!toggle||!panel)return; panel.setAttribute('aria-hidden','true');
-  function setOpen(open){panel.classList.toggle('is-open',open);toggle.setAttribute('aria-expanded',open?'true':'false');document.body.classList.toggle('collection-filters-open',open);if(open){panel.setAttribute('aria-hidden','false');}else{panel.setAttribute('aria-hidden','true');}}
+  function setOpen(open){panel.classList.toggle('is-open',open);overlay.classList.toggle('is-open',open);toggle.setAttribute('aria-expanded',open?'true':'false');document.body.classList.toggle('collection-filters-open',open);if(open){panel.setAttribute('aria-hidden','false');}else{panel.setAttribute('aria-hidden','true');}}
   toggle.addEventListener('click',function(){setOpen(!panel.classList.contains('is-open'));});
-  if(close)close.addEventListener('click',function(){setOpen(false);}); document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('is-open'))setOpen(false);});
+  if(close)close.addEventListener('click',function(){setOpen(false);}); overlay.addEventListener('click',function(){setOpen(false);}); document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('is-open'))setOpen(false);});
 })();
 </script>
 
@@ -136,7 +136,7 @@
 .pagination a,.pagination span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:.4rem .7rem;border:1px solid var(--line);border-radius:999px}
 .pagination .current{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .pagination a:hover{background:var(--soft);text-decoration:none}
-@media(max-width:749px){
+@media(min-width:750px){.filter-toggle{display:none}}\n@media(max-width:749px){
   .collection-toolbar:before{display:none}
   .collection-toolbar{position:sticky;top:76px;z-index:20;background:var(--paper);box-shadow:0 1px 0 var(--line);padding-block:.75rem;margin-bottom:1rem;align-items:center}
   .collection-hero{padding:3.5rem 16px 2.5rem}
@@ -147,7 +147,7 @@
   .sort-form select{max-width:180px}
   .collection-layout{display:block}
   .collection-filters-open{overflow:hidden}.filter-panel{display:none;position:fixed;inset:0 0 0 auto;width:min(88vw,380px);z-index:100;background:var(--paper);padding:1.25rem;overflow:auto;box-shadow:-12px 0 30px rgba(23,20,17,.12)}
-  .filter-panel.is-open{display:block}.filter-panel.is-open:before{content:'';position:fixed;inset:0;background:rgba(23,20,17,.18);z-index:-1}
+  .collection-filter-overlay{display:none}.collection-filter-overlay.is-open{display:block;position:fixed;inset:0;z-index:90;background:rgba(23,20,17,.18)}.filter-panel.is-open{display:block}
   .filter-close{display:block}
   .collection-results .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}
   .collection-count{font-size:.9rem}
