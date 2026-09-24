@@ -139,6 +139,12 @@
 @media(min-width:750px){.filter-toggle{display:none}}\n@media(max-width:749px){
   .collection-toolbar:before{display:none}
   .collection-toolbar{position:sticky;top:76px;z-index:20;background:var(--paper);box-shadow:0 1px 0 var(--line);padding-block:.75rem;margin-bottom:1rem;align-items:center}
+  .collection-toolbar,.collection-actions{min-width:0}
+  .collection-count{white-space:nowrap}
+  .collection-actions{flex:1;justify-content:flex-end}
+  .filter-toggle{display:inline-flex;flex:0 0 auto;min-width:92px}
+  .sort-form{min-width:0}
+  .sort-form select{width:100%;min-width:0}
   .collection-hero{padding:3.5rem 16px 2.5rem}
   .collection-title-row{align-items:flex-start;min-height:190px}
   .collection-mark{font-size:5rem;transform:translateY(.1em)}
