@@ -13,7 +13,7 @@
         {% if section.settings.image != blank %}
           {{ section.settings.image | image_url: width: 950 | image_tag: loading: 'lazy', widths: '475,650,800,950', sizes: '(min-width: 900px) 58vw, 93vw', alt: section.settings.product.title }}
         {% elsif section.settings.product.featured_image != blank %}
-          {{ section.settings.product.featured_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '550,750,950,1100', sizes: '(min-width: 900px) 58vw, 90vw', alt: section.settings.product.title }}
+          {{ section.settings.product.featured_image | image_url: width: 950 | image_tag: loading: 'lazy', widths: '475,650,800,950', sizes: '(min-width: 900px) 58vw, 93vw', alt: section.settings.product.title }}
         {% endif %}
       </a>
       <div class="edenrose-editorial__tag edenrose-editorial__tag--one">
@@ -30,7 +30,7 @@
       {% if section.settings.third_product != blank %}
         <a class="edenrose-editorial__mini edenrose-editorial__mini--three" href="{{ section.settings.third_product.url }}" aria-label="{{ section.settings.third_product.title | escape }}">
           {% if section.settings.third_product.featured_image != blank %}
-            {{ section.settings.third_product.featured_image | image_url: width: 420 | image_tag: loading: 'lazy', widths: '210,320,420', sizes: '(min-width: 900px) 22vw, 45vw', alt: section.settings.third_product.title }}
+            {{ section.settings.third_product.featured_image | image_url: width: 360 | image_tag: loading: 'lazy', widths: '180,280,360', sizes: '(min-width: 900px) 22vw, 29vw', alt: section.settings.third_product.title }}
           {% endif %}
         </a>
       {% endif %}
