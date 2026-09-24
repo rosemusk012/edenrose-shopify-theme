@@ -1,6 +1,6 @@
 <header class="site-header">
   <div class="page-width header-row">
-    <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 600 | image_tag: loading: 'eager', widths: '180,300,450,600', sizes: '(min-width: 901px) 180px, 150px', class: 'brand-logo', alt: shop.name }}{% else %}<span>{{ shop.name | escape }}</span>{% endif %}</a>
+    <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 300 | image_tag: loading: 'eager', widths: '180,240,300', sizes: '(min-width: 901px) 180px, 150px', class: 'brand-logo', alt: shop.name }}{% else %}<span>{{ shop.name | escape }}</span>{% endif %}</a>
 
     <nav class="nav nav-desktop" aria-label="{{ 'accessibility.main_navigation' | t }}">
       <span class="nav-label" aria-hidden="true">Shop</span>
