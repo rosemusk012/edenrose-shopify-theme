@@ -241,6 +241,51 @@
     "benefits": {
       "type": "benefits",
       "settings": {}
+    },
+    "sale_edit": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "15-off-selected-styles",
+        "heading": "15% off selected styles",
+        "subheading": "A little more reason to find your next favourite.",
+        "products_to_show": 8
+      }
+    },
+    "dresses_edit": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "dresses-1",
+        "heading": "Dresses",
+        "subheading": "Easy pieces for nights out, weekends and everything between.",
+        "products_to_show": 8
+      }
+    },
+    "tops_edit": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "tops-blouses",
+        "heading": "Tops & blouses",
+        "subheading": "Fresh layers and everyday favourites.",
+        "products_to_show": 8
+      }
+    },
+    "bottoms_edit": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "bottoms-sets",
+        "heading": "Bottoms & sets",
+        "subheading": "Build the look your way.",
+        "products_to_show": 8
+      }
+    },
+    "swimwear_edit": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "swimwear",
+        "heading": "Swimwear",
+        "subheading": "Ready for sunny days and getaways.",
+        "products_to_show": 8
+      }
     }
   },
   "order": [
@@ -249,11 +294,16 @@
     "sale_promo",
     "featured",
     "categories",
+    "sale_edit",
+    "dresses_edit",
+    "tops_edit",
+    "bottoms_edit",
+    "jewellery_edit",
+    "shoes_edit",
+    "swimwear_edit",
     "floating",
     "editorial_1",
     "clothing_edit",
-    "jewellery_edit",
-    "shoes_edit",
     "break_1",
     "apps",
     "benefits"
