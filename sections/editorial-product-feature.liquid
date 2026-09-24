@@ -15,9 +15,9 @@
     <div class="edenrose-editorial__stage">
       <a class="edenrose-editorial__main" href="{{ section.settings.product.url }}" aria-label="{{ section.settings.product.title | escape }}">
         {% if section.settings.image != blank %}
-          {{ section.settings.image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '550,750,950,1100', sizes: '(min-width: 900px) 58vw, 90vw', decoding: 'async', alt: section.settings.product.title }}
+          {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '500,700,850,1000', sizes: '(min-width: 900px) 58vw, 90vw', decoding: 'async', alt: section.settings.product.title }}
         {% elsif section.settings.product.featured_image != blank %}
-          {{ section.settings.product.featured_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '550,750,950,1100', sizes: '(min-width: 900px) 58vw, 90vw', decoding: 'async', alt: section.settings.product.title }}
+          {{ section.settings.product.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '500,700,850,1000', sizes: '(min-width: 900px) 58vw, 90vw', decoding: 'async', alt: section.settings.product.title }}
         {% endif %}
       </a>
       <div class="edenrose-editorial__tag edenrose-editorial__tag--one">
