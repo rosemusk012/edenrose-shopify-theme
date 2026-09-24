@@ -4,57 +4,73 @@ Collection groups are kept separate so unrelated collections do not appear insid
 {% enddoc %}
 
 <nav class="edenrose-collection-filters" aria-label="Shop by collection">
-  <details class="collection-filter-group" open>
-    <summary><span>Clothing</span><span aria-hidden="true">+</span></summary>
-    <div class="collection-filter-links">
-      {% assign clothing_handles = 'apparel,dresses-1,maxi-dresses,midi-dresses,mini-dresses,tops-blouses,shirts,cami-tank-tops,active-tops,crop-tops-1,sweaters-hoodies,hoodies-1,cardigans-1,bottoms-sets,pants,jeans,shorts-1,denim-shorts-1,skirts-1,leggings,jumpsuits-rompers,jumpsuits,rompers-1,two-piece-sets-1' | split: ',' %}
-      {% for handle in clothing_handles %}
-        {% assign linked_collection = collections[handle] %}
-        {% if linked_collection != blank and linked_collection.products_count > 0 %}
-          <a href="{{ linked_collection.url }}"{% if linked_collection.handle == collection.handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </details>
+  {% assign current_handle = collection.handle %}
+  {% assign is_clothing_collection = false %}
+  {% assign is_jewellery_collection = false %}
+  {% assign is_shoes_swim_collection = false %}
+  {% assign is_accessories_collection = false %}
 
-  <details class="collection-filter-group">
-    <summary><span>Jewellery</span><span aria-hidden="true">+</span></summary>
-    <div class="collection-filter-links">
-      {% assign jewellery_handles = 'jewelry,rings,earrings,necklaces,pendants,chokers,anklets' | split: ',' %}
-      {% for handle in jewellery_handles %}
-        {% assign linked_collection = collections[handle] %}
-        {% if linked_collection != blank and linked_collection.products_count > 0 %}
-          <a href="{{ linked_collection.url }}"{% if linked_collection.handle == collection.handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </details>
+  {% assign clothing_handles = 'apparel,dresses-1,maxi-dresses,midi-dresses,mini-dresses,tops-blouses,shirts,cami-tank-tops,active-tops,crop-tops-1,sweaters-hoodies,hoodies-1,cardigans-1,bottoms-sets,pants,jeans,shorts-1,denim-shorts-1,skirts-1,leggings,jumpsuits-rompers,jumpsuits,rompers-1,two-piece-sets-1' | split: ',' %}
+  {% if clothing_handles contains current_handle %}{% assign is_clothing_collection = true %}{% endif %}
 
-  <details class="collection-filter-group">
-    <summary><span>Shoes & swim</span><span aria-hidden="true">+</span></summary>
-    <div class="collection-filter-links">
-      {% assign shoes_swim_handles = 'shoes,sneakers,boots,sandals,heels,loafers,swimwear,bikinis,one-piece-swimwear,swim-sets,swim-dresses,cover-ups' | split: ',' %}
-      {% for handle in shoes_swim_handles %}
-        {% assign linked_collection = collections[handle] %}
-        {% if linked_collection != blank and linked_collection.products_count > 0 %}
-          <a href="{{ linked_collection.url }}"{% if linked_collection.handle == collection.handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </details>
+  {% assign jewellery_handles = 'jewelry,rings,earrings,necklaces,pendants,chokers,anklets' | split: ',' %}
+  {% if jewellery_handles contains current_handle %}{% assign is_jewellery_collection = true %}{% endif %}
 
-  <details class="collection-filter-group">
-    <summary><span>Accessories</span><span aria-hidden="true">+</span></summary>
-    <div class="collection-filter-links">
-      {% assign accessory_handles = 'socks' | split: ',' %}
-      {% for handle in accessory_handles %}
-        {% assign linked_collection = collections[handle] %}
-        {% if linked_collection != blank and linked_collection.products_count > 0 %}
-          <a href="{{ linked_collection.url }}"{% if linked_collection.handle == collection.handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </details>
+  {% assign shoes_swim_handles = 'shoes,sneakers,boots,sandals,heels,loafers,swimwear,bikinis,one-piece-swimwear,swim-sets,swim-dresses,cover-ups' | split: ',' %}
+  {% if shoes_swim_handles contains current_handle %}{% assign is_shoes_swim_collection = true %}{% endif %}
+
+  {% assign accessory_handles = 'socks' | split: ',' %}
+  {% if accessory_handles contains current_handle %}{% assign is_accessories_collection = true %}{% endif %}
+
+  {% if is_clothing_collection %}
+    <details class="collection-filter-group" open>
+      <summary><span>Clothing</span><span aria-hidden="true">+</span></summary>
+      <div class="collection-filter-links">
+        {% for handle in clothing_handles %}
+          {% assign linked_collection = collections[handle] %}
+          {% if linked_collection != blank and linked_collection.products_count > 0 %}
+            <a href="{{ linked_collection.url }}"{% if linked_collection.handle == current_handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </details>
+  {% elsif is_jewellery_collection %}
+    <details class="collection-filter-group" open>
+      <summary><span>Jewellery</span><span aria-hidden="true">+</span></summary>
+      <div class="collection-filter-links">
+        {% for handle in jewellery_handles %}
+          {% assign linked_collection = collections[handle] %}
+          {% if linked_collection != blank and linked_collection.products_count > 0 %}
+            <a href="{{ linked_collection.url }}"{% if linked_collection.handle == current_handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </details>
+  {% elsif is_shoes_swim_collection %}
+    <details class="collection-filter-group" open>
+      <summary><span>Shoes & swim</span><span aria-hidden="true">+</span></summary>
+      <div class="collection-filter-links">
+        {% for handle in shoes_swim_handles %}
+          {% assign linked_collection = collections[handle] %}
+          {% if linked_collection != blank and linked_collection.products_count > 0 %}
+            <a href="{{ linked_collection.url }}"{% if linked_collection.handle == current_handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </details>
+  {% elsif is_accessories_collection %}
+    <details class="collection-filter-group" open>
+      <summary><span>Accessories</span><span aria-hidden="true">+</span></summary>
+      <div class="collection-filter-links">
+        {% for handle in accessory_handles %}
+          {% assign linked_collection = collections[handle] %}
+          {% if linked_collection != blank and linked_collection.products_count > 0 %}
+            <a href="{{ linked_collection.url }}"{% if linked_collection.handle == current_handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </details>
+  {% endif %}
 
   <details class="collection-filter-group">
     <summary><span>Shop by edit</span><span aria-hidden="true">+</span></summary>
@@ -63,7 +79,7 @@ Collection groups are kept separate so unrelated collections do not appear insid
       {% for handle in edit_handles %}
         {% assign linked_collection = collections[handle] %}
         {% if linked_collection != blank and linked_collection.products_count > 0 %}
-          <a href="{{ linked_collection.url }}"{% if linked_collection.handle == collection.handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
+          <a href="{{ linked_collection.url }}"{% if linked_collection.handle == current_handle %} aria-current="page"{% endif %}>{{ linked_collection.title | escape }}<span>{{ linked_collection.products_count }}</span></a>
         {% endif %}
       {% endfor %}
     </div>
