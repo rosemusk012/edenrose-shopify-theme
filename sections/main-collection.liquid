@@ -32,7 +32,7 @@
         </div>
 
         <div class="collection-layout">
-          <aside id="CollectionFilters" class="filter-panel" aria-label="{{ 'templates.collection.filter' | t }}">
+          <aside id="CollectionFilters" class="filter-panel" aria-label="{{ 'templates.collection.filter' | t }}" aria-hidden="true">
               <div class="filter-heading"><strong>{{ 'templates.collection.filter' | t }}</strong><button type="button" class="filter-close" aria-label="{{ 'templates.collection.close_filters' | t }}">×</button></div>
               {% render 'collection-filter-links' %}
               {% for filter in collection.filters %}
@@ -118,16 +118,17 @@
 .collection-hero h1{font-size:clamp(3.2rem,8vw,7rem);line-height:.88;letter-spacing:-.06em;margin:0;max-width:9ch}
 .collection-description{max-width:650px;margin:1.25rem 0 0;color:var(--muted);line-height:1.65}
 .collection-mark{font:normal clamp(6rem,15vw,13rem)/.7 Georgia,serif;color:var(--line);user-select:none;transform:translateY(.08em)}
-.collection-toolbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-block:1px solid var(--line);padding:1rem 0;margin-bottom:1.75rem}
+.collection-toolbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-block:1px solid var(--line);padding:1rem 0;margin-bottom:1.5rem}
 .collection-toolbar:before{content:'CURATED FOR YOU';font-size:.62rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
 .collection-actions{display:flex;align-items:center;gap:.7rem;margin-left:auto}
 .sort-form{display:flex;align-items:center;gap:.5rem}
 .sort-form select{padding:.65rem 2rem .65rem .75rem;border:1px solid var(--line);background:var(--paper);border-radius:999px;min-height:44px}
-.filter-toggle{min-height:44px;padding-inline:1rem}
-.collection-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:2rem;align-items:start}
-.filter-panel{position:sticky;top:6rem}
+.filter-toggle{display:inline-flex;min-height:44px;padding-inline:1rem}
+.collection-layout{display:block}
+.filter-panel{display:none}
+.filter-panel.is-open{display:block;max-width:340px;margin:0 0 1.5rem;padding:1.1rem 1.2rem;border:1px solid var(--line);background:var(--paper)}
 .filter-heading{display:flex;justify-content:space-between;padding-bottom:1rem;border-bottom:1px solid var(--line)}
-.filter-close{display:none;border:0;background:none;font-size:1.5rem}
+.filter-close{display:block;border:0;background:none;font-size:1.5rem;line-height:1;cursor:pointer;min-width:40px;min-height:40px}
 .filter-group{border-bottom:1px solid var(--line);padding:.9rem 0}
 .filter-group summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between}
 .filter-group summary::-webkit-details-marker{display:none}
@@ -141,6 +142,7 @@
 .filter-apply{width:100%;margin-top:1rem;min-height:44px}
 .filter-clear{display:block;text-align:center;margin-top:.65rem;font-size:.82rem;text-decoration:underline;text-underline-offset:3px}
 .collection-results{min-width:0}
+.collection-results .product-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.15rem}
 .collection-empty{grid-column:1/-1;text-align:center;padding:clamp(3rem,7vw,5rem) 1rem;border:1px solid var(--line);background:#f7efeb}
 .collection-empty p{color:var(--muted);margin:0 0 1rem}
 .collection-empty .button{display:inline-flex}
@@ -148,28 +150,31 @@
 .pagination a,.pagination span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:.4rem .7rem;border:1px solid var(--line);border-radius:999px}
 .pagination .current{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .pagination a:hover{background:var(--soft);text-decoration:none}
-@media(min-width:750px){.filter-toggle{display:none}}\n@media(max-width:749px){
+@media(max-width:749px){
   .collection-toolbar:before{display:none}
   .collection-toolbar{position:sticky;top:76px;z-index:20;background:var(--paper);box-shadow:0 1px 0 var(--line);padding-block:.75rem;margin-bottom:1rem;align-items:center}
   .collection-toolbar,.collection-actions{min-width:0}
   .collection-count{white-space:nowrap}
   .collection-actions{flex:1;justify-content:flex-end}
-  .filter-toggle{display:inline-flex;flex:0 0 auto;min-width:92px}
-  .sort-form{min-width:0}
-  .sort-form select{width:100%;min-width:0}
+  .filter-toggle{flex:0 0 auto;min-width:92px}
+  .sort-form{min-width:0;justify-content:flex-end}
+  .sort-form select{width:100%;min-width:0;max-width:180px}
   .collection-hero{padding:3.5rem 16px 2.5rem}
   .collection-title-row{align-items:flex-start;min-height:190px}
   .collection-mark{font-size:5rem;transform:translateY(.1em)}
-  .collection-actions{justify-content:space-between}
-  .sort-form{justify-content:flex-end}
-  .sort-form select{max-width:180px}
   .collection-layout{display:block}
-  .collection-filters-open{overflow:hidden}.filter-panel{display:none;position:fixed;inset:0 0 0 auto;width:min(88vw,380px);z-index:100;background:var(--paper);padding:1.25rem;overflow:auto;box-shadow:-12px 0 30px rgba(23,20,17,.12)}
-  .collection-filter-overlay{display:none}.collection-filter-overlay.is-open{display:block;position:fixed;inset:0;z-index:90;background:rgba(23,20,17,.18)}.filter-panel.is-open{display:block}
-  .filter-close{display:block}
-  .collection-results .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}
+  .collection-filters-open{overflow:hidden}
+  .filter-panel.is-open{position:fixed;inset:0 0 0 auto;width:min(88vw,380px);max-width:none;height:100dvh;z-index:100;padding:1.25rem;overflow:auto;margin:0;border:0;box-shadow:-12px 0 30px rgba(23,20,17,.12)}
+  .collection-filter-overlay{display:none}.collection-filter-overlay.is-open{display:block;position:fixed;inset:0;z-index:90;background:rgba(23,20,17,.18)}
+  .collection-results .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
   .collection-count{font-size:.9rem}
 }
-@media(max-width:480px){.collection-actions{gap:.5rem}.sort-form label{display:none}.sort-form select{max-width:150px}.collection-hero h1{font-size:clamp(3rem,15vw,5rem)}.collection-description{font-size:.92rem}}
+@media(max-width:480px){
+  .collection-actions{gap:.5rem}
+  .sort-form label{display:none}
+  .sort-form select{max-width:150px}
+  .collection-hero h1{font-size:clamp(3rem,15vw,5rem)}
+  .collection-description{font-size:.92rem}
+}
 {% endstylesheet %}
 {% schema %}{"name":"t:sections.main_collection.name"}{% endschema %}
