@@ -1,6 +1,6 @@
 (function(){
   function initSearch(){
-    document.querySelectorAll('.header-search').forEach(function(form){
+    document.querySelectorAll('.header-search').forEach(function(form,index){
       if(form.dataset.predictiveInitialized) return;
       var input=form.querySelector('input[name="q"]');
       if(!input) return;
@@ -9,9 +9,9 @@
       input.setAttribute('role','combobox');
       input.setAttribute('aria-autocomplete','list');
       input.setAttribute('aria-expanded','false');
-      input.setAttribute('aria-controls','EdenRosePredictiveSearch');
+      input.setAttribute('aria-controls','EdenRosePredictiveSearch-'+index);
       var panel=document.createElement('div');
-      panel.id='EdenRosePredictiveSearch';
+      panel.id='EdenRosePredictiveSearch-'+index;
       panel.className='edenrose-predictive-search';
       panel.setAttribute('role','listbox');
       panel.hidden=true;
