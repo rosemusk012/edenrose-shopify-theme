@@ -52,7 +52,7 @@
         {% endif %}
       {% endfor %}
     </div>
-    {% if visible_categories > 6 %}<div class="category-more"><button class="button" type="button" data-category-toggle aria-expanded="false" data-show-all="Show all collections" data-show-fewer="Show fewer collections">Show all collections</button></div>{% endif %}
+    {% if visible_categories > 6 %}<div class="category-more"><button class="button" type="button" data-category-toggle aria-expanded="false" data-show-all="{{ 'general.show_all_collections' | t | escape }}" data-show-fewer="{{ 'general.show_fewer_collections' | t | escape }}">{{ 'general.show_all_collections' | t }}</button></div>{% endif %}
   </div>
 </section>
 
