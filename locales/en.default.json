@@ -213,7 +213,12 @@
       "min": "Min",
       "no_products": "No products found. Try removing a filter.",
       "max": "Max",
-      "apply_filters": "Apply filters"
+      "apply_filters": "Apply filters",
+      "pieces": "pieces",
+      "curated_for_you": "Curated for you",
+      "shop_by_collection": "Shop by collection",
+      "shoes_swim": "Shoes & swim",
+      "shop_by_edit": "Shop by edit"
     },
     "product": {
       "recommended_eyebrow": "You may also like",
