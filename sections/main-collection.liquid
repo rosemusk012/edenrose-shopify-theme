@@ -91,6 +91,7 @@
   toggle.setAttribute('aria-controls','CollectionFilters');
   var overlay=document.createElement('div');
   overlay.className='collection-filter-overlay';
+  overlay.setAttribute('aria-hidden','true');
   document.body.appendChild(overlay);
   panel.setAttribute('aria-hidden','true');
   function setOpen(open){
@@ -99,6 +100,7 @@
     toggle.setAttribute('aria-expanded',open?'true':'false');
     document.body.classList.toggle('collection-filters-open',open);
     panel.setAttribute('aria-hidden',open?'false':'true');
+    overlay.setAttribute('aria-hidden',open?'false':'true');
   }
   var previousFocus=null;
   function openWithFocus(){previousFocus=document.activeElement;setOpen(true);if(close)close.focus();}
