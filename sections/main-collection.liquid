@@ -106,7 +106,7 @@
   toggle.addEventListener('click',function(){if(panel.classList.contains('is-open'))closeWithFocus();else openWithFocus();});
   if(close)close.addEventListener('click',closeWithFocus);
   overlay.addEventListener('click',closeWithFocus);
-  function onKeydown(e){if(e.key==='Escape'&&panel.classList.contains('is-open'))setOpen(false);}
+  function onKeydown(e){if(e.key==='Escape'&&panel.classList.contains('is-open'))closeWithFocus();}
   document.addEventListener('keydown',onKeydown);
 })();
 </script>
