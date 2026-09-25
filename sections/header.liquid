@@ -2,9 +2,10 @@
   <div class="page-width header-row">
     <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 300 | image_tag: loading: 'eager', widths: '180,240,300', sizes: '(min-width: 901px) 180px, 150px', class: 'brand-logo', alt: shop.name }}{% else %}<span>{{ shop.name | escape }}</span>{% endif %}</a>
 
+    {% assign edenrose_categories = 'new_arrivals|new-arrivals,clothing|apparel,jewellery|jewelry,shoes|shoes,accessories|accessories,the_edit|new-arrivals' | split: ',' %}
+
     <nav class="nav nav-desktop" aria-label="{{ 'accessibility.main_navigation' | t }}">
       <span class="nav-label" aria-hidden="true">Shop</span>
-      {% assign edenrose_categories = 'new_arrivals|new-arrivals,clothing|apparel,jewellery|jewelry,shoes|shoes,accessories|accessories,the_edit|new-arrivals' | split: ',' %}
       {% for item in edenrose_categories %}
         {% assign item_parts = item | split: '|' %}
         {% assign item_title = item_parts[0] %}
@@ -116,8 +117,7 @@
         </summary>
         <nav id="MobileNavigation-{{ section.id }}" class="mobile-nav" aria-label="{{ 'accessibility.main_navigation' | t }}">
           <div class="mobile-nav-links">
-            {% assign edenrose_mobile_categories = 'new_arrivals|new-arrivals,clothing|apparel,jewellery|jewelry,shoes|shoes,accessories|accessories,the_edit|new-arrivals' | split: ',' %}
-            {% for item in edenrose_mobile_categories %}
+            {% for item in edenrose_categories %}
               {% assign item_parts = item | split: '|' %}
               {% assign item_title = item_parts[0] %}
               {% assign item_handle = item_parts[1] %}
