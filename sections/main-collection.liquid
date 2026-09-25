@@ -100,13 +100,10 @@
     document.body.classList.toggle('collection-filters-open',open);
     panel.setAttribute('aria-hidden',open?'false':'true');
   }
-  toggle.addEventListener('click',function(){setOpen(!panel.classList.contains('is-open'));});
   var previousFocus=null;
   function openWithFocus(){previousFocus=document.activeElement;setOpen(true);if(close)close.focus();}
   function closeWithFocus(){setOpen(false);if(previousFocus&&previousFocus.focus)previousFocus.focus();}
-  toggle.onclick=null;
   toggle.addEventListener('click',function(){if(panel.classList.contains('is-open'))closeWithFocus();else openWithFocus();});
-  if(close)close.onclick=null;
   if(close)close.addEventListener('click',closeWithFocus);
   overlay.addEventListener('click',closeWithFocus);
   function onKeydown(e){if(e.key==='Escape'&&panel.classList.contains('is-open'))setOpen(false);}
