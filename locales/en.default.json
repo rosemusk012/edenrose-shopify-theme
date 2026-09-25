@@ -47,7 +47,14 @@
     "trending_now": "Trending Now",
     "going_out": "Going Out",
     "statement_pieces": "Statement Pieces",
-    "under_50": "Under $50"
+    "under_50": "Under $50",
+    "show_all_collections": "Show all collections",
+    "show_fewer_collections": "Show fewer collections"
+  },
+  "customer": {
+    "account": {
+      "title": "Account"
+    }
   },
   "settings": {
     "general": {
