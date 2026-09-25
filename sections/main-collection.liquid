@@ -49,8 +49,8 @@
                         {% endfor %}
                       {% when 'price_range' %}
                         <div class="price-fields">
-                          <label>From <input type="number" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | default: '' }}" min="0" inputmode="decimal"></label>
-                          <label>To <input type="number" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | default: '' }}" min="0" inputmode="decimal"></label>
+                          <label>{{ 'templates.collection.min' | t }} <input type="number" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | default: '' }}" min="0" inputmode="decimal"></label>
+                          <label>{{ 'templates.collection.max' | t }} <input type="number" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | default: '' }}" min="0" inputmode="decimal"></label>
                         </div>
                     {% endcase %}
                   </div>
@@ -88,6 +88,7 @@
   var panel=document.getElementById('CollectionFilters');
   if(!toggle||!panel)return;
   var close=panel.querySelector('.filter-close');
+  toggle.setAttribute('aria-controls','CollectionFilters');
   var overlay=document.createElement('div');
   overlay.className='collection-filter-overlay';
   document.body.appendChild(overlay);
@@ -100,11 +101,16 @@
     panel.setAttribute('aria-hidden',open?'false':'true');
   }
   toggle.addEventListener('click',function(){setOpen(!panel.classList.contains('is-open'));});
-  if(close)close.addEventListener('click',function(){setOpen(false);});
-  overlay.addEventListener('click',function(){setOpen(false);});
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'&&panel.classList.contains('is-open'))setOpen(false);
-  });
+  var previousFocus=null;
+  function openWithFocus(){previousFocus=document.activeElement;setOpen(true);if(close)close.focus();}
+  function closeWithFocus(){setOpen(false);if(previousFocus&&previousFocus.focus)previousFocus.focus();}
+  toggle.onclick=null;
+  toggle.addEventListener('click',function(){if(panel.classList.contains('is-open'))closeWithFocus();else openWithFocus();});
+  if(close)close.onclick=null;
+  if(close)close.addEventListener('click',closeWithFocus);
+  overlay.addEventListener('click',closeWithFocus);
+  function onKeydown(e){if(e.key==='Escape'&&panel.classList.contains('is-open'))setOpen(false);}
+  document.addEventListener('keydown',onKeydown);
 })();
 </script>
 
@@ -152,7 +158,7 @@
 .pagination a:hover{background:var(--soft);text-decoration:none}
 @media(max-width:749px){
   .collection-toolbar:before{display:none}
-  .collection-toolbar{position:sticky;top:76px;z-index:20;background:var(--paper);box-shadow:0 1px 0 var(--line);padding-block:.75rem;margin-bottom:1rem;align-items:center}
+  .collection-toolbar{position:sticky;top:68px;z-index:20;background:var(--paper);box-shadow:0 1px 0 var(--line);padding-block:.75rem;margin-bottom:1rem;align-items:center}
   .collection-toolbar,.collection-actions{min-width:0}
   .collection-count{white-space:nowrap}
   .collection-actions{flex:1;justify-content:flex-end}
