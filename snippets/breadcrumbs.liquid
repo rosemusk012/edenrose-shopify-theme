@@ -1,12 +1,34 @@
 <nav class="breadcrumbs page-width" itemscope itemtype="https://schema.org/BreadcrumbList" aria-label="{{ 'general.breadcrumbs' | t }}">
-  <a href="{{ routes.root_url }}" itemprop="item"><span itemprop="name">{{ 'general.home' | t }}</span></a><span aria-hidden="true">/</span>
+  <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+    <a href="{{ routes.root_url }}" itemprop="item"><span itemprop="name">{{ 'general.home' | t }}</span></a>
+    <meta itemprop="position" content="1">
+  </span><span aria-hidden="true">/</span>
   {% if template.name == 'product' %}
-    {% if collection %}<a href="{{ collection.url }}">{{ collection.title | escape }}</a><span aria-hidden="true">/</span>{% endif %}
-    <span aria-current="page" itemprop="itemListElement"><span itemprop="name">{{ product.title | escape }}</span></span>
+    {% if collection %}
+      <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="{{ collection.url }}" itemprop="item"><span itemprop="name">{{ collection.title | escape }}</span></a>
+        <meta itemprop="position" content="2">
+      </span><span aria-hidden="true">/</span>
+      <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span aria-current="page" itemprop="name">{{ product.title | escape }}</span>
+        <meta itemprop="position" content="3">
+      </span>
+    {% else %}
+      <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span aria-current="page" itemprop="name">{{ product.title | escape }}</span>
+        <meta itemprop="position" content="2">
+      </span>
+    {% endif %}
   {% elsif template.name == 'collection' %}
-    <span aria-current="page" itemprop="itemListElement"><span itemprop="name">{{ collection.title | escape }}</span></span>
+    <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span aria-current="page" itemprop="name">{{ collection.title | escape }}</span>
+      <meta itemprop="position" content="2">
+    </span>
   {% elsif template.name == 'page' %}
-    <span aria-current="page" itemprop="itemListElement"><span itemprop="name">{{ page.title | escape }}</span></span>
+    <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span aria-current="page" itemprop="name">{{ page.title | escape }}</span>
+      <meta itemprop="position" content="2">
+    </span>
   {% elsif template.name == 'search' %}
     <span aria-current="page">{{ 'templates.search.eyebrow' | t }}</span>
   {% elsif template.name == 'cart' %}
