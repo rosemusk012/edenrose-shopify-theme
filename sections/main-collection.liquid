@@ -4,7 +4,7 @@
     <p class="eyebrow">{{ 'templates.collection.eyebrow' | t }}</p>
     <div class="collection-title-row">
       <div>
-        <div class="collection-eyebrow-line"><span>THE EDENROSE EDIT</span>{% if collection.products_count > 0 %}<span>{{ collection.products_count }} pieces</span>{% endif %}</div>
+        <div class="collection-eyebrow-line"><span>THE EDENROSE EDIT</span>{% if collection.products_count > 0 %}<span>{{ collection.products_count }} {{ 'templates.collection.pieces' | t }}</span>{% endif %}</div>
         <h1>{{ collection.title | escape }}</h1>
         {% if collection.description != blank %}<div class="collection-description">{{ collection.description }}</div>{% endif %}
       </div>
@@ -124,7 +124,7 @@
 .collection-description{max-width:650px;margin:1.25rem 0 0;color:var(--muted);line-height:1.65}
 .collection-mark{font:normal clamp(6rem,15vw,13rem)/.7 Georgia,serif;color:var(--line);user-select:none;transform:translateY(.08em)}
 .collection-toolbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-block:1px solid var(--line);padding:1rem 0;margin-bottom:1.5rem}
-.collection-toolbar:before{content:'CURATED FOR YOU';font-size:.62rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.collection-toolbar:before{content:'{{ 'templates.collection.curated_for_you' | t }}';font-size:.62rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
 .collection-actions{display:flex;align-items:center;gap:.7rem;margin-left:auto}
 .sort-form{display:flex;align-items:center;gap:.5rem}
 .sort-form select{padding:.65rem 2rem .65rem .75rem;border:1px solid var(--line);background:var(--paper);border-radius:999px;min-height:44px}
