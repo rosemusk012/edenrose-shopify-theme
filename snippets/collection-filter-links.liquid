@@ -3,7 +3,7 @@ Renders EdenRose collection links as a reliable, collection-based filter/navigat
 Collection groups are kept separate so unrelated collections do not appear inside another category.
 {% enddoc %}
 
-<nav class="edenrose-collection-filters" aria-label="Shop by collection">
+<nav class="edenrose-collection-filters" aria-label="{{ 'templates.collection.shop_by_collection' | t }}">
   {% assign current_handle = collection.handle %}
   {% assign is_clothing_collection = false %}
   {% assign is_jewellery_collection = false %}
@@ -24,7 +24,7 @@ Collection groups are kept separate so unrelated collections do not appear insid
 
   {% if is_clothing_collection %}
     <details class="collection-filter-group" open>
-      <summary><span>Clothing</span><span aria-hidden="true">+</span></summary>
+      <summary><span>{{ 'general.clothing' | t }}</span><span aria-hidden="true">+</span></summary>
       <div class="collection-filter-links">
         {% for handle in clothing_handles %}
           {% assign linked_collection = collections[handle] %}
@@ -36,7 +36,7 @@ Collection groups are kept separate so unrelated collections do not appear insid
     </details>
   {% elsif is_jewellery_collection %}
     <details class="collection-filter-group" open>
-      <summary><span>Jewellery</span><span aria-hidden="true">+</span></summary>
+      <summary><span>{{ 'general.jewellery' | t }}</span><span aria-hidden="true">+</span></summary>
       <div class="collection-filter-links">
         {% for handle in jewellery_handles %}
           {% assign linked_collection = collections[handle] %}
@@ -48,7 +48,7 @@ Collection groups are kept separate so unrelated collections do not appear insid
     </details>
   {% elsif is_shoes_swim_collection %}
     <details class="collection-filter-group" open>
-      <summary><span>Shoes & swim</span><span aria-hidden="true">+</span></summary>
+      <summary><span>{{ 'templates.collection.shoes_swim' | t }}</span><span aria-hidden="true">+</span></summary>
       <div class="collection-filter-links">
         {% for handle in shoes_swim_handles %}
           {% assign linked_collection = collections[handle] %}
@@ -60,7 +60,7 @@ Collection groups are kept separate so unrelated collections do not appear insid
     </details>
   {% elsif is_accessories_collection %}
     <details class="collection-filter-group" open>
-      <summary><span>Accessories</span><span aria-hidden="true">+</span></summary>
+      <summary><span>{{ 'general.accessories' | t }}</span><span aria-hidden="true">+</span></summary>
       <div class="collection-filter-links">
         {% for handle in accessory_handles %}
           {% assign linked_collection = collections[handle] %}
@@ -73,7 +73,7 @@ Collection groups are kept separate so unrelated collections do not appear insid
   {% endif %}
 
   <details class="collection-filter-group">
-    <summary><span>Shop by edit</span><span aria-hidden="true">+</span></summary>
+    <summary><span>{{ 'templates.collection.shop_by_edit' | t }}</span><span aria-hidden="true">+</span></summary>
     <div class="collection-filter-links">
       {% assign edit_handles = 'new-arrivals,plus-size,gift-ideas,statement-pieces,under-50,15-off-selected-styles' | split: ',' %}
       {% for handle in edit_handles %}
