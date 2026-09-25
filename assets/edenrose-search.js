@@ -35,7 +35,7 @@
         if(term.length<2){close();return;}
         if(controller) controller.abort();
         controller=new AbortController();
-        fetch('{{ routes.predictive_search_url }}?q='+encodeURIComponent(term)+'&resources[type]=product,collection&resources[limit]=8&resources[limit_scope]=each',{signal:controller.signal,headers:{Accept:'application/json'}})
+        fetch('{{ routes.predictive_search_url }}?q='+encodeURIComponent(term)+'&resources[type]=product,collection&resources[limit]=6&resources[limit_scope]=each',{signal:controller.signal,headers:{Accept:'application/json'}})
           .then(function(r){if(!r.ok)throw new Error('search');return r.json()})
           .then(function(data){render(data,term)})
           .catch(function(e){if(e.name!=='AbortError')close()});
