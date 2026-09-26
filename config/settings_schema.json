@@ -73,7 +73,7 @@
         "type": "color",
         "id": "color_muted",
         "label": "t:settings.colors.muted",
-        "default": "#776b69"
+        "default": "#6b5f5d"
       },
       {
         "type": "color",

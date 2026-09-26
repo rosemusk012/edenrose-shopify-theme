@@ -110,15 +110,6 @@ button:disabled{cursor:not-allowed;opacity:.55}
   .header-action{min-width:44px;justify-content:center}
 }
 
-/* ---------- Gentle entrance for product cards ----------
-   CSS only, no script. Runs only in browsers that support scroll-driven
-   animation and only when the shopper has not asked for reduced motion. */
-@media(prefers-reduced-motion:no-preference){
-  @supports (animation-timeline:view()){
-    .product-grid>*{animation:edenrose-rise linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
-    @keyframes edenrose-rise{from{opacity:.35;transform:translateY(14px)}to{opacity:1;transform:none}}
-  }
-}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}

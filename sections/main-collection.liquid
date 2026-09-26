@@ -64,6 +64,7 @@
             </aside>
 
           <div class="collection-results">
+            <h2 class="visually-hidden">{{ 'templates.collection.products_heading' | t }}</h2>
             <div class="product-grid">
               {% for product in collection.products %}
                 {% render 'card-product', product: product %}
@@ -177,7 +178,7 @@
 }
 @media(max-width:480px){
   .collection-actions{gap:.5rem}
-  .sort-form label{display:none}
+  .sort-form label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
   .sort-form select{max-width:150px}
   .collection-hero h1{font-size:clamp(2.6rem,12vw,4rem)}
   .collection-description{font-size:.92rem}
