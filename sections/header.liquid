@@ -81,7 +81,7 @@
 
     <div class="header-actions">
       <a class="mobile-search-link" href="{{ routes.search_url }}" aria-label="{{ 'general.search' | t }}"><span aria-hidden="true">⌕</span><span class="visually-hidden">{{ 'general.search' | t }}</span></a>
-      <form class="header-search" action="{{ routes.search_url }}" method="get" role="search">
+      <form class="header-search" action="{{ routes.search_url }}" method="get" role="search" data-suggest-url="{{ routes.predictive_search_url }}.json" data-currency="{{ cart.currency.iso_code }}" data-label-products="{{ 'templates.search.products' | t | escape }}" data-label-collections="{{ 'templates.search.collections' | t | escape }}" data-label-search-for="{{ 'templates.search.search_for' | t: terms: '__TERMS__' | escape }}">
         <label class="visually-hidden" for="HeaderSearch">{{ 'general.search' | t }}</label>
         <input id="HeaderSearch" type="search" name="q" placeholder="{{ 'templates.search.placeholder' | t }}" autocomplete="off">
         <button type="submit" aria-label="{{ 'general.search' | t }}">⌕</button>
