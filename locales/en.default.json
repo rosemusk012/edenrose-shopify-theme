@@ -238,7 +238,9 @@
       "trust_secure": "Secure Shopify checkout",
       "trust_returns": "Clear returns",
       "trust_shipping": "Shipping shown before payment",
-      "choose_options": "Choose options"
+      "choose_options": "Choose options",
+      "kicker": "EDENROSE EDIT",
+      "purchase_intro": "A considered piece for your EdenRose edit."
     },
     "cart": {
       "eyebrow": "Shopping bag",

@@ -1,22 +1,188 @@
-{% render 'breadcrumbs' %}<section class="product-page" data-product-section="{{ section.id }}" itemscope itemtype="https://schema.org/Product">
+{% render 'breadcrumbs' %}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign on_sale = false -%}
+{%- if current_variant.compare_at_price > current_variant.price -%}{%- assign on_sale = true -%}{%- endif -%}
+<section class="product-page" data-product-section="{{ section.id }}" itemscope itemtype="https://schema.org/Product">
   <div class="page-width product-layout">
     <div class="product-media">
-      {% for image in product.images %}<figure class="product-media-item" itemprop="image">{% if forloop.first %}{{ image | image_url: width: 1200 | image_tag: loading: 'eager', widths: '600,850,1000,1200', sizes: '(min-width: 750px) 55vw, 100vw', alt: image.alt | default: product.title }}{% else %}{{ image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,850,1000,1200', sizes: '(min-width: 750px) 55vw, 100vw', alt: image.alt | default: product.title }}{% endif %}</figure>{% endfor %}
+      {%- for image in product.images -%}
+        <figure class="product-media-item" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+          <meta itemprop="url" content="https:{{ image | image_url: width: 1200 }}">
+          {%- if forloop.first -%}
+            {{ image | image_url: width: 1200 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600,850,1000,1200', sizes: '(min-width: 750px) 55vw, 100vw', alt: image.alt | default: product.title }}
+          {%- else -%}
+            {{ image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,850,1000,1200', sizes: '(min-width: 750px) 27vw, 50vw', alt: image.alt | default: product.title }}
+          {%- endif -%}
+        </figure>
+      {%- else -%}
+        <figure class="product-media-item">{{ 'product-1' | placeholder_svg_tag: 'product-media-placeholder' }}</figure>
+      {%- endfor -%}
     </div>
+
     <div class="product-info">
-      <p class="eyebrow">{{ product.type | default: shop.name | escape }}</p><h1>{{ product.title | escape }}</h1>
-      <div class="product-kicker"><span>EDENROSE EDIT</span>{% if product.tags contains 'new' or product.tags contains 'New' %}<span>New</span>{% endif %}</div><div class="product-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><span data-product-price aria-live="polite" aria-atomic="true">{{ product.selected_or_first_available_variant.price | money }}</span><meta itemprop="price" content="{{ product.selected_or_first_available_variant.price | divided_by: 100.0 }}" data-product-price-meta><meta itemprop="priceCurrency" content="{{ shop.currency }}"><meta itemprop="availability" content="{% if product.selected_or_first_available_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}"><link itemprop="url" href="{{ shop.url }}{{ product.url }}"><s data-product-compare{% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %} hidden{% endunless %}>{{ product.selected_or_first_available_variant.compare_at_price | money }}</s><span class="sale-note" data-product-sale{% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %} hidden{% endunless %}>{{ 'templates.product.on_sale' | t }}</span></div>
-      {% if product.available %}<p class="availability" data-product-availability aria-live="polite" aria-atomic="true"><span aria-hidden="true">●</span> {{ 'templates.product.available' | t }}{% if product.selected_or_first_available_variant.inventory_management and product.selected_or_first_available_variant.inventory_quantity > 0 and product.selected_or_first_available_variant.inventory_quantity <= 5 %} · {{ product.selected_or_first_available_variant.inventory_quantity }} {{ 'templates.product.left' | t }}{% endif %}</p>{% endif %}
-      <div class="product-purchase-intro">A considered piece for your EdenRose edit.</div>{% form 'product', product, class: 'product-form', id: 'ProductForm-' | append: section.id %}
-        {% unless product.has_only_default_variant %}<div class="field"><label for="Variant-{{ section.id }}">{{ 'templates.product.choose_options' | t }}</label><select id="Variant-{{ section.id }}" name="id" aria-label="{{ 'templates.product.variant' | t }}">{% for variant in product.variants %}<option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %} {% if variant.id == product.selected_or_first_available_variant.id %}selected{% endif %}>{{ variant.title | escape }} — {{ variant.price | money }}{% unless variant.available %} — {{ 'templates.product.sold_out' | t }}{% endunless %}</option>{% endfor %}</select></div>{% else %}<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">{% endunless %}
-        {% if product.available %}<div class="purchase-row"><div class="quantity-field"><label for="Quantity-{{ section.id }}">{{ 'templates.product.quantity' | t }}</label><input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1" step="1" inputmode="numeric" aria-label="{{ 'templates.product.quantity' | t }}"></div><button class="button add-to-cart" type="submit" data-add-to-cart>{{ 'templates.product.add_to_cart' | t }}</button></div>{% else %}<button class="button" type="button" disabled>{{ 'templates.product.sold_out' | t }}</button>{% endif %}
-        {% if product.available %}<div class="accelerated-checkout">{{ form | payment_button }}</div>{% endif %}
-      {% endform %}
-      {% if product.available %}<div class="mobile-buy-bar" data-mobile-buy aria-label="{{ 'templates.product.add_to_cart' | t }}"><span><small>{{ product.title | escape }}</small><strong data-mobile-buy-price>{{ product.selected_or_first_available_variant.price | money }}</strong></span><button class="button" type="button" data-mobile-buy>{{ 'templates.product.add_to_cart' | t }}</button></div>{% endif %}
-      <!-- Start of Judge.me code -->{% assign has_legacy = false %}{% if product.metafields.judgeme.widget.size > 20 %}{% assign has_legacy = true %}{% endif %}<div style='clear:both'></div><div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title | escape }}' data-id='{{ product.id }}' data-product-id='{{ product.id }}' data-widget='review' data-auto-install='false' data-shop-reviews-count='{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}' data-entry-point='review_widget.js' data-entry-key='review-widget/main.js'>{% if has_legacy %}<div class='jdgm-legacy-widget-content' style='display: none;'>{{ product.metafields.judgeme.widget }}</div>{% endif %}</div>{% if product.metafields.judgeme.review_widget_data %}<script>jdgm.data ||= {}; jdgm.data.reviewWidget ||= {}; jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }}</script>{% endif %}<!-- End of Judge.me code -->
-      <div class="product-trust-strip" aria-label="{{ 'templates.product.trust_label' | t }}"><span>{{ 'templates.product.trust_secure' | t }}</span><span>{{ 'templates.product.trust_returns' | t }}</span><span>{{ 'templates.product.trust_shipping' | t }}</span></div>
-      {% unless product.has_only_default_variant %}<details class="product-size-fit"><summary>{{ 'templates.product.size_fit_title' | t }}</summary><p>{{ 'templates.product.size_fit_text' | t }}</p></details>{% endunless %}
-      {% unless product.has_only_default_variant %}<script type="application/json" id="ProductVariants-{{ section.id }}">{{ product.variants | json }}</script><script>(function(){function init(){var root=document.querySelector('.product-page[data-product-section="{{ section.id }}"]');if(!root)return;var s=root.querySelector('#Variant-{{ section.id }}'),d=root.querySelector('#ProductVariants-{{ section.id }}'),p=root.querySelector('[data-product-price]'),pm=root.querySelector('[data-product-price-meta]'),cp=root.querySelector('[data-product-compare]'),sale=root.querySelector('[data-product-sale]'),a=root.querySelector('[data-product-availability]'),availability=root.querySelector('[itemprop="availability"]'),sticky=root.querySelector('[data-mobile-buy]'),main=root.querySelector('[data-add-to-cart]'),mobilePrice=root.querySelector('[data-mobile-buy-price]');if(s&&d&&!root.dataset.variantInitialized){root.dataset.variantInitialized='true';var variants=JSON.parse(d.textContent),byId={};variants.forEach(function(v){byId[String(v.id)]=v});var money=new Intl.NumberFormat(document.documentElement.lang||'en-AU',{style:'currency',currency:'{{ shop.currency }}'});s.addEventListener('change',function(){var v=byId[s.value];if(!v)return;p.textContent=money.format(v.price/100);if(pm)pm.content=(v.price/100).toFixed(2);if(availability)availability.content=v.available?'https://schema.org/InStock':'https://schema.org/OutOfStock';var onsale=v.compare_at_price&&v.compare_at_price>v.price;if(cp){cp.hidden=!onsale;if(onsale)cp.textContent=money.format(v.compare_at_price)}if(sale)sale.hidden=!onsale;if(v.available){a.innerHTML='<span aria-hidden="true">●</span> {{ 'templates.product.available' | t }}';if(v.inventory_management&&v.inventory_quantity>0&&v.inventory_quantity<=5)a.innerHTML+=' '+v.inventory_quantity+' '+{{ 'templates.product.left' | t | json }};if(main)main.disabled=false}else{if(a)a.innerHTML='{{ 'templates.product.sold_out' | t }}';if(main)main.disabled=true}syncMobile()})}function syncMobile(){if(!s)return;var opt=s.options[s.selectedIndex];if(mobilePrice){var parts=opt.textContent.split(' — ');mobilePrice.textContent=parts[1]?parts[1].split(' — ')[0]:opt.textContent}if(sticky&&main)sticky.disabled=main.disabled}if(sticky&&main&&!root.dataset.mobileBuyInitialized){root.dataset.mobileBuyInitialized='true';sticky.addEventListener('click',function(){if(!main.disabled)main.click()})}syncMobile()}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init()})();</script>
+      <p class="eyebrow">{{ product.type | default: shop.name | escape }}</p>
+      <h1 itemprop="name">{{ product.title | escape }}</h1>
+      <div class="product-kicker">
+        <span>{{ 'templates.product.kicker' | t }}</span>
+        {%- if product.tags contains 'new' or product.tags contains 'New' -%}<span>{{ 'products.product.new' | t }}</span>{%- endif -%}
+      </div>
+
+      <div class="product-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+        <span data-product-price aria-live="polite" aria-atomic="true">{{ current_variant.price | money }}</span>
+        <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.0 }}" data-product-price-meta>
+        <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
+        <meta itemprop="availability" content="{% if current_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}">
+        <link itemprop="url" href="{{ request.origin }}{{ product.url }}">
+        <s data-product-compare{% unless on_sale %} hidden{% endunless %}>{{ current_variant.compare_at_price | money }}</s>
+        <span class="sale-note" data-product-sale{% unless on_sale %} hidden{% endunless %}>{{ 'templates.product.on_sale' | t }}</span>
+      </div>
+
+      {%- if product.available -%}
+        <p class="availability" data-product-availability aria-live="polite" aria-atomic="true">
+          <span aria-hidden="true">●</span> {{ 'templates.product.available' | t }}
+          {%- if current_variant.inventory_management and current_variant.inventory_quantity > 0 and current_variant.inventory_quantity <= 5 %} · {{ current_variant.inventory_quantity }} {{ 'templates.product.left' | t }}{% endif -%}
+        </p>
+      {%- endif -%}
+
+      <div class="product-purchase-intro">{{ 'templates.product.purchase_intro' | t }}</div>
+
+      {%- form 'product', product, class: 'product-form', id: 'ProductForm-' | append: section.id -%}
+        {%- unless product.has_only_default_variant -%}
+          <div class="field">
+            <label for="Variant-{{ section.id }}">{{ 'templates.product.choose_options' | t }}</label>
+            <select id="Variant-{{ section.id }}" name="id">
+              {%- for variant in product.variants -%}
+                <option value="{{ variant.id }}" data-price="{{ variant.price | money | escape }}"{% unless variant.available %} disabled{% endunless %}{% if variant.id == current_variant.id %} selected{% endif %}>
+                  {{- variant.title | escape }} — {{ variant.price | money }}{% unless variant.available %} — {{ 'templates.product.sold_out' | t }}{% endunless -%}
+                </option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- else -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+        {%- endunless -%}
+
+        {%- if product.available -%}
+          <div class="purchase-row">
+            <div class="quantity-field">
+              <label for="Quantity-{{ section.id }}">{{ 'templates.product.quantity' | t }}</label>
+              <input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1" step="1" inputmode="numeric">
+            </div>
+            <button class="button add-to-cart" type="submit" data-add-to-cart>{{ 'templates.product.add_to_cart' | t }}</button>
+          </div>
+          <div class="accelerated-checkout">{{ form | payment_button }}</div>
+        {%- else -%}
+          <button class="button add-to-cart" type="button" disabled>{{ 'templates.product.sold_out' | t }}</button>
+        {%- endif -%}
+      {%- endform -%}
+
+      <div class="product-trust-strip" aria-label="{{ 'templates.product.trust_label' | t }}">
+        <span>{{ 'templates.product.trust_secure' | t }}</span>
+        <span>{{ 'templates.product.trust_returns' | t }}</span>
+        <span>{{ 'templates.product.trust_shipping' | t }}</span>
+      </div>
+
+      {%- if product.description != blank -%}
+        <details class="product-details" open>
+          <summary>{{ 'templates.product.details' | t }}</summary>
+          <div class="product-description" itemprop="description">{{ product.description }}</div>
+        </details>
+      {%- endif -%}
+
+      <div class="product-confidence">
+        {%- unless product.has_only_default_variant -%}
+          <details class="product-size-fit">
+            <summary>{{ 'templates.product.size_fit_title' | t }}</summary>
+            <p>{{ 'templates.product.size_fit_text' | t }}</p>
+          </details>
+        {%- endunless -%}
+        <details>
+          <summary>{{ 'templates.product.shipping_title' | t }}</summary>
+          <p>{{ 'templates.product.shipping_text' | t }}</p>
+          {%- if shop.shipping_policy -%}<a href="{{ shop.shipping_policy.url }}">{{ 'templates.product.view_policy' | t }} →</a>{%- endif -%}
+        </details>
+        <details>
+          <summary>{{ 'templates.product.returns_title' | t }}</summary>
+          <p>{{ 'templates.product.returns_text' | t }}</p>
+          {%- if shop.refund_policy -%}<a href="{{ shop.refund_policy.url }}">{{ 'templates.product.view_policy' | t }} →</a>{%- endif -%}
+        </details>
+      </div>
+    </div>
+  </div>
+
+  {%- if product.available -%}
+    <div class="mobile-buy-bar" data-mobile-buy-bar>
+      <span><small>{{ product.title | escape }}</small><strong data-mobile-buy-price>{{ current_variant.price | money }}</strong></span>
+      <button class="button" type="button" data-mobile-buy>{{ 'templates.product.add_to_cart' | t }}</button>
+    </div>
+  {%- endif -%}
+
+  {%- unless product.has_only_default_variant -%}
+    <script type="application/json" data-product-variants>{{ product.variants | json }}</script>
+  {%- endunless -%}
+</section>
+
+<script>
+(function(){
+  var strings={available:{{ 'templates.product.available' | t | json }},left:{{ 'templates.product.left' | t | json }},soldOut:{{ 'templates.product.sold_out' | t | json }}};
+  function init(){
+    var root=document.querySelector('.product-page[data-product-section="{{ section.id }}"]');
+    if(!root||root.dataset.productInitialized)return;
+    root.dataset.productInitialized='true';
+    var select=root.querySelector('#Variant-{{ section.id }}'),
+        data=root.querySelector('[data-product-variants]'),
+        price=root.querySelector('[data-product-price]'),
+        priceMeta=root.querySelector('[data-product-price-meta]'),
+        compare=root.querySelector('[data-product-compare]'),
+        sale=root.querySelector('[data-product-sale]'),
+        availabilityText=root.querySelector('[data-product-availability]'),
+        availabilityMeta=root.querySelector('[itemprop="availability"]'),
+        mainButton=root.querySelector('[data-add-to-cart]'),
+        stickyButton=root.querySelector('[data-mobile-buy]'),
+        stickyPrice=root.querySelector('[data-mobile-buy-price]');
+
+    function syncSticky(){
+      if(stickyButton&&mainButton)stickyButton.disabled=mainButton.disabled;
+      if(stickyPrice&&select){var opt=select.options[select.selectedIndex];if(opt&&opt.dataset.price)stickyPrice.textContent=opt.dataset.price;}
+    }
+
+    if(stickyButton&&mainButton){
+      stickyButton.addEventListener('click',function(){if(!mainButton.disabled)mainButton.click();});
+    }
+
+    if(select&&data){
+      var byId={};
+      try{JSON.parse(data.textContent).forEach(function(v){byId[String(v.id)]=v;});}catch(e){}
+      var money=new Intl.NumberFormat(document.documentElement.lang||'en-AU',{style:'currency',currency:{{ cart.currency.iso_code | json }}});
+      select.addEventListener('change',function(){
+        var v=byId[select.value];
+        if(!v)return;
+        if(price)price.textContent=money.format(v.price/100);
+        if(priceMeta)priceMeta.content=(v.price/100).toFixed(2);
+        if(availabilityMeta)availabilityMeta.content=v.available?'https://schema.org/InStock':'https://schema.org/OutOfStock';
+        var onSale=v.compare_at_price&&v.compare_at_price>v.price;
+        if(compare){compare.hidden=!onSale;if(onSale)compare.textContent=money.format(v.compare_at_price/100);}
+        if(sale)sale.hidden=!onSale;
+        if(availabilityText){
+          if(v.available){
+            var text=strings.available;
+            if(v.inventory_management&&v.inventory_quantity>0&&v.inventory_quantity<=5)text+=' · '+v.inventory_quantity+' '+strings.left;
+            availabilityText.innerHTML='<span aria-hidden="true">●</span> ';
+            availabilityText.appendChild(document.createTextNode(text));
+          }else{
+            availabilityText.textContent=strings.soldOut;
+          }
+        }
+        if(mainButton)mainButton.disabled=!v.available;
+        if(window.history&&history.replaceState){var url=new URL(window.location.href);url.searchParams.set('variant',v.id);history.replaceState({},'',url.toString());}
+        syncSticky();
+      });
+    }
+    syncSticky();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script>
 {% stylesheet %}
 .product-page{padding:clamp(2.5rem,6vw,6.5rem) 0;position:relative}.product-page:before{content:"THE EDENROSE EDIT";display:block;max-width:1280px;margin:0 auto 1.25rem;padding:0 20px;font-size:.62rem;letter-spacing:.2em;color:var(--muted)}.product-kicker{display:flex;gap:.55rem;align-items:center;margin-bottom:1rem}.product-kicker span{font-size:.64rem;text-transform:uppercase;letter-spacing:.13em;border:1px solid var(--line);padding:.4rem .6rem;border-radius:999px}.product-kicker span:first-child{background:var(--wine);border-color:var(--wine);color:#fff}.product-purchase-intro{font-size:.85rem;color:var(--muted);max-width:38ch;margin-bottom:.5rem}.mobile-buy-bar{display:none}.product-layout{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(340px,.82fr);gap:clamp(2.5rem,6vw,7rem);align-items:start}.product-media{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}.product-media-item{margin:0;overflow:hidden;background:var(--soft);border-radius:10px;line-height:0;box-shadow:0 12px 30px rgba(33,26,27,.05)}.product-media-item img{display:block;width:100%;height:auto;transition:transform .45s ease}.product-media-item:first-child{grid-column:1/-1}.product-media-item:hover img{transform:scale(1.012)}.product-info{position:sticky;top:105px;align-self:start;padding:1.5rem 0 2rem;max-width:560px;min-width:0}.product-info h1{font-size:clamp(2.4rem,4.8vw,4.8rem);line-height:.94;letter-spacing:-.05em;margin:.25rem 0 1.15rem;max-width:14ch;overflow-wrap:anywhere}.product-price{display:flex;align-items:center;flex-wrap:wrap;gap:.65rem;font-size:1.2rem;font-weight:700;margin:0 0 .55rem}.product-price s{color:var(--muted);font-weight:400}.sale-note{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em}.availability{font-size:.8rem;margin:.5rem 0 1.5rem;color:var(--muted)}.availability span{font-size:.6rem}.product-form{display:grid;gap:1rem}.field{display:grid;gap:.45rem}.field label,.quantity-field label{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em}.field select,.quantity-field input{width:100%;padding:1rem;border:1px solid var(--line);border-radius:8px;background:var(--paper);font:inherit}.purchase-row{display:grid;grid-template-columns:minmax(88px,100px) minmax(0,1fr);gap:.75rem;align-items:end}.quantity-field{display:grid;gap:.45rem}.add-to-cart{width:100%;min-width:0;min-height:60px;font-size:1rem;position:relative;font-weight:600;letter-spacing:.01em;border-radius:999px;box-shadow:0 10px 24px rgba(84,42,53,.12)}.add-to-cart:hover{transform:translateY(-1px)}.add-to-cart:active{transform:translateY(0)}.add-to-cart:focus-visible{outline:var(--focus);outline-offset:3px}.add-to-cart:disabled{opacity:.5;cursor:not-allowed;transform:none}.product-details{border-block:1px solid var(--line);padding:1.25rem 0;margin-top:2rem}.product-details summary{cursor:pointer;font-weight:600;display:flex;justify-content:space-between}.product-details summary::after{content:"+ ";font-weight:400}.product-details[open] summary::after{content:"− "}.product-description{margin-top:1rem;overflow-wrap:anywhere;word-break:normal;color:var(--muted);line-height:1.7}.product-description img{height:auto;max-width:100%}.product-description a{text-decoration:underline;text-underline-offset:3px}.product-confidence{display:grid;gap:0;border-top:1px solid var(--line);margin-top:1.5rem}.product-confidence details{border-bottom:1px solid var(--line);padding:1rem 0}.product-confidence summary{cursor:pointer;font-weight:600;display:flex;justify-content:space-between}.product-confidence summary::after{content:'+'}.product-confidence details[open] summary::after{content:'−'}.product-confidence p{color:var(--muted);line-height:1.6;font-size:.85rem;margin:.7rem 0 .35rem}.product-confidence a{font-size:.75rem;text-decoration:underline}.product-trust{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:1.5rem}.product-trust>div{padding:1rem .8rem 0 0;border-right:1px solid var(--line);display:grid;gap:.3rem;font-size:.78rem}.product-trust>div:not(:first-child){padding-left:.8rem}.product-trust>div:last-child{border-right:0}.product-trust span{color:var(--muted);line-height:1.5}.product-trust a{font-size:.72rem;text-decoration:underline;text-underline-offset:3px;margin-top:.15rem}@media(max-width:749px){.product-page{padding-top:1rem;overflow-x:clip}.product-layout{display:block}.product-media{grid-template-columns:1fr 1fr;gap:.45rem;margin-inline:-16px;min-width:0}.product-media-item:first-child{grid-column:1/-1}.product-info{position:static;padding-top:1.75rem}.product-info h1{font-size:clamp(2.2rem,10.5vw,4rem);max-width:12ch}.purchase-row{grid-template-columns:minmax(82px,90px) minmax(0,1fr)}.product-trust{grid-template-columns:1fr}.product-trust>div,.product-trust>div:not(:first-child){border-right:0;border-bottom:1px solid var(--line);padding:1rem 0}.product-trust>div:last-child{border-bottom:0}.purchase-row{grid-template-columns:90px 1fr}.add-to-cart{min-height:58px}.mobile-buy-bar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 16px calc(.7rem + env(safe-area-inset-bottom));background:rgba(251,247,243,.98);border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(33,26,27,.08)}.mobile-buy-bar span{display:grid;gap:.05rem;min-width:0}.mobile-buy-bar small{text-transform:uppercase;letter-spacing:.1em;font-size:.58rem;color:var(--muted)}.mobile-buy-bar strong{font-size:.88rem}.mobile-buy-bar .button{min-height:48px;padding-inline:20px;white-space:nowrap;border-radius:999px}.product-info{padding-bottom:6rem}}
 {% endstylesheet %}
