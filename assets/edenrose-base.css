@@ -99,6 +99,17 @@ button:disabled{cursor:not-allowed;opacity:.55}
   .button{min-height:50px}
 }
 
+/* ---------- Touch targets ----------
+   Small text links get an invisible 44px-tall tap area on touch screens,
+   so they are easy to hit without changing how they look. */
+@media(pointer:coarse){
+  .text-link,.promo-banner__link,.recommendation-link,.benefits a,.product-confidence a{position:relative}
+  .text-link:after,.promo-banner__link:after,.recommendation-link:after,.benefits a:after,.product-confidence a:after{content:"";position:absolute;left:-6px;right:-6px;top:50%;height:44px;transform:translateY(-50%)}
+}
+@media(max-width:900px){
+  .header-action{min-width:44px;justify-content:center}
+}
+
 /* ---------- Gentle entrance for product cards ----------
    CSS only, no script. Runs only in browsers that support scroll-driven
    animation and only when the shopper has not asked for reduced motion. */
