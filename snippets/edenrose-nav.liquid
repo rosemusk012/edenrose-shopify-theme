@@ -1,0 +1,109 @@
+{% doc %}
+  Header navigation shared by the desktop bar and the mobile menu.
+  Uses the Shopify menu picked in the header settings; if that menu has no links
+  (or the "Built-in EdenRose categories" option is chosen) it falls back to the
+  original built-in category list.
+  @param {string} mode - 'desktop' or 'mobile'
+  @param {object} menu - linklist from section.settings.menu
+  @param {string} source - 'menu' or 'builtin'
+{% enddoc %}
+{%- liquid
+  assign use_menu = false
+  if source != 'builtin' and menu != blank and menu.links.size > 0
+    assign use_menu = true
+  endif
+  if mode == 'desktop'
+    assign group_class = 'nav-dropdown'
+    assign panel_class = 'nav-dropdown__menu'
+    assign chevron_class = 'nav-dropdown__chevron'
+  else
+    assign group_class = 'mobile-nav-group'
+    assign panel_class = 'mobile-nav-sub-links'
+    assign chevron_class = ''
+  endif
+-%}
+{%- if use_menu -%}
+  {%- for link in menu.links -%}
+    {%- if link.links.size > 0 -%}
+      <details class="{{ group_class }}">
+        <summary aria-expanded="false">{{ link.title | escape }}<span{% if chevron_class != '' %} class="{{ chevron_class }}"{% endif %} aria-hidden="true">⌄</span></summary>
+        <div class="{{ panel_class }}">
+          {%- if mode == 'desktop' -%}<span class="nav-dropdown__label">{{ 'general.shop_label' | t }} {{ link.title | escape }}</span>{%- endif -%}
+          {%- if link.url != blank and link.url != '#' and link.url != routes.root_url -%}
+            <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ 'general.all_prefix' | t }} {{ link.title | escape }}</a>
+          {%- endif -%}
+          {%- for child in link.links -%}
+            {%- if child.links.size > 0 -%}
+              {%- if mode == 'desktop' -%}<span class="nav-dropdown__sub-label">{{ child.title | escape }}</span>{%- endif -%}
+              <a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title | escape }}</a>
+              {%- for grandchild in child.links -%}
+                <a href="{{ grandchild.url }}"{% if grandchild.current %} aria-current="page"{% endif %}>{{ grandchild.title | escape }}</a>
+              {%- endfor -%}
+            {%- else -%}
+              <a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title | escape }}</a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </details>
+    {%- else -%}
+      <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}{% if mode == 'mobile' %}<span aria-hidden="true">→</span>{% endif %}</a>
+    {%- endif -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- liquid
+    assign arrow = false
+    if mode == 'mobile'
+      assign arrow = true
+    endif
+  -%}
+  {%- assign l = 'general.new_arrivals' | t -%}{% render 'edenrose-nav-link', handle: 'new-arrivals', label: l, arrow: arrow %}
+  <details class="{{ group_class }}">
+    <summary aria-expanded="false">{{ 'general.clothing' | t }}<span{% if chevron_class != '' %} class="{{ chevron_class }}"{% endif %} aria-hidden="true">⌄</span></summary>
+    <div class="{{ panel_class }}">
+      {%- if mode == 'desktop' -%}<span class="nav-dropdown__label">{{ 'general.shop_clothing' | t }}</span>{%- endif -%}
+      {%- assign all_clothing = 'general.all_clothing' | t -%}{% render 'edenrose-nav-link', handle: 'apparel', label: all_clothing %}
+      {%- assign l = 'general.dresses' | t -%}{% render 'edenrose-nav-link', handle: 'dresses-1', label: l %}
+      {%- assign l = 'general.tops_blouses' | t -%}{% render 'edenrose-nav-link', handle: 'tops-blouses', label: l %}
+      {%- assign l = 'general.bottoms_sets' | t -%}{% render 'edenrose-nav-link', handle: 'bottoms-sets', label: l %}
+      {%- assign l = 'general.jumpsuits_rompers' | t -%}{% render 'edenrose-nav-link', handle: 'jumpsuits-rompers', label: l %}
+      {%- assign l = 'general.sweaters_hoodies' | t -%}{% render 'edenrose-nav-link', handle: 'sweaters-hoodies', label: l %}
+      {%- assign l = 'general.plus_size' | t -%}{% render 'edenrose-nav-link', handle: 'plus-size', label: l %}
+      {%- if mode == 'desktop' -%}<span class="nav-dropdown__sub-label">{{ 'general.clothing_filters' | t }}</span>{%- endif -%}
+      {%- assign filter_handles = 'maxi-dresses,midi-dresses,mini-dresses,shirts,cami-tank-tops,active-tops,jeans,pants,shorts-1,skirts-1,leggings,jumpsuits,rompers-1' | split: ',' -%}
+      {%- for h in filter_handles -%}{% render 'edenrose-nav-link', handle: h %}{%- endfor -%}
+    </div>
+  </details>
+  <details class="{{ group_class }}">
+    <summary aria-expanded="false">{{ 'general.jewellery' | t }}<span{% if chevron_class != '' %} class="{{ chevron_class }}"{% endif %} aria-hidden="true">⌄</span></summary>
+    <div class="{{ panel_class }}">
+      {%- if mode == 'desktop' -%}<span class="nav-dropdown__label">{{ 'general.shop_jewellery' | t }}</span>{%- endif -%}
+      {%- assign l = 'general.all_jewellery' | t -%}{% render 'edenrose-nav-link', handle: 'jewelry', label: l %}
+      {%- assign l = 'general.rings' | t -%}{% render 'edenrose-nav-link', handle: 'rings', label: l %}
+      {%- assign l = 'general.earrings' | t -%}{% render 'edenrose-nav-link', handle: 'earrings', label: l %}
+      {%- assign l = 'general.necklaces' | t -%}{% render 'edenrose-nav-link', handle: 'necklaces', label: l %}
+      {% render 'edenrose-nav-link', handle: 'pendants' %}
+    </div>
+  </details>
+  {%- assign l = 'general.shoes' | t -%}{% render 'edenrose-nav-link', handle: 'shoes', label: l, arrow: arrow %}
+  <details class="{{ group_class }}">
+    <summary aria-expanded="false">{{ 'general.accessories' | t }}<span{% if chevron_class != '' %} class="{{ chevron_class }}"{% endif %} aria-hidden="true">⌄</span></summary>
+    <div class="{{ panel_class }}">
+      {%- if mode == 'desktop' -%}<span class="nav-dropdown__label">{{ 'general.more_to_discover' | t }}</span>{%- endif -%}
+      {%- assign l = 'general.socks' | t -%}{% render 'edenrose-nav-link', handle: 'socks', label: l %}
+      {%- assign l = 'general.gift_ideas' | t -%}{% render 'edenrose-nav-link', handle: 'gift-ideas', label: l %}
+      {% render 'edenrose-nav-link', handle: '15-off-selected-styles' %}
+    </div>
+  </details>
+  <details class="{{ group_class }}">
+    <summary aria-expanded="false">{{ 'general.the_edit' | t }}<span{% if chevron_class != '' %} class="{{ chevron_class }}"{% endif %} aria-hidden="true">⌄</span></summary>
+    <div class="{{ panel_class }}">
+      {%- if mode == 'desktop' -%}<span class="nav-dropdown__label">{{ 'general.edenrose_edit' | t }}</span>{%- endif -%}
+      {%- assign l = 'general.trending_now' | t -%}{% render 'edenrose-nav-link', handle: 'new-arrivals', label: l %}
+      {%- assign l = 'general.going_out' | t -%}{% render 'edenrose-nav-link', handle: 'dresses-1', label: l %}
+      {%- assign l = 'general.statement_pieces' | t -%}{% render 'edenrose-nav-link', handle: 'statement-pieces', label: l %}
+      {%- assign l = 'general.under_50' | t -%}{% render 'edenrose-nav-link', handle: 'under-50', label: l %}
+      {% render 'edenrose-nav-link', handle: '15-off-selected-styles' %}
+      {%- assign l = 'general.gift_ideas' | t -%}{% render 'edenrose-nav-link', handle: 'gift-ideas', label: l %}
+    </div>
+  </details>
+{%- endif -%}

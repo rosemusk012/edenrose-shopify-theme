@@ -52,7 +52,8 @@
     "show_fewer_collections": "Show fewer collections",
     "shop_label": "Shop",
     "contact": "Contact",
-    "all_prefix": "All"
+    "all_prefix": "All",
+    "clothing_filters": "Clothing filters"
   },
   "customer": {
     "account": {
