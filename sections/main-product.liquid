@@ -2,12 +2,11 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 {%- assign on_sale = false -%}
 {%- if current_variant.compare_at_price > current_variant.price -%}{%- assign on_sale = true -%}{%- endif -%}
-<section class="product-page" data-product-section="{{ section.id }}" itemscope itemtype="https://schema.org/Product">
+<section class="product-page" data-product-section="{{ section.id }}">
   <div class="page-width product-layout">
     <div class="product-media">
       {%- for image in product.images -%}
-        <figure class="product-media-item" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-          <meta itemprop="url" content="https:{{ image | image_url: width: 1200 }}">
+        <figure class="product-media-item">
           {%- if forloop.first -%}
             {{ image | image_url: width: 1200 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600,850,1000,1200', sizes: '(min-width: 750px) 55vw, 100vw', alt: image.alt | default: product.title }}
           {%- else -%}
@@ -21,18 +20,14 @@
 
     <div class="product-info">
       <p class="eyebrow">{{ product.type | default: shop.name | escape }}</p>
-      <h1 itemprop="name">{{ product.title | escape }}</h1>
+      <h1>{{ product.title | escape }}</h1>
       <div class="product-kicker">
         <span>{{ 'templates.product.kicker' | t }}</span>
         {%- if product.tags contains 'new' or product.tags contains 'New' -%}<span>{{ 'products.product.new' | t }}</span>{%- endif -%}
       </div>
 
-      <div class="product-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+      <div class="product-price">
         <span data-product-price aria-live="polite" aria-atomic="true">{{ current_variant.price | money }}</span>
-        <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.0 }}" data-product-price-meta>
-        <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
-        <meta itemprop="availability" content="{% if current_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}">
-        <link itemprop="url" href="{{ request.origin }}{{ product.url }}">
         <s data-product-compare{% unless on_sale %} hidden{% endunless %}>{{ current_variant.compare_at_price | money }}</s>
         <span class="sale-note" data-product-sale{% unless on_sale %} hidden{% endunless %}>{{ 'templates.product.on_sale' | t }}</span>
       </div>
@@ -46,7 +41,8 @@
 
       <div class="product-purchase-intro">{{ 'templates.product.purchase_intro' | t }}</div>
 
-      {%- form 'product', product, class: 'product-form', id: 'ProductForm-' | append: section.id -%}
+      {%- assign product_form_id = 'ProductForm-' | append: section.id -%}
+      {%- form 'product', product, class: 'product-form', id: product_form_id -%}
         {%- unless product.has_only_default_variant -%}
           <div class="field">
             <label for="Variant-{{ section.id }}">{{ 'templates.product.choose_options' | t }}</label>
@@ -85,7 +81,7 @@
       {%- if product.description != blank -%}
         <details class="product-details" open>
           <summary>{{ 'templates.product.details' | t }}</summary>
-          <div class="product-description" itemprop="description">{{ product.description }}</div>
+          <div class="product-description">{{ product.description }}</div>
         </details>
       {%- endif -%}
 
@@ -117,6 +113,7 @@
     </div>
   {%- endif -%}
 
+  <script type="application/ld+json">{{ product | structured_data }}</script>
   {%- unless product.has_only_default_variant -%}
     <script type="application/json" data-product-variants>{{ product.variants | json }}</script>
   {%- endunless -%}
@@ -132,11 +129,9 @@
     var select=root.querySelector('#Variant-{{ section.id }}'),
         data=root.querySelector('[data-product-variants]'),
         price=root.querySelector('[data-product-price]'),
-        priceMeta=root.querySelector('[data-product-price-meta]'),
         compare=root.querySelector('[data-product-compare]'),
         sale=root.querySelector('[data-product-sale]'),
         availabilityText=root.querySelector('[data-product-availability]'),
-        availabilityMeta=root.querySelector('[itemprop="availability"]'),
         mainButton=root.querySelector('[data-add-to-cart]'),
         stickyButton=root.querySelector('[data-mobile-buy]'),
         stickyPrice=root.querySelector('[data-mobile-buy-price]');
@@ -158,8 +153,6 @@
         var v=byId[select.value];
         if(!v)return;
         if(price)price.textContent=money.format(v.price/100);
-        if(priceMeta)priceMeta.content=(v.price/100).toFixed(2);
-        if(availabilityMeta)availabilityMeta.content=v.available?'https://schema.org/InStock':'https://schema.org/OutOfStock';
         var onSale=v.compare_at_price&&v.compare_at_price>v.price;
         if(compare){compare.hidden=!onSale;if(onSale)compare.textContent=money.format(v.compare_at_price/100);}
         if(sale)sale.hidden=!onSale;

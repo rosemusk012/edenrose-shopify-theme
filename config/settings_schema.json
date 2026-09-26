@@ -1,1 +1,103 @@
-[{"name":"t:settings.general.name","settings":[{"type":"text","id":"announcement","label":"t:settings.general.announcement","default":"Delivery information shown at checkout."}]}]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "EdenRose",
+    "theme_version": "1.1.0",
+    "theme_author": "EdenRose",
+    "theme_documentation_url": "https://github.com/rosemusk012/edenrose-shopify-theme",
+    "theme_support_url": "https://github.com/rosemusk012/edenrose-shopify-theme/issues"
+  },
+  {
+    "name": "t:settings.general.name",
+    "settings": [
+      {
+        "type": "text",
+        "id": "announcement",
+        "label": "t:settings.general.announcement",
+        "default": "Delivery information shown at checkout."
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "t:settings.general.favicon",
+        "info": "t:settings.general.favicon_info"
+      }
+    ]
+  },
+  {
+    "name": "t:settings.colors.name",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "t:settings.colors.ink",
+        "default": "#211a1b"
+      },
+      {
+        "type": "color",
+        "id": "color_paper",
+        "label": "t:settings.colors.paper",
+        "default": "#fbf7f3"
+      },
+      {
+        "type": "color",
+        "id": "color_soft",
+        "label": "t:settings.colors.soft",
+        "default": "#eee3df"
+      },
+      {
+        "type": "color",
+        "id": "color_blush",
+        "label": "t:settings.colors.blush",
+        "default": "#f7efeb"
+      },
+      {
+        "type": "color",
+        "id": "color_rose",
+        "label": "t:settings.colors.rose",
+        "default": "#ead2d6"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "t:settings.colors.accent",
+        "default": "#9b596b"
+      },
+      {
+        "type": "color",
+        "id": "color_wine",
+        "label": "t:settings.colors.wine",
+        "default": "#542a35"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "t:settings.colors.muted",
+        "default": "#776b69"
+      },
+      {
+        "type": "color",
+        "id": "color_line",
+        "label": "t:settings.colors.line",
+        "default": "#dfd2cf"
+      }
+    ]
+  },
+  {
+    "name": "t:settings.typography.name",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_heading_font",
+        "label": "t:settings.typography.heading_font",
+        "default": "playfair_display_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "t:settings.typography.body_font",
+        "default": "dm_sans_n4"
+      }
+    ]
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {}
+    },
+    "apps": {
+      "type": "apps",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "apps"
+  ]
+}

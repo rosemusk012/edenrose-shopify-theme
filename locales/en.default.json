@@ -53,7 +53,8 @@
     "shop_label": "Shop",
     "contact": "Contact",
     "all_prefix": "All",
-    "clothing_filters": "Clothing filters"
+    "clothing_filters": "Clothing filters",
+    "page": "Page {{ page }}"
   },
   "customer": {
     "account": {

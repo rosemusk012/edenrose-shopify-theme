@@ -10,23 +10,6 @@
 {
   "current": {
     "announcement": "Free delivery, information is shown at checkout.",
-    "settings": {
-      "announcement": "Free delivery information is shown at checkout."
-    },
-    "sections": {
-      "header": {
-        "type": "header",
-        "settings": {
-          "menu": "main-menu"
-        }
-      },
-      "footer": {
-        "type": "footer",
-        "settings": {
-          "menu": "footer"
-        }
-      }
-    },
     "content_for_index": [],
     "blocks": {
       "11556762269829088362": {

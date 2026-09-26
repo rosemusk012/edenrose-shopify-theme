@@ -1,0 +1,39 @@
+{% render 'breadcrumbs' %}
+<section class="section list-collections">
+  <div class="page-width">
+    <div class="section-head"><div><p class="eyebrow">{{ 'templates.collection.eyebrow' | t }}</p><h1>{{ section.settings.heading | escape }}</h1></div></div>
+    {%- paginate collections by 24 -%}
+      <div class="list-collections__grid">
+        {%- for item in collections -%}
+          {%- if item.products_count > 0 -%}
+            <a class="list-collections__card" href="{{ item.url }}">
+              <div class="list-collections__media">
+                {%- assign card_image = item.featured_image | default: item.products.first.featured_image -%}
+                {%- if card_image -%}
+                  {{ card_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360,540,720,900', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw', alt: item.title }}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag }}
+                {%- endif -%}
+              </div>
+              <span class="list-collections__title">{{ item.title | escape }}<small>{{ item.products_count }} {{ 'templates.collection.products' | t }}</small></span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}<div class="pagination">{{ paginate | default_pagination }}</div>{%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+{% stylesheet %}
+.list-collections h1{font:normal clamp(2.4rem,5vw,4.5rem)/.95 var(--display);letter-spacing:-.045em;margin:.3rem 0 0}
+.list-collections__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.15rem}
+.list-collections__card{display:grid;gap:.7rem;color:inherit}
+.list-collections__media{aspect-ratio:4/5;overflow:hidden;border-radius:10px;background:var(--soft)}
+.list-collections__media img,.list-collections__media svg{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
+.list-collections__card:hover img{transform:scale(1.03)}
+.list-collections__title{display:grid;gap:.15rem;font-weight:600}
+.list-collections__title small{font-weight:400;color:var(--muted);font-size:.8rem}
+@media(max-width:989px){.list-collections__grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:749px){.list-collections__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}}
+{% endstylesheet %}
+{% schema %}{"name":"Collections list","settings":[{"type":"text","id":"heading","label":"Heading","default":"Shop by collection"}]}{% endschema %}

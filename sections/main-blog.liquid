@@ -1,0 +1,37 @@
+{% render 'breadcrumbs' %}
+<section class="page-content blog-page">
+  <div class="page-width">
+    <p class="page-kicker">EDENROSE / {{ blog.title | upcase | escape }}</p>
+    <h1>{{ blog.title | escape }}</h1>
+    {%- paginate blog.articles by 12 -%}
+      <div class="blog-grid">
+        {%- for article in blog.articles -%}
+          <article class="blog-card">
+            <a href="{{ article.url }}" class="blog-card__link">
+              {%- if article.image -%}
+                <div class="blog-card__media">{{ article.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360,540,720,900', sizes: '(min-width: 750px) 33vw, 100vw', alt: article.image.alt | default: article.title }}</div>
+              {%- endif -%}
+              <h2>{{ article.title | escape }}</h2>
+              <p class="blog-card__meta">{{ article.published_at | time_tag: format: 'date' }}</p>
+              {%- if article.excerpt != blank -%}<p>{{ article.excerpt | strip_html | truncatewords: 28 }}</p>{%- endif -%}
+            </a>
+          </article>
+        {%- else -%}
+          <p>{{ 'templates.search.no_results' | t }}</p>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}<div class="pagination">{{ paginate | default_pagination }}</div>{%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+{% stylesheet %}
+.blog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
+.blog-card__link{display:grid;gap:.5rem;color:inherit}
+.blog-card__media{aspect-ratio:4/3;overflow:hidden;border-radius:10px;background:var(--soft)}
+.blog-card__media img{width:100%;height:100%;object-fit:cover;display:block}
+.blog-card h2{font:normal 1.5rem/1.1 var(--display);margin:.4rem 0 0}
+.blog-card p{margin:0;color:var(--muted);font-size:.9rem}
+.blog-card__meta{font-size:.72rem!important;text-transform:uppercase;letter-spacing:.1em}
+@media(max-width:749px){.blog-grid{grid-template-columns:1fr}}
+{% endstylesheet %}
+{% schema %}{"name":"Blog"}{% endschema %}

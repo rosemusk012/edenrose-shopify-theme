@@ -1,0 +1,19 @@
+{% render 'breadcrumbs' %}
+<article class="page-content article-page">
+  <div class="page-width">
+    <p class="page-kicker"><a href="{{ blog.url }}">{{ blog.title | escape }}</a></p>
+    <h1>{{ article.title | escape }}</h1>
+    <p class="article-meta">{{ article.published_at | time_tag: format: 'date' }}</p>
+    {%- if article.image -%}
+      <div class="article-hero">{{ article.image | image_url: width: 1600 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '750,1100,1600', sizes: '(min-width: 1280px) 1232px, 100vw', alt: article.image.alt | default: article.title }}</div>
+    {%- endif -%}
+    <div class="rte">{{ article.content }}</div>
+  </div>
+</article>
+<script type="application/ld+json">{{ article | structured_data }}</script>
+{% stylesheet %}
+.article-meta{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin:-1rem 0 2rem}
+.article-hero{margin:0 0 2.5rem;border-radius:10px;overflow:hidden;background:var(--soft)}
+.article-hero img{display:block;width:100%;height:auto}
+{% endstylesheet %}
+{% schema %}{"name":"Article"}{% endschema %}
