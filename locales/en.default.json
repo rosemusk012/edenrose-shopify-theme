@@ -311,7 +311,9 @@
       "add_to_cart": "Add to cart",
       "choose_options": "Choose options",
       "view": "View",
-      "new": "New"
+      "new": "New",
+      "sale_price": "Sale price",
+      "regular_price": "Regular price"
     }
   }
 }

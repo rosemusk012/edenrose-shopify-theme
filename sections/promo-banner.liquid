@@ -1,8 +1,8 @@
 <section class="promo-banner" aria-label="{{ 'sections.promo_banner.aria_label' | t }}">
   <div class="page-width promo-banner__inner">
-    <span class="promo-banner__message">{{ 'sections.promo_banner.message' | t }}</span>
-    <span class="promo-banner__code">{{ 'sections.promo_banner.use_code' | t }} <strong>EDENROSE10</strong></span>
-    <a class="promo-banner__link" href="{{ routes.all_products_collection_url }}">{{ 'sections.promo_banner.shop_now' | t }} <span aria-hidden="true">↗</span></a>
+    <span class="promo-banner__message">{% if section.settings.message != blank %}{{ section.settings.message | escape }}{% else %}{{ 'sections.promo_banner.message' | t }}{% endif %}</span>
+    {%- if section.settings.code != blank -%}<span class="promo-banner__code">{{ 'sections.promo_banner.use_code' | t }} <strong>{{ section.settings.code | escape }}</strong></span>{%- endif -%}
+    <a class="promo-banner__link" href="{{ section.settings.link | default: routes.all_products_collection_url }}">{{ 'sections.promo_banner.shop_now' | t }} <span aria-hidden="true">↗</span></a>
   </div>
 </section>
 
@@ -18,5 +18,5 @@
 {% endstylesheet %}
 
 {% schema %}
-{"name":"Promotion banner","presets":[{"name":"Promotion banner"}]}
+{"name":"Promotion banner","settings":[{"type":"text","id":"message","label":"Message","info":"Leave empty to use the default: 10% off your EdenRose order"},{"type":"text","id":"code","label":"Discount code","default":"EDENROSE10"},{"type":"url","id":"link","label":"Shop now link"}],"presets":[{"name":"Promotion banner"}]}
 {% endschema %}

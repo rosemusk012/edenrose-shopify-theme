@@ -1,9 +1,9 @@
-<section class="shop-by-category" aria-labelledby="shop-by-category-heading">
+<section class="shop-by-category" aria-labelledby="ShopByCategory-{{ section.id }}">
   <div class="page-width">
     <div class="category-intro">
       <div>
         {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}
-        <h2 id="shop-by-category-heading">{{ section.settings.heading | escape }}</h2>
+        <h2 id="ShopByCategory-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
       </div>
       {% if section.settings.intro != blank %}<p class="category-intro__text">{{ section.settings.intro | escape }}</p>{% endif %}
     </div>
@@ -37,7 +37,7 @@
           <a class="category-card category-card--{{ forloop.index }}" href="{{ category.url }}" {{ block.shopify_attributes }}>
             <div class="category-card__media">
               {% if category_image != blank %}
-                {{ category_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '450,650,900', sizes: '(min-width: 750px) 33vw, 50vw', alt: category.title | escape }}
+                {{ category_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '450,650,900', sizes: '(min-width: 750px) 33vw, 50vw', alt: category.title }}
               {% else %}
                 <div class="category-card__placeholder" aria-hidden="true"><span>{{ category.title | slice: 0 | escape }}</span></div>
               {% endif %}

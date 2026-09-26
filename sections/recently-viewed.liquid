@@ -8,7 +8,7 @@
 (function(){
   const section=document.querySelector('[data-recently-viewed]'); if(!section||section.dataset.initialized)return;
   section.dataset.initialized='true';
-  const key='edenrose-recently-viewed', current='{{ product.handle }}';
+  const key='edenrose-recently-viewed', current={{ product.handle | json }}, root={{ routes.root_url | json }}.replace(/\/$/,'');
   let handles=[]; try{handles=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}
   handles=handles.filter(h=>h&&h!==current).slice(0,4);
   if(!handles.length){section.hidden=true;return}
@@ -17,7 +17,7 @@
   function loadRecentlyViewed(){
     if(section.dataset.loaded)return;
     section.dataset.loaded='true';
-  Promise.all(handles.map(h=>fetch('/products/'+encodeURIComponent(h)+'.js').then(r=>r.ok?r.json():null).then(p=>p?`<article class="card recent-card"><a href="/products/${encodeURIComponent(p.handle)}"><div class="recent-card-image">${p.featured_image?`<img src="${escapeHtml(p.featured_image)}" alt="${escapeHtml(p.title||'')}" loading="lazy">`:''}</div><div class="card-info"><p class="card-title">${escapeHtml(p.title||'')}</p><p class="card-price">${new Intl.NumberFormat(document.documentElement.lang||'en-AU',{style:'currency',currency:'{{ shop.currency }}'}).format((p.price||0)/100)}</p></div></a></article>`:'').catch(()=>''))).then(items=>{
+  Promise.all(handles.map(h=>fetch(root+'/products/'+encodeURIComponent(h)+'.js').then(r=>r.ok?r.json():null).then(p=>p?`<article class="card recent-card"><a href="${root}/products/${encodeURIComponent(p.handle)}"><div class="recent-card-image">${p.featured_image?`<img src="${escapeHtml(p.featured_image)}${p.featured_image.indexOf('?')>-1?'&':'?'}width=600" alt="${escapeHtml(p.title||'')}" width="600" height="750" loading="lazy">`:''}</div><div class="card-info"><p class="card-title">${escapeHtml(p.title||'')}</p><p class="card-price">${new Intl.NumberFormat(document.documentElement.lang||'en-AU',{style:'currency',currency:{{ cart.currency.iso_code | json }}}).format((p.price||0)/100)}</p></div></a></article>`:'').catch(()=>''))).then(items=>{
     const html=items.filter(Boolean).join(''); if(!html){section.hidden=true;return} grid.innerHTML=html;
   });
   }
