@@ -49,7 +49,10 @@
     "statement_pieces": "Statement Pieces",
     "under_50": "Under $50",
     "show_all_collections": "Show all collections",
-    "show_fewer_collections": "Show fewer collections"
+    "show_fewer_collections": "Show fewer collections",
+    "shop_label": "Shop",
+    "contact": "Contact",
+    "all_prefix": "All"
   },
   "customer": {
     "account": {
@@ -98,7 +101,9 @@
       "secure_text": "Secure checkout is provided by Shopify, with payment details handled through Shopify checkout.",
       "back_to_store": "Back to store",
       "privacy": "Privacy",
-      "terms": "Terms"
+      "terms": "Terms",
+      "editorial": "The EdenRose edit, beyond the expected.",
+      "explore": "Explore everything →"
     },
     "hero": {
       "name": "Hero",
@@ -213,7 +218,12 @@
       "min": "Min",
       "no_products": "No products found. Try removing a filter.",
       "max": "Max",
-      "apply_filters": "Apply filters"
+      "apply_filters": "Apply filters",
+      "pieces": "pieces",
+      "curated_for_you": "Curated for you",
+      "shop_by_collection": "Shop by collection",
+      "shoes_swim": "Shoes & swim",
+      "shop_by_edit": "Shop by edit"
     },
     "product": {
       "recommended_eyebrow": "You may also like",
@@ -267,7 +277,8 @@
       "policy_note": "Review shipping and returns before completing your purchase.",
       "policy_links_label": "Store policies",
       "returns_policy": "Returns policy",
-      "shipping_policy": "Shipping policy"
+      "shipping_policy": "Shipping policy",
+      "discount_note": "Discount codes can be entered at checkout"
     },
     "search": {
       "eyebrow": "Search",
@@ -279,7 +290,10 @@
       "open_result": "Open result",
       "no_results": "Nothing matched that search.",
       "try_again": "Try another search, or browse the full collection.",
-      "browse_all": "Browse everything"
+      "browse_all": "Browse everything",
+      "products": "Products",
+      "collections": "Collections",
+      "search_for": "Search for “{{ terms }}” →"
     }
   },
   "snippets": {

@@ -16,6 +16,7 @@
     {% paginate collection.products by 24 %}
       <form id="CollectionFilterForm" class="collection-form" method="get" action="{{ collection.url }}">
         <div class="collection-toolbar">
+          <span class="collection-curated">{{ 'templates.collection.curated_for_you' | t }}</span>
           <div class="collection-count"><strong>{{ collection.products_count }}</strong> <span>{{ 'templates.collection.products' | t }}</span></div>
           <div class="collection-actions">
             <button type="button" class="filter-toggle button button--secondary" aria-expanded="false" aria-controls="CollectionFilters">{{ 'templates.collection.filter' | t }}</button>
@@ -49,8 +50,8 @@
                         {% endfor %}
                       {% when 'price_range' %}
                         <div class="price-fields">
-                          <label>{{ 'templates.collection.min' | t }} <input type="number" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | default: '' }}" min="0" inputmode="decimal"></label>
-                          <label>{{ 'templates.collection.max' | t }} <input type="number" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | default: '' }}" min="0" inputmode="decimal"></label>
+                          <label>{{ 'templates.collection.min' | t }} <input type="number" name="{{ filter.min_value.param_name }}" value="{% if filter.min_value.value %}{{ filter.min_value.value | money_without_currency | remove: ',' }}{% endif %}" placeholder="{{ 0 | money_without_currency }}" min="0" step="any" inputmode="decimal"></label>
+                          <label>{{ 'templates.collection.max' | t }} <input type="number" name="{{ filter.max_value.param_name }}" value="{% if filter.max_value.value %}{{ filter.max_value.value | money_without_currency | remove: ',' }}{% endif %}" placeholder="{{ filter.range_max | money_without_currency | remove: ',' }}" min="0" step="any" inputmode="decimal"></label>
                         </div>
                     {% endcase %}
                   </div>
@@ -124,7 +125,7 @@
 .collection-description{max-width:650px;margin:1.25rem 0 0;color:var(--muted);line-height:1.65}
 .collection-mark{font:normal clamp(6rem,15vw,13rem)/.7 Georgia,serif;color:var(--line);user-select:none;transform:translateY(.08em)}
 .collection-toolbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-block:1px solid var(--line);padding:1rem 0;margin-bottom:1.5rem}
-.collection-toolbar:before{content:'{{ 'templates.collection.curated_for_you' | t }}';font-size:.62rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.collection-curated{font-size:.62rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
 .collection-actions{display:flex;align-items:center;gap:.7rem;margin-left:auto}
 .sort-form{display:flex;align-items:center;gap:.5rem}
 .sort-form select{padding:.65rem 2rem .65rem .75rem;border:1px solid var(--line);background:var(--paper);border-radius:999px;min-height:44px}
@@ -156,7 +157,7 @@
 .pagination .current{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .pagination a:hover{background:var(--soft);text-decoration:none}
 @media(max-width:749px){
-  .collection-toolbar:before{display:none}
+  .collection-curated{display:none}
   .collection-toolbar{position:sticky;top:68px;z-index:20;background:var(--paper);box-shadow:0 1px 0 var(--line);padding-block:.75rem;margin-bottom:1rem;align-items:center}
   .collection-toolbar,.collection-actions{min-width:0}
   .collection-count{white-space:nowrap}
