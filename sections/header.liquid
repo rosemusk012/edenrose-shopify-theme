@@ -2,7 +2,7 @@
   <div class="page-width header-row">
     <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 300 | image_tag: loading: 'eager', widths: '180,240,300', sizes: '(min-width: 901px) 180px, 150px', class: 'brand-logo', alt: shop.name }}{% else %}<span>{{ shop.name | escape }}</span>{% endif %}</a>
 
-    {% assign edenrose_categories = 'new_arrivals|new-arrivals,clothing|apparel,jewellery|jewelry,shoes|shoes,accessories|accessories,the_edit|new-arrivals' | split: ',' %}
+    {% assign edenrose_categories = 'new_arrivals|new-arrivals-1,clothing|apparel,jewellery|jewelry,swimwear|swimwear,shoes|shoes,accessories|accessories,the_edit|new-arrivals-1,sale|15-off-selected-styles' | split: ',' %}
 
     <nav class="nav nav-desktop" aria-label="{{ 'accessibility.main_navigation' | t }}">
       <span class="nav-label" aria-hidden="true">Shop</span>
@@ -48,6 +48,33 @@
               <a href="{{ collections['earrings'].url }}">Earrings</a>
               <a href="{{ collections['necklaces'].url }}">Necklaces</a>
               <a href="{{ collections['pendants'].url }}">Pendants</a>
+              <a href="{{ collections['bracelets-1'].url }}">Bracelets</a>
+            </div>
+          </details>
+        {% elsif item_title == 'swimwear' %}
+          <details class="nav-dropdown">
+            <summary aria-expanded="false">Swim<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
+            <div class="nav-dropdown__menu">
+              <span class="nav-dropdown__label">Shop Swim</span>
+              <a href="{{ collections['swimwear'].url }}">All Swimwear</a>
+              <a href="{{ collections['bikinis'].url }}">Bikinis</a>
+              <a href="{{ collections['one-piece-swimwear'].url }}">One-Piece Swimwear</a>
+              <a href="{{ collections['swim-sets'].url }}">Swim Sets</a>
+              <a href="{{ collections['swim-dresses'].url }}">Swim Dresses</a>
+              <a href="{{ collections['cover-ups'].url }}">Cover-Ups</a>
+            </div>
+          </details>
+        {% elsif item_title == 'shoes' %}
+          <details class="nav-dropdown">
+            <summary aria-expanded="false">Shoes<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
+            <div class="nav-dropdown__menu">
+              <span class="nav-dropdown__label">Shop Shoes</span>
+              <a href="{{ collections['shoes'].url }}">All Shoes</a>
+              <a href="{{ collections['flats'].url }}">Flats</a>
+              <a href="{{ collections['sneakers'].url }}">Sneakers</a>
+              <a href="{{ collections['sandals'].url }}">Sandals</a>
+              <a href="{{ collections['boots'].url }}">Boots</a>
+              <a href="{{ collections['heels'].url }}">Heels</a>
             </div>
           </details>
         {% elsif item_title == 'accessories' %}
@@ -60,12 +87,20 @@
               <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
             </div>
           </details>
+        {% elsif item_title == 'sale' %}
+          <details class="nav-dropdown">
+            <summary aria-expanded="false">Sale<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
+            <div class="nav-dropdown__menu">
+              <span class="nav-dropdown__label">Shop Sale</span>
+              <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
+            </div>
+          </details>
         {% elsif item_title == 'the_edit' %}
           <details class="nav-dropdown">
             <summary aria-expanded="false">The Edit<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
             <div class="nav-dropdown__menu">
               <span class="nav-dropdown__label">EdenRose Edit</span>
-              <a href="{{ collections['new-arrivals'].url }}">Trending Now</a>
+              <a href="{{ collections['new-arrivals-1'].url }}">New Arrivals</a>
               <a href="{{ collections['dresses-1'].url }}">Going Out</a>
               <a href="{{ collections['statement-pieces'].url }}">Statement Pieces</a>
               <a href="{{ collections['under-50'].url }}">Under $50</a>
@@ -156,6 +191,31 @@
                     <a href="{{ collections['earrings'].url }}">Earrings</a>
                     <a href="{{ collections['necklaces'].url }}">Necklaces</a>
                     <a href="{{ collections['pendants'].url }}">Pendants</a>
+                    <a href="{{ collections['bracelets-1'].url }}">Bracelets</a>
+                  </div>
+                </details>
+              {% elsif item_title == 'swimwear' %}
+                <details class="mobile-nav-group">
+                  <summary aria-expanded="false">Swim<span aria-hidden="true">⌄</span></summary>
+                  <div class="mobile-nav-sub-links">
+                    <a href="{{ collections['swimwear'].url }}">All Swimwear</a>
+                    <a href="{{ collections['bikinis'].url }}">Bikinis</a>
+                    <a href="{{ collections['one-piece-swimwear'].url }}">One-Piece Swimwear</a>
+                    <a href="{{ collections['swim-sets'].url }}">Swim Sets</a>
+                    <a href="{{ collections['swim-dresses'].url }}">Swim Dresses</a>
+                    <a href="{{ collections['cover-ups'].url }}">Cover-Ups</a>
+                  </div>
+                </details>
+              {% elsif item_title == 'shoes' %}
+                <details class="mobile-nav-group">
+                  <summary aria-expanded="false">Shoes<span aria-hidden="true">⌄</span></summary>
+                  <div class="mobile-nav-sub-links">
+                    <a href="{{ collections['shoes'].url }}">All Shoes</a>
+                    <a href="{{ collections['flats'].url }}">Flats</a>
+                    <a href="{{ collections['sneakers'].url }}">Sneakers</a>
+                    <a href="{{ collections['sandals'].url }}">Sandals</a>
+                    <a href="{{ collections['boots'].url }}">Boots</a>
+                    <a href="{{ collections['heels'].url }}">Heels</a>
                   </div>
                 </details>
               {% elsif item_title == 'accessories' %}
@@ -167,11 +227,18 @@
                     <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
                   </div>
                 </details>
+              {% elsif item_title == 'sale' %}
+                <details class="mobile-nav-group">
+                  <summary aria-expanded="false">Sale<span aria-hidden="true">⌄</span></summary>
+                  <div class="mobile-nav-sub-links">
+                    <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
+                  </div>
+                </details>
               {% elsif item_title == 'the_edit' %}
                 <details class="mobile-nav-group">
                   <summary aria-expanded="false">The Edit<span aria-hidden="true">⌄</span></summary>
                   <div class="mobile-nav-sub-links">
-                    <a href="{{ collections['new-arrivals'].url }}">Trending Now</a>
+                    <a href="{{ collections['new-arrivals-1'].url }}">New Arrivals</a>
                     <a href="{{ collections['dresses-1'].url }}">Going Out</a>
                     <a href="{{ collections['statement-pieces'].url }}">Statement Pieces</a>
                     <a href="{{ collections['under-50'].url }}">Under $50</a>
