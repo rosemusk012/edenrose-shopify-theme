@@ -30,7 +30,7 @@
     "featured": {
       "type": "featured-collection",
       "settings": {
-        "collection": "new-arrivals",
+        "collection": "new-arrivals-1",
         "heading": "New arrivals",
         "subheading": "A fresh edit of pieces to discover now.",
         "products_to_show": 12
@@ -141,7 +141,7 @@
         "float-1": {
           "type": "collection",
           "settings": {
-            "collection": "new-arrivals"
+            "collection": "new-arrivals-1"
           }
         },
         "float-2": {
