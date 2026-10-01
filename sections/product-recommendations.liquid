@@ -2,7 +2,7 @@
   <div class="page-width">
     <div class="recommendation-heading"><div><p class="eyebrow">{{ 'templates.product.recommended_eyebrow' | t }}</p><h2>{{ section.settings.heading | escape }}</h2>{% if section.settings.subheading != blank %}<p>{{ section.settings.subheading | escape }}</p>{% endif %}</div><a class="recommendation-link" href="{{ routes.all_products_collection_url }}">{{ 'general.view_all' | t }} →</a></div>
     <div class="recommendation-grid" aria-live="polite">
-      {% if recommendations.performed and recommendations.products_count > 0 %}{% for product in recommendations.products limit: section.settings.products_to_show %}{% render 'card-product', product: product %}{% endfor %}{% else %}{% for product in collections['new-arrivals'].products limit: section.settings.products_to_show %}{% render 'card-product', product: product %}{% endfor %}{% endif %}
+      {% if recommendations.performed and recommendations.products_count > 0 %}{% for product in recommendations.products limit: section.settings.products_to_show %}{% render 'card-product', product: product %}{% endfor %}{% else %}{% for product in collections['new-arrivals-1'].products limit: section.settings.products_to_show %}{% render 'card-product', product: product %}{% endfor %}{% endif %}
     </div>
   </div>
 </section>
