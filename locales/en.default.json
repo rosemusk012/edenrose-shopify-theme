@@ -4,7 +4,7 @@
  *
  * This file may be updated by the Shopify admin theme editor
  * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
+ * made here may be overwritten.
  * ------------------------------------------------------------
  */
 {
@@ -213,7 +213,9 @@
       "min": "Min",
       "no_products": "No products found. Try removing a filter.",
       "max": "Max",
-      "apply_filters": "Apply filters"
+      "apply_filters": "Apply filters",
+      "pieces": "pieces",
+      "curated_for_you": "Curated for you"
     },
     "product": {
       "recommended_eyebrow": "You may also like",
