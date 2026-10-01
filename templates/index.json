@@ -4,7 +4,7 @@
  *
  * This file may be updated by the Shopify admin theme editor
  * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
+ * made here may be overwritten.
  * ------------------------------------------------------------
  */
 {
@@ -54,7 +54,7 @@
         "category-3": {
           "type": "category",
           "settings": {
-            "collection": "tops-blouses"
+            "collection": "tops"
           }
         },
         "category-4": {
@@ -66,7 +66,7 @@
         "category-5": {
           "type": "category",
           "settings": {
-            "collection": "jumpsuits-rompers"
+            "collection": "jumpsuits"
           }
         },
         "category-6": {
@@ -84,37 +84,37 @@
         "category-8": {
           "type": "category",
           "settings": {
-            "collection": "shoes"
+            "collection": "swimwear"
           }
         },
         "category-9": {
           "type": "category",
           "settings": {
-            "collection": "jewelry"
+            "collection": "shoes"
           }
         },
         "category-10": {
           "type": "category",
           "settings": {
-            "collection": "rings"
+            "collection": "jewelry"
           }
         },
         "category-11": {
           "type": "category",
           "settings": {
-            "collection": "necklaces"
+            "collection": "rings"
           }
         },
         "category-12": {
           "type": "category",
           "settings": {
-            "collection": "earrings"
+            "collection": "necklaces"
           }
         },
         "category-13": {
           "type": "category",
           "settings": {
-            "collection": "new-arrivals"
+            "collection": "earrings"
           }
         }
       },
@@ -263,7 +263,7 @@
     "tops_edit": {
       "type": "featured-collection",
       "settings": {
-        "collection": "tops-blouses",
+        "collection": "tops",
         "heading": "Tops & blouses",
         "subheading": "Fresh layers and everyday favourites.",
         "products_to_show": 8
@@ -286,6 +286,15 @@
         "subheading": "Ready for sunny days and getaways.",
         "products_to_show": 8
       }
+    },
+    "men_edit": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "men",
+        "heading": "Men",
+        "subheading": "Explore the latest men's styles.",
+        "products_to_show": 8
+      }
     }
   },
   "order": [
@@ -294,13 +303,14 @@
     "sale_promo",
     "featured",
     "categories",
-    "sale_edit",
+    "men_edit",
     "dresses_edit",
     "tops_edit",
     "bottoms_edit",
     "jewellery_edit",
     "shoes_edit",
     "swimwear_edit",
+    "sale_edit",
     "floating",
     "editorial_1",
     "clothing_edit",
