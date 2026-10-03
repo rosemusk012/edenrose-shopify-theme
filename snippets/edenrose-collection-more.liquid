@@ -1,0 +1,20 @@
+{% doc %}
+  Outputs a comma-separated list of non-empty collection handles that are not in any
+  theme collection group (Theme settings › Collection groups) and not hidden. Used for
+  the "More collections" group so newly created collections appear automatically.
+  The caller gathers the non-empty handles (inside its own paginate) and passes them in.
+  @param {string} all_handles - Comma-separated handles of every non-empty collection
+{% enddoc %}
+{%- liquid
+  assign listed = settings.collection_group_women | append: ',' | append: settings.collection_group_men | append: ',' | append: settings.collection_group_jewellery | append: ',' | append: settings.collection_group_shoes_swim | append: ',' | append: settings.collection_group_edits | append: ',' | append: settings.collection_group_hidden
+  assign listed = listed | strip_newlines | remove: ' ' | prepend: ',' | append: ','
+  assign more = ''
+  assign all_list = all_handles | split: ','
+  for h in all_list
+    assign key = ',' | append: h | append: ','
+    unless listed contains key
+      assign more = more | append: h | append: ','
+    endunless
+  endfor
+  echo more
+-%}

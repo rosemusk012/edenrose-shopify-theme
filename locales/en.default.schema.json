@@ -14,6 +14,16 @@
         "heading": "Heading"
       }
     },
+    "collection_index": {
+      "name": "Collection index",
+      "settings": {
+        "eyebrow": "Eyebrow",
+        "heading": "Heading",
+        "intro": "Intro text",
+        "show_counts": "Show product counts",
+        "show_more": "Show “More collections” group"
+      }
+    },
     "featured_collection": {
       "name": "Featured collection",
       "settings": {
@@ -59,6 +69,13 @@
     "main_collection": {
       "name": "Collection"
     },
+    "main_list_collections": {
+      "name": "Collections list",
+      "settings": {
+        "heading": "Heading",
+        "show_more": "Show “More collections” group"
+      }
+    },
     "main_page": {
       "name": "Page"
     },
@@ -96,6 +113,17 @@
     }
   },
   "settings": {
+    "collection_groups": {
+      "edits": "Edits & offers",
+      "hidden": "Hidden collections",
+      "hidden_info": "Never shown in collection lists (for example the Home page collection, archives or duplicates).",
+      "info": "Comma-separated collection handles. These lists decide which group each collection appears under on the Collections page, the homepage collection index and the navigation. Empty collections are hidden automatically, and any non-empty collection not listed here (and not hidden) appears under “More collections”, so new collections show up on their own.",
+      "jewellery": "Jewellery",
+      "men": "Men",
+      "name": "Collection groups",
+      "shoes_swim": "Shoes & swim",
+      "women": "Women"
+    },
     "colors": {
       "accent": "Accent",
       "blush": "Blush background",

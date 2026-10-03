@@ -116,9 +116,23 @@
           "settings": {
             "collection": "earrings"
           }
+        },
+        "category-women": {
+          "type": "category",
+          "settings": {
+            "collection": "women"
+          }
+        },
+        "category-men": {
+          "type": "category",
+          "settings": {
+            "collection": "men"
+          }
         }
       },
       "block_order": [
+        "category-women",
+        "category-men",
         "category-1",
         "category-2",
         "category-3",
@@ -318,6 +332,16 @@
         "subheading": "Explore the latest men's styles.",
         "products_to_show": 8
       }
+    },
+    "collection_index": {
+      "type": "collection-index",
+      "settings": {
+        "eyebrow": "Every collection",
+        "heading": "Find your edit.",
+        "intro": "Women's, men's, jewellery, shoes and swim. New collections appear here as soon as they have pieces.",
+        "show_counts": true,
+        "show_more": true
+      }
     }
   },
   "order": [
@@ -325,6 +349,7 @@
     "hero",
     "featured",
     "categories",
+    "collection_index",
     "men_edit",
     "dresses_edit",
     "tops_edit",

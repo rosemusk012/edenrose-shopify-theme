@@ -63,7 +63,19 @@
     "all_shoes": "All Shoes",
     "sale": "Sale",
     "shop_sale": "Shop Sale",
-    "shop_by_style": "Shop by style"
+    "shop_by_style": "Shop by style",
+    "women": "Women",
+    "shop_women": "Shop Women",
+    "all_women": "All Women",
+    "men": "Men",
+    "shop_men": "Shop Men",
+    "all_men": "All Men",
+    "active_tops": "Active Tops",
+    "cami_tank_tops": "Cami & Tank Tops",
+    "jeans": "Jeans",
+    "denim_shorts": "Denim Shorts",
+    "activewear": "Activewear",
+    "hoodies": "Hoodies"
   },
   "customer": {
     "account": {
@@ -235,7 +247,15 @@
       "shop_by_collection": "Shop by collection",
       "shoes_swim": "Shoes & swim",
       "shop_by_edit": "Shop by edit",
-      "products_heading": "Products"
+      "products_heading": "Products",
+      "group_women": "Women",
+      "group_men": "Men",
+      "group_jewellery": "Jewellery",
+      "group_shoes_swim": "Shoes & swim",
+      "group_edits": "Edits & offers",
+      "group_more": "More collections",
+      "jump_to": "Jump to",
+      "list_intro": "Every EdenRose collection, grouped so you can find your way in."
     },
     "product": {
       "recommended_eyebrow": "You may also like",

@@ -60,20 +60,26 @@
     if mode == 'mobile'
       assign arrow = true
     endif
-    assign groups = 'clothing,jewellery,swim,shoes,accessories,the_edit,sale' | split: ','
+    assign groups = 'women,men,jewellery,swim,shoes,accessories,the_edit,sale' | split: ','
   -%}
   {%- assign l = 'general.new_arrivals' | t -%}{% render 'edenrose-nav-link', handle: 'new-arrivals-1', label: l, arrow: arrow %}
   {%- for group in groups -%}
     {%- liquid
       assign sub_label = ''
       assign sub_links = ''
+      assign strip = ''
       case group
-        when 'clothing'
-          assign summary_key = 'general.clothing'
-          assign panel_key = 'general.shop_clothing'
-          assign main_links = 'apparel|general.all_clothing,dresses-1|general.dresses,tops|,bottoms-sets|,two-piece-sets-1|,jumpsuits-rompers|general.jumpsuits_rompers,sweaters-hoodies|general.sweaters_hoodies,cardigans-1|,plus-size|general.plus_size'
+        when 'women'
+          assign summary_key = 'general.women'
+          assign panel_key = 'general.shop_women'
+          assign main_links = 'women|general.all_women,apparel|general.all_clothing,dresses-1|general.dresses,tops|,bottoms-sets|,two-piece-sets-1|,jumpsuits-rompers|general.jumpsuits_rompers,sweaters-hoodies|general.sweaters_hoodies,hoodies-1|general.hoodies,cardigans-1|,activewear|general.activewear,plus-size|general.plus_size'
           assign sub_label = 'general.shop_by_style'
-          assign sub_links = 'maxi-dresses|,midi-dresses|,mini-dresses|,crop-tops-1|,pants|,shorts-1|,skirts-1|,leggings|,jumpsuits|,rompers-1|'
+          assign sub_links = 'maxi-dresses|,midi-dresses|,mini-dresses|,crop-tops-1|,cami-tank-tops|general.cami_tank_tops,active-tops|general.active_tops,pants|,jeans|general.jeans,shorts-1|,denim-shorts-1|general.denim_shorts,skirts-1|,leggings|,jumpsuits|,rompers-1|'
+        when 'men'
+          assign summary_key = 'general.men'
+          assign panel_key = 'general.shop_men'
+          assign main_links = 'men|general.all_men,men-shirts-tops|,men-t-shirts|,men-shorts|,men-pants|,men-sets|,men-hoodies-sweatshirts|,men-jackets|,men-sweaters|,men-jeans|,men-outerwear|,men-blazers|,men-activewear|'
+          assign strip = 'Men '
         when 'jewellery'
           assign summary_key = 'general.jewellery'
           assign panel_key = 'general.shop_jewellery'
@@ -109,14 +115,14 @@
         {%- for pair in main_links -%}
           {%- assign parts = pair | split: '|' -%}
           {%- assign l = blank -%}{%- if parts[1] != blank -%}{%- assign l = parts[1] | t -%}{%- endif -%}
-          {% render 'edenrose-nav-link', handle: parts[0], label: l %}
+          {% render 'edenrose-nav-link', handle: parts[0], label: l, strip_prefix: strip %}
         {%- endfor -%}
         {%- if sub_links.size > 0 -%}
           {%- if mode == 'desktop' -%}<span class="nav-dropdown__sub-label">{{ sub_label | t }}</span>{%- endif -%}
           {%- for pair in sub_links -%}
             {%- assign parts = pair | split: '|' -%}
             {%- assign l = blank -%}{%- if parts[1] != blank -%}{%- assign l = parts[1] | t -%}{%- endif -%}
-            {% render 'edenrose-nav-link', handle: parts[0], label: l %}
+            {% render 'edenrose-nav-link', handle: parts[0], label: l, strip_prefix: strip %}
           {%- endfor -%}
         {%- endif -%}
       </div>

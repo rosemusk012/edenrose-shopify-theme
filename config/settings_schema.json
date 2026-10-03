@@ -99,5 +99,51 @@
         "default": "dm_sans_n4"
       }
     ]
+  },
+  {
+    "name": "t:settings.collection_groups.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:settings.collection_groups.info"
+      },
+      {
+        "type": "textarea",
+        "id": "collection_group_women",
+        "label": "t:settings.collection_groups.women",
+        "default": "women,apparel,dresses-1,maxi-dresses,midi-dresses,mini-dresses,tops,crop-tops-1,cami-tank-tops,active-tops,two-piece-sets-1,bottoms-sets,pants,jeans,shorts-1,denim-shorts-1,skirts-1,leggings,jumpsuits-rompers,jumpsuits,rompers-1,sweaters-hoodies,hoodies-1,cardigans-1,outerwear,activewear,plus-size"
+      },
+      {
+        "type": "textarea",
+        "id": "collection_group_men",
+        "label": "t:settings.collection_groups.men",
+        "default": "men,men-shirts-tops,men-t-shirts,men-shorts,men-pants,men-sets,men-hoodies-sweatshirts,men-jackets,men-sweaters,men-jeans,men-outerwear,men-blazers,men-activewear"
+      },
+      {
+        "type": "textarea",
+        "id": "collection_group_jewellery",
+        "label": "t:settings.collection_groups.jewellery",
+        "default": "jewelry,rings,earrings,necklaces,pendants,bracelets-1,statement-pieces"
+      },
+      {
+        "type": "textarea",
+        "id": "collection_group_shoes_swim",
+        "label": "t:settings.collection_groups.shoes_swim",
+        "default": "shoes,sneakers,flats,sandals,boots,heels,swimwear,bikinis,one-piece-swimwear,swim-sets,swim-dresses,cover-ups"
+      },
+      {
+        "type": "textarea",
+        "id": "collection_group_edits",
+        "label": "t:settings.collection_groups.edits",
+        "default": "new-arrivals-1,15-off-selected-styles,under-50,gift-ideas,socks"
+      },
+      {
+        "type": "textarea",
+        "id": "collection_group_hidden",
+        "label": "t:settings.collection_groups.hidden",
+        "info": "t:settings.collection_groups.hidden_info",
+        "default": "frontpage,new-arrivals,bracelets,tops-blouses-1,accessories,blouses"
+      }
+    ]
   }
 ]

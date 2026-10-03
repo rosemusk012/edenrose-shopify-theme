@@ -1,0 +1,66 @@
+{% doc %}
+  Renders one group of collections (cards for the Collections page, chips for the
+  homepage collection index). Collections that don't exist or have no products are
+  skipped, and the whole group is skipped when nothing in it has products, so
+  collections appear by themselves once products land in them.
+  @param {string} handles - Comma-separated collection handles, in display order
+  @param {string} title - Group heading
+  @param {string} group_id - Anchor id for the group
+  @param {string} [mode] - 'cards' (default) or 'chips'
+  @param {boolean} [show_counts] - Show product counts
+  @param {string} [strip_prefix] - Text removed from the start of titles (e.g. 'Men ')
+{% enddoc %}
+{%- liquid
+  assign handle_list = handles | split: ','
+  assign group_total = 0
+  for h in handle_list
+    assign h = h | strip
+    assign c = collections[h]
+    if c != blank and c.products_count > 0
+      assign group_total = group_total | plus: 1
+    endif
+  endfor
+-%}
+{%- if group_total > 0 -%}
+  {%- if mode == 'chips' -%}
+    <div class="collection-index__group" id="{{ group_id }}">
+      <h3 class="collection-index__label">{{ title | escape }}</h3>
+      <ul class="collection-index__chips" role="list">
+        {%- for h in handle_list -%}
+          {%- assign h = h | strip -%}
+          {%- assign c = collections[h] -%}
+          {%- if c != blank and c.products_count > 0 -%}
+            {%- assign chip_title = c.title -%}
+            {%- if strip_prefix != blank and chip_title != strip_prefix -%}{%- assign chip_title = chip_title | remove_first: strip_prefix | strip -%}{%- endif -%}
+            <li><a class="collection-chip" href="{{ c.url }}">{{ chip_title | escape }}{% if show_counts %}<small>{{ c.products_count }}</small>{% endif %}</a></li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- else -%}
+    <div class="list-collections__group" id="{{ group_id }}">
+      <h2 class="list-collections__group-title">{{ title | escape }}<small>{{ group_total }}</small></h2>
+      <div class="list-collections__grid">
+        {%- for h in handle_list -%}
+          {%- assign h = h | strip -%}
+          {%- assign c = collections[h] -%}
+          {%- if c != blank and c.products_count > 0 -%}
+            {%- assign card_title = c.title -%}
+            {%- if strip_prefix != blank and card_title != strip_prefix -%}{%- assign card_title = card_title | remove_first: strip_prefix | strip -%}{%- endif -%}
+            <a class="list-collections__card" href="{{ c.url }}">
+              <div class="list-collections__media">
+                {%- assign card_image = c.featured_image | default: c.products.first.featured_image -%}
+                {%- if card_image -%}
+                  {{ card_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360,540,720,900', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw', alt: c.title }}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag }}
+                {%- endif -%}
+              </div>
+              <span class="list-collections__title">{{ card_title | escape }}{% if show_counts %}<small>{{ c.products_count }} {{ 'templates.collection.products' | t }}</small>{% endif %}</span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}

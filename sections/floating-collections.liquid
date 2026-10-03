@@ -8,7 +8,7 @@
     <div class="floating-collections__grid">
       {% for block in section.blocks %}
         {% assign collection = block.settings.collection %}
-        {% if collection != blank %}
+        {% if collection != blank and collection.products_count > 0 %}
           <a class="floating-card floating-card--{{ forloop.index }}" href="{{ collection.url }}" {{ block.shopify_attributes }}>
             <div class="floating-card__image">
               {% if collection.featured_image %}

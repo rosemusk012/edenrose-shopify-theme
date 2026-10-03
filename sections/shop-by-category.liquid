@@ -13,7 +13,7 @@
     {% comment %}Customer-facing landing categories use the main Shopify collections; granular filter collections stay in collection pages/navigation. {% endcomment %}
     <div class="category-grid category-grid--all">
       {% for block in section.blocks %}
-        {% if block.settings.collection != blank %}
+        {% if block.settings.collection != blank and block.settings.collection.products_count > 0 %}
           {% assign visible_categories = visible_categories | plus: 1 %}
           {% assign category = block.settings.collection %}
           {% assign category_image = category.featured_image %}
