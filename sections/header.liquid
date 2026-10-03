@@ -90,6 +90,32 @@
 
       function positionOpenDropdowns(){ dropdowns.forEach(positionDropdown); }
 
+      // Safety net for the desktop nav: if the links can't fit between the logo and
+      // the actions (longer menu, translated labels, language selector), switch to
+      // the hamburger menu instead of letting the nav slide under the logo.
+      var navDesktop=header.querySelector('.nav-desktop');
+      function isCollapsed(){ return !navDesktop || getComputedStyle(navDesktop).display==='none'; }
+      function fitNav(){
+        if(!navDesktop) return;
+        var was=header.classList.contains('is-nav-collapsed');
+        header.classList.remove('is-nav-collapsed','is-label-hidden','is-search-compact');
+        var collapse=false;
+        function overflowing(){ return navDesktop.scrollWidth>navDesktop.clientWidth+1; }
+        if(getComputedStyle(navDesktop).display!=='none' && overflowing()){
+          // Step 1: drop the small "Shop" label. Step 2: swap the search field
+          // for the search icon. Step 3: hamburger menu.
+          header.classList.add('is-label-hidden');
+          if(overflowing()){
+            header.classList.add('is-search-compact');
+            collapse=overflowing();
+          }
+        }
+        header.classList.toggle('is-nav-collapsed',collapse);
+        if(collapse!==was){
+          if(collapse) closeDropdowns(); else closeMobileMenu();
+        }
+      }
+
       function setExpanded(details){
         var s=details&&details.querySelector(':scope > summary');
         if(s) s.setAttribute('aria-expanded',String(details.open));
@@ -167,14 +193,18 @@
       window.addEventListener('resize',function(){
         syncPosition();
         positionOpenDropdowns();
-        if(window.innerWidth>900){
+        fitNav();
+        if(!isCollapsed()){
           if(menu&&menu.open) closeMobileMenu();
         } else {
           closeDropdowns();
         }
       },{passive:true});
+      window.addEventListener('load',fitNav);
+      if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fitNav);
 
       window.addEventListener('orientationchange',function(){ syncPosition(); positionOpenDropdowns(); },{passive:true});
+      fitNav();
       syncPosition();
     });
 
@@ -185,8 +215,10 @@
     });
   }
 
+  // Run straight away (this script sits right after the header markup) so the
+  // nav is fitted before first paint, and again once the DOM is ready.
+  init();
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
-  else init();
 })();
 </script>
 
@@ -197,6 +229,12 @@
 .shopify-section:has(.site-header) .site-header{z-index:10001}
 .site-header .header-row{overflow:visible;position:relative;z-index:10001}
 .header-row{min-height:82px}
+/* Flex row: the logo never shrinks, the nav takes the space that is left and
+   collapses to the hamburger menu (below 1200px, or via fitNav) when it can't fit. */
+.site-header .header-row{display:flex;align-items:center;justify-content:space-between;gap:clamp(16px,1.8vw,28px)}
+.site-header .brand{flex:0 0 auto}
+.site-header .nav-desktop{flex:1 1 auto;justify-content:center;min-width:0}
+.site-header .header-actions{flex:0 0 auto;align-items:center;margin-left:auto}
 .brand{display:inline-flex;align-items:center;min-width:0}
 .nav-label{font-size:.62rem;letter-spacing:.16em;color:var(--muted);margin-right:.15rem}
 .brand-logo{display:block;width:auto;max-width:210px;max-height:52px;object-fit:contain;object-position:left center}
@@ -232,7 +270,7 @@
 .bag-count{display:inline-flex;align-items:center;justify-content:center;min-width:1.45rem;height:1.45rem;padding:0 .3rem;border:1px solid var(--ink);border-radius:999px;font-size:.72rem;font-weight:500}
 .header-language{display:inline-flex;align-items:center}
 .header-language form{margin:0}
-.header-language select{min-height:40px;border:0;border-bottom:1px solid var(--line);background:transparent;color:inherit;font:inherit;font-size:.78rem;cursor:pointer;padding:.25rem 1.2rem .25rem 0}
+.header-language select{min-height:40px;max-width:96px;border:0;border-bottom:1px solid var(--line);background:transparent;color:inherit;font:inherit;font-size:.72rem;letter-spacing:.03em;cursor:pointer;padding:.25rem .15rem .25rem 0;text-overflow:ellipsis}
 .header-language select:focus-visible{outline:var(--focus);outline-offset:2px}
 .mobile-menu{display:none}
 .mobile-menu-open{overflow:hidden;touch-action:none}
@@ -264,7 +302,12 @@
 .mobile-nav-utility a{font-size:.9rem}
 .mobile-nav-utility span{font-size:.75rem}
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media(max-width:1100px){.header-row{gap:12px}.nav{gap:.7rem}.header-search{display:none}.mobile-search-link{display:flex}.header-actions{gap:8px}.brand:has(.brand-logo){max-width:180px}.brand-logo{max-width:180px;max-height:46px}.header-language select{max-width:86px}}
+@media(max-width:1365px){.nav-label{display:none}}
+@media(max-width:1279px){.header-search{display:none}.mobile-search-link{display:inline-flex}.header-actions{gap:12px}}
+@media(max-width:1199px){.nav-desktop{display:none}.mobile-menu{display:block}}
+.site-header.is-search-compact .header-search{display:none}.site-header.is-search-compact .mobile-search-link{display:inline-flex}.site-header.is-label-hidden .nav-label{display:none}
+.site-header.is-nav-collapsed .nav-desktop{display:none}.site-header.is-nav-collapsed .mobile-menu{display:block}.site-header.is-nav-collapsed .header-search{display:none}.site-header.is-nav-collapsed .mobile-search-link{display:inline-flex}
+@media(max-width:1100px){.site-header .header-row{gap:12px}.nav{gap:.7rem}.header-search{display:none}.mobile-search-link{display:flex}.header-actions{gap:8px}.brand:has(.brand-logo){max-width:180px}.brand-logo{max-width:180px;max-height:46px}.header-language select{max-width:86px}}
 @media(max-width:900px){.nav-desktop{display:none}.mobile-menu{display:block}.header-row{grid-template-columns:1fr auto}.header-actions{gap:4px}.mobile-search-link{display:inline-flex}.header-search{display:none}.header-language{display:none}}
 @media(max-width:560px){.header-row{min-height:68px}.header-search input{width:110px}.brand{font-size:24px;max-width:170px;min-height:40px}.brand-logo{max-width:160px;max-height:40px}.mobile-nav{padding-left:10px;padding-right:10px}.header-actions .bag-action > span:first-child{display:none}.header-actions .account-action > span:last-child{display:none}.account-icon{font-size:1.15rem}}
 .header-search{position:relative}.edenrose-predictive-search{position:absolute;top:calc(100% + 8px);right:0;width:min(520px,calc(100vw - 32px));max-height:min(70vh,560px);overflow:auto;background:var(--paper);border:1px solid var(--line);box-shadow:0 18px 45px rgba(33,26,27,.16);z-index:2147483647}.edenrose-predictive-search[hidden]{display:none}.edenrose-predictive-inner{padding:1rem}.edenrose-predictive-heading{font-size:.62rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);padding:.25rem 0 .55rem}.edenrose-predictive-products{display:grid;gap:.35rem}.edenrose-predictive-product{display:grid;grid-template-columns:52px minmax(0,1fr);gap:.75rem;align-items:center;padding:.45rem;text-decoration:none;border-radius:8px}.edenrose-predictive-product:hover,.edenrose-predictive-product:focus-visible{background:var(--soft)}.edenrose-predictive-product img{width:52px;height:64px;object-fit:cover;background:var(--soft)}.edenrose-predictive-product span{display:grid;gap:.18rem;min-width:0}.edenrose-predictive-product strong{font-size:.82rem;line-height:1.3}.edenrose-predictive-product small{font-size:.75rem;color:var(--muted)}.edenrose-predictive-collections{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.8rem}.edenrose-predictive-collections a{padding:.45rem .65rem;border:1px solid var(--line);border-radius:999px;font-size:.72rem}.edenrose-predictive-more{display:block;border-top:1px solid var(--line);margin-top:.65rem;padding:.85rem .25rem .15rem;font-size:.78rem;text-decoration:underline;text-underline-offset:3px}@media(max-width:900px){.header-search{display:none}.mobile-search-link{display:inline-flex}.edenrose-predictive-search{position:fixed;top:calc(var(--edenrose-mobile-nav-top,82px) + 8px);left:16px;right:16px;width:auto;max-width:none}}

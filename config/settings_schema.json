@@ -14,7 +14,7 @@
         "type": "text",
         "id": "announcement",
         "label": "t:settings.general.announcement",
-        "default": "Free shipping on every order · Free 30-day returns"
+        "default": "Free shipping on every order · Easy 30-day returns"
       },
       {
         "type": "image_picker",
