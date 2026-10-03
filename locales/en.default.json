@@ -54,7 +54,8 @@
     "contact": "Contact",
     "all_prefix": "All",
     "clothing_filters": "Clothing filters",
-    "page": "Page {{ page }}"
+    "page": "Page {{ page }}",
+    "collections": "Collections"
   },
   "customer": {
     "account": {
@@ -297,6 +298,9 @@
       "products": "Products",
       "collections": "Collections",
       "search_for": "Search for “{{ terms }}” →"
+    },
+    "blog": {
+      "empty": "No articles yet. Check back soon."
     }
   },
   "snippets": {

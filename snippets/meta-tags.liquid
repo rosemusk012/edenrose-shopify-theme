@@ -41,7 +41,7 @@
   "url": {{ request.origin | append: routes.root_url | json }},
   "potentialAction": {
     "@type": "SearchAction",
-    {%- assign search_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' -%}
+    {%- assign search_target = request.origin | append: routes.search_url | append: '?q=%7Bsearch_term_string%7D' | url_decode -%}
     "target": {{ search_target | json }},
     "query-input": "required name=search_term_string"
   }

@@ -59,9 +59,9 @@ button:disabled{cursor:not-allowed;opacity:.55}
 .product-grid>*{min-width:0}
 
 /* ---------- Content pages, blog and articles ---------- */
-.page-content,.cart{padding:clamp(3rem,7vw,6rem) 0}
+.page-content{padding:clamp(1.5rem,3.5vw,2.75rem) 0 clamp(3rem,6vw,5rem)}
 .page-kicker{margin:0 0 .75rem;font-size:.62rem;text-transform:uppercase;letter-spacing:.16em;color:var(--accent)}
-.page-content h1,.cart h1{font:normal clamp(2.8rem,7vw,5.8rem)/.95 var(--display);letter-spacing:-.03em;margin:0 0 2rem}
+.page-content h1,.cart h1{font:normal clamp(2.6rem,6vw,5rem)/.95 var(--display);letter-spacing:-.03em;margin:0 0 1.5rem}
 .rte{max-width:780px;color:var(--muted);font-size:1rem;line-height:1.75}
 .rte h2,.rte h3{color:var(--ink);font-family:var(--display);font-weight:400;line-height:1.1;margin-top:2.5rem}
 .rte a{text-decoration:underline;text-underline-offset:3px}
@@ -94,7 +94,7 @@ button:disabled{cursor:not-allowed;opacity:.55}
   .hero p{font-size:15px;margin-bottom:18px}
   .section{padding-block:48px}
   .section h2,.collection-hero h1,.product-info h1,.cart h1,.page-content h1{font-size:38px}
-  .page-content{padding:2.5rem 0}
+  .page-content{padding:1.25rem 0 2.5rem}
   .product-grid{gap:22px 12px}
   .button{min-height:50px}
 }
