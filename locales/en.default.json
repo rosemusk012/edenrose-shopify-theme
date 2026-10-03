@@ -49,7 +49,21 @@
     "statement_pieces": "Statement Pieces",
     "under_50": "Under $50",
     "show_all_collections": "Show all collections",
-    "show_fewer_collections": "Show fewer collections"
+    "show_fewer_collections": "Show fewer collections",
+    "shop_label": "Shop",
+    "contact": "Contact",
+    "all_prefix": "All",
+    "clothing_filters": "Clothing filters",
+    "page": "Page {{ page }}",
+    "collections": "Collections",
+    "swim": "Swim",
+    "shop_swim": "Shop Swim",
+    "all_swimwear": "All Swimwear",
+    "shop_shoes": "Shop Shoes",
+    "all_shoes": "All Shoes",
+    "sale": "Sale",
+    "shop_sale": "Shop Sale",
+    "shop_by_style": "Shop by style"
   },
   "customer": {
     "account": {
@@ -98,7 +112,9 @@
       "secure_text": "Secure checkout is provided by Shopify, with payment details handled through Shopify checkout.",
       "back_to_store": "Back to store",
       "privacy": "Privacy",
-      "terms": "Terms"
+      "terms": "Terms",
+      "editorial": "The EdenRose edit, beyond the expected.",
+      "explore": "Explore everything →"
     },
     "hero": {
       "name": "Hero",
@@ -215,7 +231,11 @@
       "max": "Max",
       "apply_filters": "Apply filters",
       "pieces": "pieces",
-      "curated_for_you": "Curated for you"
+      "curated_for_you": "Curated for you",
+      "shop_by_collection": "Shop by collection",
+      "shoes_swim": "Shoes & swim",
+      "shop_by_edit": "Shop by edit",
+      "products_heading": "Products"
     },
     "product": {
       "recommended_eyebrow": "You may also like",
@@ -224,23 +244,25 @@
       "quantity": "Quantity",
       "add_to_cart": "Add to cart",
       "on_sale": "Sale",
-      "details": "Details",
+      "details": "Product details",
       "available": "Available",
-      "shipping_title": "Shipping",
-      "shipping_text": "Delivery details are available at checkout.",
+      "shipping_title": "Shipping & delivery",
+      "shipping_text": "Shipping options and delivery estimates are shown at checkout based on your destination.",
       "returns_title": "Returns",
-      "returns_text": "Review the store return policy before purchase.",
+      "returns_text": "Return eligibility and instructions vary by order. Please check the store return policy before purchasing.",
       "secure_title": "Secure checkout",
       "secure_text": "Checkout is handled securely by Shopify.",
       "left": "left",
-      "size_fit_title": "Size & fit",
-      "size_fit_text": "Fit can vary by style and supplier. Please check the measurements and product details before choosing your size. If you are between sizes, compare the garment measurements with a similar item you already own.",
+      "size_fit_title": "Size & measurements",
+      "size_fit_text": "Check the available size or option above before adding to cart. Where measurements are provided for this product, use them to compare with a similar garment you already own.",
       "view_policy": "View policy",
       "trust_label": "EdenRose purchase reassurance",
       "trust_secure": "Secure Shopify checkout",
       "trust_returns": "Clear returns",
       "trust_shipping": "Shipping shown before payment",
-      "choose_options": "Choose options"
+      "choose_options": "Choose size, colour or option",
+      "kicker": "EDENROSE EDIT",
+      "purchase_intro": "Select your options below to check availability and add your choice to cart."
     },
     "cart": {
       "eyebrow": "Shopping bag",
@@ -267,7 +289,8 @@
       "policy_note": "Review shipping and returns before completing your purchase.",
       "policy_links_label": "Store policies",
       "returns_policy": "Returns policy",
-      "shipping_policy": "Shipping policy"
+      "shipping_policy": "Shipping policy",
+      "discount_note": "Discount codes can be entered at checkout"
     },
     "search": {
       "eyebrow": "Search",
@@ -279,7 +302,13 @@
       "open_result": "Open result",
       "no_results": "Nothing matched that search.",
       "try_again": "Try another search, or browse the full collection.",
-      "browse_all": "Browse everything"
+      "browse_all": "Browse everything",
+      "products": "Products",
+      "collections": "Collections",
+      "search_for": "Search for “{{ terms }}” →"
+    },
+    "blog": {
+      "empty": "No articles yet. Check back soon."
     }
   },
   "snippets": {
@@ -295,7 +324,9 @@
       "add_to_cart": "Add to cart",
       "choose_options": "Choose options",
       "view": "View",
-      "new": "New"
+      "new": "New",
+      "sale_price": "Sale price",
+      "regular_price": "Regular price"
     }
   }
 }

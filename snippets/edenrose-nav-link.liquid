@@ -1,0 +1,11 @@
+{% doc %}
+  Renders one built-in EdenRose navigation link, but only when the collection exists,
+  so a missing handle never produces an empty link.
+  @param {string} handle - Collection handle
+  @param {string} [label] - Link text (defaults to the collection title)
+  @param {boolean} [arrow] - Append a decorative arrow (mobile top level)
+{% enddoc %}
+{%- assign nav_collection = collections[handle] -%}
+{%- if nav_collection != blank and nav_collection.url != blank -%}
+  <a href="{{ nav_collection.url }}"{% if collection.handle == handle %} aria-current="page"{% endif %}>{{ label | default: nav_collection.title | escape }}{% if arrow %}<span aria-hidden="true">→</span>{% endif %}</a>
+{%- endif -%}

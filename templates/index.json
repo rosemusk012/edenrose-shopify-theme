@@ -199,15 +199,6 @@
         "text": "One piece, styled as its own little editorial moment."
       }
     },
-    "clothing_edit": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "apparel",
-        "heading": "Clothing",
-        "subheading": "Explore the full EdenRose clothing collection.",
-        "products_to_show": 8
-      }
-    },
     "jewellery_edit": {
       "type": "featured-collection",
       "settings": {
@@ -240,7 +231,39 @@
     },
     "benefits": {
       "type": "benefits",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "benefit-1": {
+          "type": "benefit",
+          "settings": {
+            "title": "Easy browsing",
+            "text": "Explore clothing and jewellery by collection.",
+            "link_label": "Explore",
+            "link": "/collections/all"
+          }
+        },
+        "benefit-2": {
+          "type": "benefit",
+          "settings": {
+            "title": "Clear checkout",
+            "text": "Shipping and delivery details are shown before purchase.",
+            "link_label": ""
+          }
+        },
+        "benefit-3": {
+          "type": "benefit",
+          "settings": {
+            "title": "Secure payment",
+            "text": "Checkout is handled securely by Shopify.",
+            "link_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "benefit-1",
+        "benefit-2",
+        "benefit-3"
+      ]
     },
     "sale_edit": {
       "type": "featured-collection",
@@ -300,21 +323,21 @@
   "order": [
     "promo",
     "hero",
-    "sale_promo",
     "featured",
     "categories",
     "men_edit",
     "dresses_edit",
     "tops_edit",
+    "floating",
+    "sale_promo",
+    "sale_edit",
     "bottoms_edit",
     "jewellery_edit",
+    "editorial_1",
     "shoes_edit",
     "swimwear_edit",
-    "sale_edit",
-    "floating",
-    "editorial_1",
     "break_1",
-    "apps",
-    "benefits"
+    "benefits",
+    "apps"
   ]
 }

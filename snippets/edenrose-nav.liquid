@@ -1,0 +1,125 @@
+{% doc %}
+  Header navigation shared by the desktop bar and the mobile menu.
+  Uses the Shopify menu picked in the header settings; if that menu has no links
+  (or the "Built-in EdenRose categories" option is chosen) it falls back to the
+  original built-in category list.
+  @param {string} mode - 'desktop' or 'mobile'
+  @param {object} menu - linklist from section.settings.menu
+  @param {string} source - 'menu' or 'builtin'
+{% enddoc %}
+{%- liquid
+  assign use_menu = false
+  if source != 'builtin' and menu != blank and menu.links.size > 0
+    assign use_menu = true
+  endif
+  if mode == 'desktop'
+    assign group_class = 'nav-dropdown'
+    assign panel_class = 'nav-dropdown__menu'
+    assign chevron_class = 'nav-dropdown__chevron'
+  else
+    assign group_class = 'mobile-nav-group'
+    assign panel_class = 'mobile-nav-sub-links'
+    assign chevron_class = ''
+  endif
+-%}
+{%- if use_menu -%}
+  {%- for link in menu.links -%}
+    {%- if link.links.size > 0 -%}
+      <details class="{{ group_class }}">
+        <summary aria-expanded="false">{{ link.title | escape }}<span{% if chevron_class != '' %} class="{{ chevron_class }}"{% endif %} aria-hidden="true">⌄</span></summary>
+        <div class="{{ panel_class }}">
+          {%- if mode == 'desktop' -%}<span class="nav-dropdown__label">{{ 'general.shop_label' | t }} {{ link.title | escape }}</span>{%- endif -%}
+          {%- if link.url != blank and link.url != '#' and link.url != routes.root_url -%}
+            <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ 'general.all_prefix' | t }} {{ link.title | escape }}</a>
+          {%- endif -%}
+          {%- for child in link.links -%}
+            {%- if child.links.size > 0 -%}
+              {%- if mode == 'desktop' -%}<span class="nav-dropdown__sub-label">{{ child.title | escape }}</span>{%- endif -%}
+              <a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title | escape }}</a>
+              {%- for grandchild in child.links -%}
+                <a href="{{ grandchild.url }}"{% if grandchild.current %} aria-current="page"{% endif %}>{{ grandchild.title | escape }}</a>
+              {%- endfor -%}
+            {%- else -%}
+              <a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title | escape }}</a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </details>
+    {%- else -%}
+      <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}{% if mode == 'mobile' %}<span aria-hidden="true">→</span>{% endif %}</a>
+    {%- endif -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- comment -%}
+    Built-in EdenRose categories (mirrors the live navigation).
+    Each group is a list of "handle|translation key" pairs; when the key is empty the
+    collection title is used. Missing collections are skipped by edenrose-nav-link.
+  {%- endcomment -%}
+  {%- liquid
+    assign arrow = false
+    if mode == 'mobile'
+      assign arrow = true
+    endif
+    assign groups = 'clothing,jewellery,swim,shoes,accessories,the_edit,sale' | split: ','
+  -%}
+  {%- assign l = 'general.new_arrivals' | t -%}{% render 'edenrose-nav-link', handle: 'new-arrivals-1', label: l, arrow: arrow %}
+  {%- for group in groups -%}
+    {%- liquid
+      assign sub_label = ''
+      assign sub_links = ''
+      case group
+        when 'clothing'
+          assign summary_key = 'general.clothing'
+          assign panel_key = 'general.shop_clothing'
+          assign main_links = 'apparel|general.all_clothing,dresses-1|general.dresses,tops|,bottoms-sets|,two-piece-sets-1|,jumpsuits-rompers|general.jumpsuits_rompers,sweaters-hoodies|general.sweaters_hoodies,cardigans-1|,plus-size|general.plus_size'
+          assign sub_label = 'general.shop_by_style'
+          assign sub_links = 'maxi-dresses|,midi-dresses|,mini-dresses|,crop-tops-1|,pants|,shorts-1|,skirts-1|,leggings|,jumpsuits|,rompers-1|'
+        when 'jewellery'
+          assign summary_key = 'general.jewellery'
+          assign panel_key = 'general.shop_jewellery'
+          assign main_links = 'jewelry|general.all_jewellery,rings|general.rings,earrings|general.earrings,necklaces|general.necklaces,pendants|,bracelets-1|'
+        when 'swim'
+          assign summary_key = 'general.swim'
+          assign panel_key = 'general.shop_swim'
+          assign main_links = 'swimwear|general.all_swimwear,bikinis|,one-piece-swimwear|,swim-sets|,swim-dresses|,cover-ups|'
+        when 'shoes'
+          assign summary_key = 'general.shoes'
+          assign panel_key = 'general.shop_shoes'
+          assign main_links = 'shoes|general.all_shoes,flats|,sneakers|,sandals|,boots|,heels|'
+        when 'accessories'
+          assign summary_key = 'general.accessories'
+          assign panel_key = 'general.more_to_discover'
+          assign main_links = 'gift-ideas|general.gift_ideas,statement-pieces|general.statement_pieces,under-50|general.under_50,15-off-selected-styles|'
+        when 'the_edit'
+          assign summary_key = 'general.the_edit'
+          assign panel_key = 'general.edenrose_edit'
+          assign main_links = 'new-arrivals-1|general.new_arrivals,dresses-1|general.going_out,statement-pieces|general.statement_pieces,under-50|general.under_50,15-off-selected-styles|,gift-ideas|general.gift_ideas'
+        when 'sale'
+          assign summary_key = 'general.sale'
+          assign panel_key = 'general.shop_sale'
+          assign main_links = '15-off-selected-styles|'
+      endcase
+      assign main_links = main_links | split: ','
+      assign sub_links = sub_links | split: ','
+    -%}
+    <details class="{{ group_class }}">
+      <summary aria-expanded="false">{{ summary_key | t }}<span{% if chevron_class != '' %} class="{{ chevron_class }}"{% endif %} aria-hidden="true">⌄</span></summary>
+      <div class="{{ panel_class }}">
+        {%- if mode == 'desktop' -%}<span class="nav-dropdown__label">{{ panel_key | t }}</span>{%- endif -%}
+        {%- for pair in main_links -%}
+          {%- assign parts = pair | split: '|' -%}
+          {%- assign l = blank -%}{%- if parts[1] != blank -%}{%- assign l = parts[1] | t -%}{%- endif -%}
+          {% render 'edenrose-nav-link', handle: parts[0], label: l %}
+        {%- endfor -%}
+        {%- if sub_links.size > 0 -%}
+          {%- if mode == 'desktop' -%}<span class="nav-dropdown__sub-label">{{ sub_label | t }}</span>{%- endif -%}
+          {%- for pair in sub_links -%}
+            {%- assign parts = pair | split: '|' -%}
+            {%- assign l = blank -%}{%- if parts[1] != blank -%}{%- assign l = parts[1] | t -%}{%- endif -%}
+            {% render 'edenrose-nav-link', handle: parts[0], label: l %}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </details>
+  {%- endfor -%}
+{%- endif -%}

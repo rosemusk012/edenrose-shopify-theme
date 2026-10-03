@@ -1,8 +1,8 @@
-<section class="floating-collections" aria-labelledby="floating-collections-heading">
+<section class="floating-collections" aria-labelledby="FloatingCollections-{{ section.id }}">
   <div class="page-width">
     <div class="floating-collections__intro">
       <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
-      <h2 id="floating-collections-heading">{{ section.settings.heading | escape }}</h2>
+      <h2 id="FloatingCollections-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
       {% if section.settings.text != blank %}<p>{{ section.settings.text | escape }}</p>{% endif %}
     </div>
     <div class="floating-collections__grid">

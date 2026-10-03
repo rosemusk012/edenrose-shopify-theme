@@ -2,122 +2,16 @@
   <div class="page-width header-row">
     <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 300 | image_tag: loading: 'eager', widths: '180,240,300', sizes: '(min-width: 901px) 180px, 150px', class: 'brand-logo', alt: shop.name }}{% else %}<span>{{ shop.name | escape }}</span>{% endif %}</a>
 
-    {% assign edenrose_categories = 'new_arrivals|new-arrivals-1,clothing|apparel,jewellery|jewelry,swimwear|swimwear,shoes|shoes,accessories|accessories,the_edit|new-arrivals-1,sale|15-off-selected-styles' | split: ',' %}
+    {%- assign nav_menu = linklists[section.settings.menu] -%}
 
     <nav class="nav nav-desktop" aria-label="{{ 'accessibility.main_navigation' | t }}">
-      <span class="nav-label" aria-hidden="true">Shop</span>
-      {% for item in edenrose_categories %}
-        {% assign item_parts = item | split: '|' %}
-        {% assign item_title = item_parts[0] %}
-        {% assign item_handle = item_parts[1] %}
-        {% if item_title == 'clothing' %}
-          <details class="nav-dropdown">
-            <summary aria-expanded="false">Clothing<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
-            <div class="nav-dropdown__menu">
-              <span class="nav-dropdown__label">Shop Clothing</span>
-              <a href="{{ collections['apparel'].url }}">All Clothing</a>
-              <a href="{{ collections['dresses-1'].url }}">Dresses</a>
-              <a href="{{ collections['tops'].url }}">Tops</a>
-              <a href="{{ collections['bottoms-sets'].url }}">Bottoms</a>
-              <a href="{{ collections['two-piece-sets-1'].url }}">Sets</a>
-              <a href="{{ collections['jumpsuits-rompers'].url }}">Jumpsuits & Rompers</a>
-              <a href="{{ collections['sweaters-hoodies'].url }}">Sweaters & Hoodies</a>
-              <a href="{{ collections['sweaters-hoodies'].url }}">Sweaters & Hoodies</a>
-              <a href="{{ collections['cardigans-1'].url }}">Cardigans</a>
-              <a href="{{ collections['plus-size'].url }}">Plus Size</a>
-              <span class="nav-dropdown__sub-label">Shop by style</span>
-              <a href="{{ collections['maxi-dresses'].url }}">Maxi Dresses</a>
-              <a href="{{ collections['midi-dresses'].url }}">Midi Dresses</a>
-              <a href="{{ collections['mini-dresses'].url }}">Mini Dresses</a>
-              <a href="{{ collections['crop-tops-1'].url }}">Crop Tops</a>
-              <a href="{{ collections['pants'].url }}">Pants</a>
-              <a href="{{ collections['shorts-1'].url }}">Shorts</a>
-              <a href="{{ collections['skirts-1'].url }}">Skirts</a>
-              <a href="{{ collections['leggings'].url }}">Leggings</a>
-              <a href="{{ collections['jumpsuits'].url }}">Jumpsuits</a>
-              <a href="{{ collections['rompers-1'].url }}">Rompers</a>
-            </div>
-          </details>
-        {% elsif item_title == 'jewellery' %}
-          <details class="nav-dropdown">
-            <summary aria-expanded="false">Jewellery<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
-            <div class="nav-dropdown__menu">
-              <span class="nav-dropdown__label">Shop Jewellery</span>
-              <a href="{{ collections['jewelry'].url }}">All Jewellery</a>
-              <a href="{{ collections['rings'].url }}">Rings</a>
-              <a href="{{ collections['earrings'].url }}">Earrings</a>
-              <a href="{{ collections['necklaces'].url }}">Necklaces</a>
-              <a href="{{ collections['pendants'].url }}">Pendants</a>
-              <a href="{{ collections['bracelets-1'].url }}">Bracelets</a>
-            </div>
-          </details>
-        {% elsif item_title == 'swimwear' %}
-          <details class="nav-dropdown">
-            <summary aria-expanded="false">Swim<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
-            <div class="nav-dropdown__menu">
-              <span class="nav-dropdown__label">Shop Swim</span>
-              <a href="{{ collections['swimwear'].url }}">All Swimwear</a>
-              <a href="{{ collections['bikinis'].url }}">Bikinis</a>
-              <a href="{{ collections['one-piece-swimwear'].url }}">One-Piece Swimwear</a>
-              <a href="{{ collections['swim-sets'].url }}">Swim Sets</a>
-              <a href="{{ collections['swim-dresses'].url }}">Swim Dresses</a>
-              <a href="{{ collections['cover-ups'].url }}">Cover-Ups</a>
-            </div>
-          </details>
-        {% elsif item_title == 'shoes' %}
-          <details class="nav-dropdown">
-            <summary aria-expanded="false">Shoes<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
-            <div class="nav-dropdown__menu">
-              <span class="nav-dropdown__label">Shop Shoes</span>
-              <a href="{{ collections['shoes'].url }}">All Shoes</a>
-              <a href="{{ collections['flats'].url }}">Flats</a>
-              <a href="{{ collections['sneakers'].url }}">Sneakers</a>
-              <a href="{{ collections['sandals'].url }}">Sandals</a>
-              <a href="{{ collections['boots'].url }}">Boots</a>
-              <a href="{{ collections['heels'].url }}">Heels</a>
-            </div>
-          </details>
-        {% elsif item_title == 'accessories' %}
-          <details class="nav-dropdown">
-            <summary aria-expanded="false">Accessories<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
-            <div class="nav-dropdown__menu">
-              <span class="nav-dropdown__label">More to Discover</span>
-                            <a href="{{ collections['gift-ideas'].url }}">Gift Ideas</a>
-              <a href="{{ collections['statement-pieces'].url }}">Statement Pieces</a>
-              <a href="{{ collections['under-50'].url }}">Under $50</a>
-              <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
-            </div>
-          </details>
-        {% elsif item_title == 'sale' %}
-          <details class="nav-dropdown">
-            <summary aria-expanded="false">Sale<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
-            <div class="nav-dropdown__menu">
-              <span class="nav-dropdown__label">Shop Sale</span>
-              <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
-            </div>
-          </details>
-        {% elsif item_title == 'the_edit' %}
-          <details class="nav-dropdown">
-            <summary aria-expanded="false">The Edit<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
-            <div class="nav-dropdown__menu">
-              <span class="nav-dropdown__label">EdenRose Edit</span>
-              <a href="{{ collections['new-arrivals-1'].url }}">New Arrivals</a>
-              <a href="{{ collections['dresses-1'].url }}">Going Out</a>
-              <a href="{{ collections['statement-pieces'].url }}">Statement Pieces</a>
-              <a href="{{ collections['under-50'].url }}">Under $50</a>
-              <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
-              <a href="{{ collections['gift-ideas'].url }}">Gift Ideas</a>
-            </div>
-          </details>
-        {% else %}
-          <a href="{{ collections[item_handle].url }}">{% case item_title %}{% when 'new_arrivals' %}New Arrivals{% when 'shoes' %}Shoes{% when 'the_edit' %}The Edit{% endcase %}</a>
-        {% endif %}
-      {% endfor %}
+      <span class="nav-label" aria-hidden="true">{{ 'general.shop_label' | t }}</span>
+      {% render 'edenrose-nav', mode: 'desktop', menu: nav_menu, source: section.settings.nav_source %}
     </nav>
 
     <div class="header-actions">
       <a class="mobile-search-link" href="{{ routes.search_url }}" aria-label="{{ 'general.search' | t }}"><span aria-hidden="true">⌕</span><span class="visually-hidden">{{ 'general.search' | t }}</span></a>
-      <form class="header-search" action="{{ routes.search_url }}" method="get" role="search">
+      <form class="header-search" action="{{ routes.search_url }}" method="get" role="search" data-suggest-url="{{ routes.predictive_search_url }}.json" data-currency="{{ cart.currency.iso_code }}" data-label-products="{{ 'templates.search.products' | t | escape }}" data-label-collections="{{ 'templates.search.collections' | t | escape }}" data-label-search-for="{{ 'templates.search.search_for' | t: terms: '__TERMS__' | escape }}">
         <label class="visually-hidden" for="HeaderSearch">{{ 'general.search' | t }}</label>
         <input id="HeaderSearch" type="search" name="q" placeholder="{{ 'templates.search.placeholder' | t }}" autocomplete="off">
         <button type="submit" aria-label="{{ 'general.search' | t }}">⌕</button>
@@ -127,7 +21,7 @@
         <span class="account-icon" aria-hidden="true">♙</span><span>{{ 'customer.account.title' | t }}</span>
       </a>
 
-      <a class="header-action bag-action" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart' | t }}{% if cart.item_count > 0 %}, {{ cart.item_count }}{% endif %}">
+      <a class="header-action bag-action" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart' | t }} {{ cart.item_count }}">
         <span>{{ 'general.cart' | t }}</span><span class="bag-count" aria-hidden="true">{{ cart.item_count }}</span>
       </a>
 
@@ -153,107 +47,7 @@
         </summary>
         <nav id="MobileNavigation-{{ section.id }}" class="mobile-nav" aria-label="{{ 'accessibility.main_navigation' | t }}">
           <div class="mobile-nav-links">
-            {% for item in edenrose_categories %}
-              {% assign item_parts = item | split: '|' %}
-              {% assign item_title = item_parts[0] %}
-              {% assign item_handle = item_parts[1] %}
-              {% if item_title == 'clothing' %}
-                <details class="mobile-nav-group">
-                  <summary aria-expanded="false">Clothing<span aria-hidden="true">⌄</span></summary>
-                  <div class="mobile-nav-sub-links">
-                    <a href="{{ collections['apparel'].url }}">All Clothing</a>
-                    <a href="{{ collections['dresses-1'].url }}">Dresses</a>
-                    <a href="{{ collections['tops'].url }}">Tops</a>
-                    <a href="{{ collections['bottoms-sets'].url }}">Bottoms</a>
-              <a href="{{ collections['two-piece-sets-1'].url }}">Sets</a>
-                    <a href="{{ collections['jumpsuits-rompers'].url }}">Jumpsuits & Rompers</a>
-                    <a href="{{ collections['jumpsuits'].url }}">Jumpsuits</a>
-                    <a href="{{ collections['rompers-1'].url }}">Rompers</a>
-                    <a href="{{ collections['sweaters-hoodies'].url }}">Sweaters & Hoodies</a>
-                    <a href="{{ collections['cardigans-1'].url }}">Cardigans</a>
-                    <a href="{{ collections['sweaters-hoodies'].url }}">Sweaters & Hoodies</a>
-                    <a href="{{ collections['cardigans-1'].url }}">Cardigans</a>
-              <a href="{{ collections['cardigans-1'].url }}">Cardigans</a>
-              <a href="{{ collections['plus-size'].url }}">Plus Size</a>
-                    <a href="{{ collections['maxi-dresses'].url }}">Maxi Dresses</a>
-                    <a href="{{ collections['midi-dresses'].url }}">Midi Dresses</a>
-                    <a href="{{ collections['mini-dresses'].url }}">Mini Dresses</a>
-                    <a href="{{ collections['crop-tops-1'].url }}">Crop Tops</a>
-                    <a href="{{ collections['pants'].url }}">Pants</a>
-                    <a href="{{ collections['shorts-1'].url }}">Shorts</a>
-                    <a href="{{ collections['skirts-1'].url }}">Skirts</a>
-                    <a href="{{ collections['leggings'].url }}">Leggings</a>
-                  </div>
-                </details>
-              {% elsif item_title == 'jewellery' %}
-                <details class="mobile-nav-group">
-                  <summary aria-expanded="false">Jewellery<span aria-hidden="true">⌄</span></summary>
-                  <div class="mobile-nav-sub-links">
-                    <a href="{{ collections['jewelry'].url }}">All Jewellery</a>
-                    <a href="{{ collections['rings'].url }}">Rings</a>
-                    <a href="{{ collections['earrings'].url }}">Earrings</a>
-                    <a href="{{ collections['necklaces'].url }}">Necklaces</a>
-                    <a href="{{ collections['pendants'].url }}">Pendants</a>
-                    <a href="{{ collections['bracelets-1'].url }}">Bracelets</a>
-                  </div>
-                </details>
-              {% elsif item_title == 'swimwear' %}
-                <details class="mobile-nav-group">
-                  <summary aria-expanded="false">Swim<span aria-hidden="true">⌄</span></summary>
-                  <div class="mobile-nav-sub-links">
-                    <a href="{{ collections['swimwear'].url }}">All Swimwear</a>
-                    <a href="{{ collections['bikinis'].url }}">Bikinis</a>
-                    <a href="{{ collections['one-piece-swimwear'].url }}">One-Piece Swimwear</a>
-                    <a href="{{ collections['swim-sets'].url }}">Swim Sets</a>
-                    <a href="{{ collections['swim-dresses'].url }}">Swim Dresses</a>
-                    <a href="{{ collections['cover-ups'].url }}">Cover-Ups</a>
-                  </div>
-                </details>
-              {% elsif item_title == 'shoes' %}
-                <details class="mobile-nav-group">
-                  <summary aria-expanded="false">Shoes<span aria-hidden="true">⌄</span></summary>
-                  <div class="mobile-nav-sub-links">
-                    <a href="{{ collections['shoes'].url }}">All Shoes</a>
-                    <a href="{{ collections['flats'].url }}">Flats</a>
-                    <a href="{{ collections['sneakers'].url }}">Sneakers</a>
-                    <a href="{{ collections['sandals'].url }}">Sandals</a>
-                    <a href="{{ collections['boots'].url }}">Boots</a>
-                    <a href="{{ collections['heels'].url }}">Heels</a>
-                  </div>
-                </details>
-              {% elsif item_title == 'accessories' %}
-                <details class="mobile-nav-group">
-                  <summary aria-expanded="false">Accessories<span aria-hidden="true">⌄</span></summary>
-                  <div class="mobile-nav-sub-links">
-                                        <a href="{{ collections['gift-ideas'].url }}">Gift Ideas</a>
-                    <a href="{{ collections['statement-pieces'].url }}">Statement Pieces</a>
-                    <a href="{{ collections['under-50'].url }}">Under $50</a>
-                    <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
-                  </div>
-                </details>
-              {% elsif item_title == 'sale' %}
-                <details class="mobile-nav-group">
-                  <summary aria-expanded="false">Sale<span aria-hidden="true">⌄</span></summary>
-                  <div class="mobile-nav-sub-links">
-                    <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
-                  </div>
-                </details>
-              {% elsif item_title == 'the_edit' %}
-                <details class="mobile-nav-group">
-                  <summary aria-expanded="false">The Edit<span aria-hidden="true">⌄</span></summary>
-                  <div class="mobile-nav-sub-links">
-                    <a href="{{ collections['new-arrivals-1'].url }}">New Arrivals</a>
-                    <a href="{{ collections['dresses-1'].url }}">Going Out</a>
-                    <a href="{{ collections['statement-pieces'].url }}">Statement Pieces</a>
-                    <a href="{{ collections['under-50'].url }}">Under $50</a>
-                    <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
-                    <a href="{{ collections['gift-ideas'].url }}">Gift Ideas</a>
-                  </div>
-                </details>
-              {% else %}
-                <a href="{{ collections[item_handle].url }}">{% case item_title %}{% when 'new_arrivals' %}New Arrivals{% when 'shoes' %}Shoes{% when 'the_edit' %}The Edit{% endcase %}<span aria-hidden="true">→</span></a>
-              {% endif %}
-            {% endfor %}
+            {% render 'edenrose-nav', mode: 'mobile', menu: nav_menu, source: section.settings.nav_source %}
           </div>
           <div class="mobile-nav-utility">
             <a href="{{ routes.account_url }}">{{ 'customer.account.title' | t }}</a>
@@ -421,6 +215,7 @@
 .nav-dropdown__menu{display:none;position:fixed;z-index:2147483647;top:var(--edenrose-dropdown-top,82px);left:var(--edenrose-dropdown-left,0px);min-width:230px;max-width:min(320px,calc(100vw - 20px));max-height:calc(100dvh - var(--edenrose-dropdown-top,82px) - 12px);overflow-x:hidden;overflow-y:auto;gap:2px;padding:.65rem;background:var(--paper);border:1px solid var(--line);box-shadow:0 16px 35px rgba(23,20,17,.12);margin-top:0}
 .nav-dropdown__menu:after{content:'';position:absolute;left:0;right:0;top:-.75rem;height:.75rem}
 .nav-dropdown[open] .nav-dropdown__menu{display:grid}
+.nav-dropdown__menu{max-height:calc(100vh - var(--edenrose-dropdown-top,82px) - 16px);overflow-y:auto;overscroll-behavior:contain}
 .nav-dropdown__sub-label{display:block;padding:.55rem .8rem .25rem;font-size:.55rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--line);margin-top:.25rem}.nav-dropdown__label{display:block;padding:.35rem .8rem .55rem;font-size:.6rem;letter-spacing:.16em;color:var(--muted);border-bottom:1px solid var(--line);margin-bottom:.15rem}
 .nav-dropdown__menu a{display:block;padding:.7rem .8rem;white-space:nowrap}
 .nav-dropdown__menu a:hover,.nav-dropdown__menu a:focus-visible{background:var(--soft);text-decoration:none}
@@ -476,4 +271,4 @@
 
 {% endstylesheet %}
 
-{% schema %}{"name":"t:sections.header.name","settings":[{"type":"link_list","id":"menu","label":"t:sections.header.settings.menu","default":"main-menu"},{"type":"image_picker","id":"logo","label":"t:sections.header.settings.logo"}]}{% endschema %}
+{% schema %}{"name":"t:sections.header.name","settings":[{"type":"link_list","id":"menu","label":"t:sections.header.settings.menu","default":"main-menu"},{"type":"select","id":"nav_source","label":"t:sections.header.settings.nav_source","info":"t:sections.header.settings.nav_source_info","options":[{"value":"menu","label":"t:sections.header.settings.nav_source_menu"},{"value":"builtin","label":"t:sections.header.settings.nav_source_builtin"}],"default":"menu"},{"type":"image_picker","id":"logo","label":"t:sections.header.settings.logo"}]}{% endschema %}

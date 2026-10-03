@@ -1,11 +1,14 @@
-<section class="sale-collection-promo" aria-labelledby="sale-collection-promo-heading">
+{%- assign promo_collection = section.settings.collection -%}
+<section class="sale-collection-promo" aria-labelledby="SalePromo-{{ section.id }}">
   <div class="page-width sale-collection-promo__inner">
     <div class="sale-collection-promo__copy">
-      <p class="sale-collection-promo__eyebrow">Selected styles</p>
-      <h2 id="sale-collection-promo-heading">15% off selected styles</h2>
-      <p>Enjoy 15% off the selected EdenRose edit with code <strong>EDENROSE15</strong>.</p>
-      <a class="sale-collection-promo__button" href="{{ routes.collections_url }}/15-off-selected-styles">Shop 15% off styles <span aria-hidden="true">↗</span></a>
-      <p class="sale-collection-promo__note">Storewide offer: 10% off is also available across EdenRose with code <strong>EDENROSE10</strong>.</p>
+      {%- if section.settings.eyebrow != blank -%}<p class="sale-collection-promo__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="SalePromo-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.text != blank -%}<p>{{ section.settings.text | escape }}{% if section.settings.code != blank %} <strong>{{ section.settings.code | escape }}</strong>.{% endif %}</p>{%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a class="sale-collection-promo__button" href="{% if promo_collection != blank %}{{ promo_collection.url }}{% else %}{{ routes.collections_url }}/15-off-selected-styles{% endif %}">{{ section.settings.button_label | escape }} <span aria-hidden="true">↗</span></a>
+      {%- endif -%}
+      {%- if section.settings.note != blank -%}<p class="sale-collection-promo__note">{{ section.settings.note | escape }}{% if section.settings.note_code != blank %} <strong>{{ section.settings.note_code | escape }}</strong>.{% endif %}</p>{%- endif -%}
     </div>
   </div>
 </section>
@@ -24,5 +27,14 @@
 {% endstylesheet %}
 
 {% schema %}
-{"name":"15% off selected styles","presets":[{"name":"15% off selected styles"}]}
+{"name":"15% off selected styles","settings":[
+{"type":"text","id":"eyebrow","label":"Eyebrow","default":"Selected styles"},
+{"type":"text","id":"heading","label":"Heading","default":"15% off selected styles"},
+{"type":"text","id":"text","label":"Text","default":"Enjoy 15% off the selected EdenRose edit with code"},
+{"type":"text","id":"code","label":"Discount code","default":"EDENROSE15"},
+{"type":"collection","id":"collection","label":"Sale collection","info":"Leave empty to use /collections/15-off-selected-styles"},
+{"type":"text","id":"button_label","label":"Button label","default":"Shop 15% off styles"},
+{"type":"text","id":"note","label":"Note","default":"Storewide offer: 10% off is also available across EdenRose with code"},
+{"type":"text","id":"note_code","label":"Note discount code","default":"EDENROSE10"}
+],"presets":[{"name":"15% off selected styles"}]}
 {% endschema %}

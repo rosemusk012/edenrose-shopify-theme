@@ -29,6 +29,22 @@
       <span aria-current="page" itemprop="name">{{ page.title | escape }}</span>
       <meta itemprop="position" content="2">
     </span>
+  {% elsif template.name == 'list-collections' %}
+    <span aria-current="page">{{ 'general.collections' | t }}</span>
+  {% elsif template.name == 'blog' %}
+    <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span aria-current="page" itemprop="name">{{ blog.title | escape }}</span>
+      <meta itemprop="position" content="2">
+    </span>
+  {% elsif template.name == 'article' %}
+    <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="{{ blog.url }}" itemprop="item"><span itemprop="name">{{ blog.title | escape }}</span></a>
+      <meta itemprop="position" content="2">
+    </span><span aria-hidden="true">/</span>
+    <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span aria-current="page" itemprop="name">{{ article.title | escape }}</span>
+      <meta itemprop="position" content="3">
+    </span>
   {% elsif template.name == 'search' %}
     <span aria-current="page">{{ 'templates.search.eyebrow' | t }}</span>
   {% elsif template.name == 'cart' %}

@@ -1,0 +1,123 @@
+{
+  "sections": {
+    "benefits_editor": {
+      "blocks": {
+        "benefit": "Benefit",
+        "link": "Link",
+        "link_label": "Link label",
+        "text": "Text",
+        "title": "Title"
+      },
+      "name": "Store benefits",
+      "settings": {
+        "eyebrow": "Eyebrow",
+        "heading": "Heading"
+      }
+    },
+    "featured_collection": {
+      "name": "Featured collection",
+      "settings": {
+        "collection": "Collection",
+        "heading": "Heading",
+        "products_to_show": "Products to show",
+        "subheading": "Subheading"
+      }
+    },
+    "footer": {
+      "name": "Footer",
+      "settings": {
+        "menu": "Menu"
+      }
+    },
+    "header": {
+      "name": "Header",
+      "settings": {
+        "logo": "Logo",
+        "menu": "Menu",
+        "nav_source": "Navigation source",
+        "nav_source_builtin": "Built-in EdenRose categories",
+        "nav_source_info": "“Shopify menu” shows the menu picked above (edit it in Online Store › Navigation). “Built-in EdenRose categories” shows the original fixed category list.",
+        "nav_source_menu": "Shopify menu"
+      }
+    },
+    "hero": {
+      "name": "Hero",
+      "settings": {
+        "button_label": "Button label",
+        "button_link": "Button link",
+        "eyebrow": "Eyebrow",
+        "heading": "Heading",
+        "text": "Text"
+      }
+    },
+    "main_404": {
+      "name": "404 page"
+    },
+    "main_cart": {
+      "name": "Cart"
+    },
+    "main_collection": {
+      "name": "Collection"
+    },
+    "main_page": {
+      "name": "Page"
+    },
+    "main_product": {
+      "name": "Product"
+    },
+    "product_recommendations": {
+      "name": "Product recommendations",
+      "settings": {
+        "heading": "Heading",
+        "products_to_show": "Products to show",
+        "subheading": "Subheading"
+      }
+    },
+    "recently_viewed": {
+      "name": "Recently viewed",
+      "settings": {
+        "heading": "Heading"
+      }
+    },
+    "search": {
+      "name": "Search results"
+    },
+    "shop_by_category": {
+      "blocks": {
+        "category": "Category",
+        "collection": "Collection"
+      },
+      "name": "Shop by category",
+      "settings": {
+        "eyebrow": "Eyebrow",
+        "heading": "Heading",
+        "intro": "Intro"
+      }
+    }
+  },
+  "settings": {
+    "colors": {
+      "accent": "Accent",
+      "blush": "Blush background",
+      "ink": "Text",
+      "line": "Borders",
+      "muted": "Muted text",
+      "name": "Colours",
+      "paper": "Background",
+      "rose": "Rose accent",
+      "soft": "Soft surface",
+      "wine": "Wine (promo bars, badges)"
+    },
+    "general": {
+      "announcement": "Announcement bar text",
+      "favicon": "Favicon",
+      "favicon_info": "Square image, shown in browser tabs (32 × 32 px or larger).",
+      "name": "General"
+    },
+    "typography": {
+      "body_font": "Body text",
+      "heading_font": "Headings",
+      "name": "Typography"
+    }
+  }
+}
