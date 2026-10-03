@@ -267,9 +267,9 @@
       "details": "Product details",
       "available": "Available",
       "shipping_title": "Shipping & delivery",
-      "shipping_text": "Shipping options and delivery estimates are shown at checkout based on your destination.",
+      "shipping_text": "Delivery times are estimates from dispatch. Your final shipping options are confirmed at checkout before you pay.",
       "returns_title": "Returns",
-      "returns_text": "Return eligibility and instructions vary by order. Please check the store return policy before purchasing.",
+      "returns_text": "Returns are free within 30 days. The refund policy explains how to start a return.",
       "secure_title": "Secure checkout",
       "secure_text": "Checkout is handled securely by Shopify.",
       "left": "left",
@@ -282,7 +282,13 @@
       "trust_shipping": "Shipping shown before payment",
       "choose_options": "Choose size, colour or option",
       "kicker": "EDENROSE EDIT",
-      "purchase_intro": "Select your options below to check availability and add your choice to cart."
+      "purchase_intro": "Select your options below to check availability and add your choice to cart.",
+      "delivery_title": "Delivery estimate",
+      "delivery_country": "{{ country }}: about {{ range }} business days",
+      "delivery_at_checkout": "Delivery time shown at checkout",
+      "delivery_us_only": "Ships within the US, about 2–5 business days",
+      "returns_free_title": "Free 30-day returns",
+      "returns_free_text": "Changed your mind? Return it within 30 days."
     },
     "cart": {
       "eyebrow": "Shopping bag",

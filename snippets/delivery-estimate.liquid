@@ -1,0 +1,45 @@
+{% doc %}
+  Delivery estimate for the product page purchase box.
+  - Products tagged "Ship From Overseas" ship from Trendsi's overseas stock and can go
+    to every country Trendsi ships to. The range is picked from the shopper's country
+    (localization.country.iso_code). Countries not on Trendsi's list show
+    "Delivery time shown at checkout".
+  - Products without that tag ship from US stock to the US only.
+  Business-day ranges are Trendsi's "Dropship & Sample Order" standard shipping times,
+  copied exactly from https://help.trendsi.com/hc/en-us/articles/8678195060123-Shipping-Information
+  (page dated 21 Sep 2026). US: 2-5 business days for US products, 5-10 for overseas
+  products; US territories (PR, GU, AS, VI) use the US ranges. Update this list if
+  Trendsi changes its times. Never add a range that is not on that page.
+  @param {product} product - The product being viewed
+{% enddoc %}
+{%- liquid
+  assign country_code = localization.country.iso_code | default: 'US'
+  assign us_codes = ',US,PR,GU,AS,VI,'
+  assign code_key = ',' | append: country_code | append: ','
+  assign overseas_ranges = 'AL:11–14,AU:8–16,AT:10–16,BE:8–14,BR:16–29,BG:9–14,CA:8–14,HR:14–16,CY:14–16,CZ:12–14,DK:12–14,EE:14–16,FR:8–14,DE:8–14,FI:14–16,GR:14–16,HU:10–16,IE:10–12,IL:14–17,IT:8–14,JP:7–12,LV:14–16,LT:14–16,LU:12–14,MT:12–14,MX:7–12,MA:8–14,NL:8–14,NZ:8–14,NG:15–20,PK:11–16,PL:9–14,PT:11–18,RO:12–14,SA:7–14,SG:4–9,SK:12–14,SI:12–14,ES:9–14,SE:11–16,AE:9–16,GB:4–14' | split: ','
+
+  if product.tags contains 'Ship From Overseas'
+    if us_codes contains code_key
+      echo 'templates.product.delivery_country' | t: country: localization.country.name, range: '5–10'
+    else
+      assign range = ''
+      assign prefix = country_code | append: ':'
+      for entry in overseas_ranges
+        if entry contains prefix
+          assign entry_code = entry | split: ':' | first
+          if entry_code == country_code
+            assign range = entry | split: ':' | last
+            break
+          endif
+        endif
+      endfor
+      if range != blank
+        echo 'templates.product.delivery_country' | t: country: localization.country.name, range: range
+      else
+        echo 'templates.product.delivery_at_checkout' | t
+      endif
+    endif
+  else
+    echo 'templates.product.delivery_us_only' | t
+  endif
+-%}
