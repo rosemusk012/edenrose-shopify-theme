@@ -14,7 +14,7 @@
         "type": "text",
         "id": "announcement",
         "label": "t:settings.general.announcement",
-        "default": "Delivery information shown at checkout."
+        "default": "Free shipping on every order · Free 30-day returns"
       },
       {
         "type": "image_picker",
