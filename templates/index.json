@@ -342,12 +342,19 @@
         "show_counts": true,
         "show_more": true
       }
+    },
+    "trust_row": {
+      "type": "trust-row",
+      "settings": {
+        "support_email": "rosemusk012@gmail.com"
+      }
     }
   },
   "order": [
     "promo",
     "hero",
     "featured",
+    "trust_row",
     "categories",
     "collection_index",
     "men_edit",

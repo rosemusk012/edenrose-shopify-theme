@@ -216,6 +216,16 @@
     },
     "editorial_break": {
       "eyebrow": "EdenRose"
+    },
+    "trust_row": {
+      "label": "Why shop with EdenRose",
+      "shipping_title": "Free shipping",
+      "shipping_text": "On every order",
+      "returns_title": "Free 30-day returns",
+      "returns_text": "See the refund policy",
+      "secure_title": "Secure checkout",
+      "secure_text": "Handled by Shopify",
+      "support_title": "Real support"
     }
   },
   "templates": {
@@ -303,7 +313,7 @@
       "checkout": "Checkout securely",
       "remove": "Remove",
       "summary": "Order summary",
-      "shipping_note": "Your available shipping options, delivery costs and taxes are shown at checkout before payment.",
+      "shipping_note": "Shipping is free. Delivery options and any taxes are confirmed at checkout before you pay.",
       "line_total": "Line total",
       "order_progress": "Almost there",
       "shipping_calculated": "Shipping and taxes are calculated at checkout.",

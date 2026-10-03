@@ -110,6 +110,12 @@
         "heading": "Heading",
         "intro": "Intro"
       }
+    },
+    "trust_row": {
+      "name": "Trust row",
+      "settings": {
+        "support_email": "Support email"
+      }
     }
   },
   "settings": {

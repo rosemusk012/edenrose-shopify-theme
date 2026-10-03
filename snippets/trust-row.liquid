@@ -1,0 +1,27 @@
+{% doc %}
+  Small EdenRose trust row: free shipping, 30-day returns, secure checkout and real
+  support. Used on the homepage (sections/trust-row.liquid) and in the cart.
+  @param {string} [layout] - 'row' (default) or 'stack' for narrow columns such as the cart summary
+  @param {string} [support_email] - Support email address
+{% enddoc %}
+{%- assign trust_email = support_email | default: 'rosemusk012@gmail.com' -%}
+<ul class="trust-row{% if layout == 'stack' %} trust-row--stack{% endif %}" role="list" aria-label="{{ 'sections.trust_row.label' | t }}">
+  <li><span class="trust-row__icon" aria-hidden="true">✈</span><span><strong>{{ 'sections.trust_row.shipping_title' | t }}</strong><small>{{ 'sections.trust_row.shipping_text' | t }}</small></span></li>
+  <li><span class="trust-row__icon" aria-hidden="true">↺</span><span><strong>{{ 'sections.trust_row.returns_title' | t }}</strong><small><a href="/policies/refund-policy">{{ 'sections.trust_row.returns_text' | t }}</a></small></span></li>
+  <li><span class="trust-row__icon" aria-hidden="true">✓</span><span><strong>{{ 'sections.trust_row.secure_title' | t }}</strong><small>{{ 'sections.trust_row.secure_text' | t }}</small></span></li>
+  <li><span class="trust-row__icon" aria-hidden="true">✉</span><span><strong>{{ 'sections.trust_row.support_title' | t }}</strong><small><a href="mailto:{{ trust_email }}">{{ trust_email }}</a></small></span></li>
+</ul>
+{% stylesheet %}
+.trust-row{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.75rem}
+.trust-row li{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:.65rem;align-items:center;padding:.8rem .9rem;border:1px solid var(--line);border-radius:12px;background:var(--paper);min-width:0}
+.trust-row__icon{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:50%;background:var(--blush,var(--soft));color:var(--accent);font-size:.85rem}
+.trust-row li>span:last-child{display:grid;gap:.1rem;min-width:0}
+.trust-row strong{font-size:.86rem;font-weight:600;line-height:1.25}
+.trust-row small{font-size:.78rem;color:var(--muted);line-height:1.35;overflow-wrap:anywhere}
+.trust-row a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.trust-row--stack{grid-template-columns:1fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:1rem}
+.trust-row--stack li{border:0;border-top:1px solid var(--line);border-radius:0;padding:.7rem .85rem}
+.trust-row--stack li:first-child{border-top:0}
+@media(max-width:989px){.trust-row:not(.trust-row--stack){grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.trust-row:not(.trust-row--stack){gap:.5rem}.trust-row li{grid-template-columns:1.7rem minmax(0,1fr);padding:.7rem;gap:.5rem}.trust-row__icon{width:1.7rem;height:1.7rem;font-size:.75rem}.trust-row strong{font-size:.8rem}.trust-row small{font-size:.74rem}}
+{% endstylesheet %}

@@ -1,0 +1,9 @@
+<section class="trust-row-section" aria-label="{{ 'sections.trust_row.label' | t }}">
+  <div class="page-width">{% render 'trust-row', support_email: section.settings.support_email %}</div>
+</section>
+{% stylesheet %}
+.trust-row-section{padding:clamp(1rem,2.5vw,1.75rem) 0}
+{% endstylesheet %}
+{% schema %}
+{"name":"t:sections.trust_row.name","settings":[{"type":"text","id":"support_email","label":"t:sections.trust_row.settings.support_email","default":"rosemusk012@gmail.com"}],"presets":[{"name":"t:sections.trust_row.name"}]}
+{% endschema %}
