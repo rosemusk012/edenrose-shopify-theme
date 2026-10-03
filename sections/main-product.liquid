@@ -33,7 +33,7 @@
         <span class="sale-note" data-product-sale{% unless on_sale %} hidden{% endunless %}>{{ 'templates.product.on_sale' | t }}</span>
       </div>
 
-      {%- if product.available -%}
+      {%- if current_variant.available -%}
         <p class="availability" data-product-availability aria-live="polite" aria-atomic="true">
           <span aria-hidden="true">●</span> {{ 'templates.product.available' | t }}
           {%- if current_variant.inventory_management and current_variant.inventory_quantity > 0 and current_variant.inventory_quantity <= 5 %} · {{ current_variant.inventory_quantity }} {{ 'templates.product.left' | t }}{% endif -%}
@@ -59,7 +59,7 @@
           <input type="hidden" name="id" value="{{ current_variant.id }}">
         {%- endunless -%}
 
-        {%- if product.available -%}
+        {%- if current_variant.available -%}
           <div class="purchase-row">
             <div class="quantity-field">
               <label for="Quantity-{{ section.id }}">{{ 'templates.product.quantity' | t }}</label>
@@ -133,7 +133,7 @@
   {%- if product.available -%}
     <div class="mobile-buy-bar" data-mobile-buy-bar>
       <span><small>{{ product.title | escape }}</small><strong data-mobile-buy-price>{{ current_variant.price | money }}</strong></span>
-      <button class="button" type="button" data-mobile-buy>{{ 'templates.product.add_to_cart' | t }}</button>
+      <button class="button" type="button" data-mobile-buy{% unless current_variant.available %} disabled{% endunless %}>{{ 'templates.product.add_to_cart' | t }}</button>
     </div>
   {%- endif -%}
 
