@@ -43,7 +43,7 @@
         "category-2": {"type": "category", "settings": {"collection": "jewelry"}},
         "category-3": {"type": "category", "settings": {"collection": "shoes"}},
         "category-4": {"type": "category", "settings": {"collection": "men"}},
-        "category-5": {"type": "category", "settings": {"collection": "tops"}},
+        "category-5": {"type": "category", "settings": {"collection": "womens-tops"}},
         "category-6": {"type": "category", "settings": {"collection": "swimwear"}},
         "category-7": {"type": "category", "settings": {"collection": "apparel"}},
         "category-8": {"type": "category", "settings": {"collection": "bottoms-sets"}},
@@ -147,7 +147,7 @@
     "tops_edit": {
       "type": "featured-collection",
       "settings": {
-        "collection": "tops",
+        "collection": "womens-tops",
         "heading": "Tops & blouses",
         "subheading": "Fresh layers and everyday favourites.",
         "products_to_show": 8
@@ -183,8 +183,8 @@
   },
   "order": [
     "promo", "hero", "sale_promo", "featured", "categories",
-    "men_edit", "dresses_edit", "tops_edit", "bottoms_edit",
-    "jewellery_edit", "shoes_edit", "swimwear_edit", "sale_edit",
+    "jewellery_edit", "dresses_edit", "tops_edit", "men_edit",
+    "bottoms_edit", "shoes_edit", "swimwear_edit", "sale_edit",
     "floating", "editorial_1", "break_1", "apps", "benefits"
   ]
 }
