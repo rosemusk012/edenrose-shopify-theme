@@ -17,7 +17,8 @@
         {% if block.settings.collection != blank %}
           {% assign category = block.settings.collection %}
           {% unless category.handle == 'frontpage' %}
-            {% unless rendered_collection_handles contains category.handle %}
+            {% assign category_token = '|' | append: category.handle | append: '|' %}
+            {% unless rendered_collection_handles contains category_token %}
               {% assign visible_categories = visible_categories | plus: 1 %}
               {% assign rendered_collection_handles = rendered_collection_handles | append: category.handle | append: '|' %}
               {% assign category_image = category.featured_image %}
