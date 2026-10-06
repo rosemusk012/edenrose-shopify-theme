@@ -79,7 +79,7 @@
         var input=form.querySelector('input[name="id"]');
         if(!button||!input)return;
         var original=button.textContent;
-        button.disabled=true;button.textContent='Adding…';
+        button.disabled=true;button.textContent='Adding…';button.setAttribute('aria-busy','true');
         fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({items:[{id:Number(input.value),quantity:1}]})})
           .then(function(r){if(!r.ok)throw new Error('cart');return r.json();})
           .then(function(){
@@ -88,7 +88,7 @@
               document.querySelectorAll('.bag-count').forEach(function(el){el.textContent=cart.item_count;});
               document.querySelectorAll('.bag-action').forEach(function(el){el.setAttribute('aria-label','Cart, '+cart.item_count);});
             }).catch(function(){});
-            setTimeout(function(){button.disabled=false;button.textContent=original;},1200);
+            setTimeout(function(){button.disabled=false;button.textContent=original;button.removeAttribute('aria-busy');},1200);
           })
           .catch(function(){button.disabled=false;button.textContent='Try again';setTimeout(function(){button.textContent=original;},1600);});
       });
