@@ -30,8 +30,8 @@
       <form id="CollectionFilterForm" class="collection-form" method="get" action="{{ collection.url }}">
         <div class="collection-toolbar" data-collection-toolbar>
           <div class="collection-view-controls" aria-label="Product view">
-            <button type="button" class="collection-view-btn is-active" data-grid-view="2" aria-pressed="false">2</button>
-            <button type="button" class="collection-view-btn" data-grid-view="3" aria-pressed="true">3</button>
+            <button type="button" class="collection-view-btn is-active" data-grid-view="2" aria-pressed="true">2</button>
+            <button type="button" class="collection-view-btn" data-grid-view="3" aria-pressed="false">3</button>
           </div>
           <div class="collection-count"><strong data-product-count>{{ collection.products_count }}</strong> <span>{{ 'templates.collection.products' | t }}</span></div>
           <div class="collection-actions">
