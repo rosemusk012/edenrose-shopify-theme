@@ -130,7 +130,7 @@
         {{ paginate | default_pagination }}
       </div>
       {% if paginate.next %}
-        <div class="collection-load-sentinel" data-collection-load data-next-url="{{ paginate.next.url }}">
+        <div class="collection-load-sentinel" data-collection-load data-next-url="{{ paginate.next.url }}" role="status" aria-live="polite">
           <span class="collection-load-spinner" aria-hidden="true"></span>
           <span>Loading more EdenRose pieces…</span>
         </div>
