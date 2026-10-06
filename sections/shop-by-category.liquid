@@ -9,47 +9,88 @@
     </div>
 
     {% assign used_category_images = '|' %}
+    {% assign rendered_collection_handles = '|' %}
     {% assign visible_categories = 0 %}
-    {% comment %}Customer-facing landing categories use the main Shopify collections; granular filter collections stay in collection pages/navigation.{% endcomment %}
     <div class="category-grid category-grid--all">
+      {% comment %}Keep the curated homepage order first, then append every other customer-facing Shopify collection automatically.{% endcomment %}
       {% for block in section.blocks %}
         {% if block.settings.collection != blank %}
-          {% assign visible_categories = visible_categories | plus: 1 %}
           {% assign category = block.settings.collection %}
-          {% assign category_image = category.featured_image %}
-          {% assign category_image_key = blank %}
-          {% if category_image != blank %}
-            {% assign category_image_key = category_image | image_url: width: 900 %}
-          {% endif %}
-          {% if category_image == blank or used_category_images contains category_image_key %}
-            {% assign fallback_product = category.products.first %}
-            {% if fallback_product != blank and fallback_product.featured_image != blank %}
-              {% assign candidate_key = fallback_product.featured_image | image_url: width: 1200 %}
-              {% unless used_category_images contains candidate_key %}
-                {% assign category_image = fallback_product.featured_image %}
-                {% assign category_image_key = candidate_key %}
-              {% endunless %}
-            {% endif %}
-          {% endif %}
-          {% if category_image != blank and category_image_key != blank %}
-            {% assign used_category_images = used_category_images | append: category_image_key | append: '|' %}
-          {% endif %}
-          <a class="category-card category-card--{{ forloop.index }}" href="{{ category.url }}" {{ block.shopify_attributes }}>
-            <div class="category-card__media">
-              {% if category_image != blank %}
-                {{ category_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '450,650,900', sizes: '(min-width: 750px) 33vw, 50vw', alt: category.title | escape }}
-              {% else %}
-                <div class="category-card__placeholder" aria-hidden="true"><span>{{ category.title | slice: 0 | escape }}</span></div>
+          {% unless category.handle == 'frontpage' %}
+            {% unless rendered_collection_handles contains category.handle %}
+              {% assign visible_categories = visible_categories | plus: 1 %}
+              {% assign rendered_collection_handles = rendered_collection_handles | append: category.handle | append: '|' %}
+              {% assign category_image = category.featured_image %}
+              {% assign category_image_key = blank %}
+              {% if category_image != blank %}{% assign category_image_key = category_image | image_url: width: 900 %}{% endif %}
+              {% if category_image == blank or used_category_images contains category_image_key %}
+                {% assign fallback_product = category.products.first %}
+                {% if fallback_product != blank and fallback_product.featured_image != blank %}
+                  {% assign candidate_key = fallback_product.featured_image | image_url: width: 1200 %}
+                  {% unless used_category_images contains candidate_key %}
+                    {% assign category_image = fallback_product.featured_image %}
+                    {% assign category_image_key = candidate_key %}
+                  {% endunless %}
+                {% endif %}
               {% endif %}
-              <div class="category-card__veil"></div>
-            </div>
-            <div class="category-card__content">
-              <span class="category-card__number">{{ forloop.index | prepend: '0' }}</span>
-              <span class="category-card__name">{{ category.title | escape }}<small>{{ category.all_products_count }} {{ 'templates.collection.products' | t }}</small></span>
-              <span class="category-card__arrow" aria-hidden="true">↗</span>
-            </div>
-          </a>
+              {% if category_image != blank and category_image_key != blank %}{% assign used_category_images = used_category_images | append: category_image_key | append: '|' %}{% endif %}
+              <a class="category-card category-card--{{ visible_categories }}" href="{{ category.url }}" {{ block.shopify_attributes }}>
+                <div class="category-card__media">
+                  {% if category_image != blank %}
+                    {{ category_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '450,650,900', sizes: '(min-width: 750px) 33vw, 50vw', alt: category.title | escape }}
+                  {% else %}
+                    <div class="category-card__placeholder" aria-hidden="true"><span>{{ category.title | slice: 0 | escape }}</span></div>
+                  {% endif %}
+                  <div class="category-card__veil"></div>
+                </div>
+                <div class="category-card__content">
+                  <span class="category-card__number">{{ visible_categories | prepend: '0' }}</span>
+                  <span class="category-card__name">{{ category.title | escape }}<small>{{ category.all_products_count }} {{ 'templates.collection.products' | t }}</small></span>
+                  <span class="category-card__arrow" aria-hidden="true">↗</span>
+                </div>
+              </a>
+            {% endunless %}
+          {% endunless %}
         {% endif %}
+      {% endfor %}
+
+      {% for category in collections %}
+        {% unless category.handle == 'frontpage' %}
+          {% assign category_token = '|' | append: category.handle | append: '|' %}
+          {% unless rendered_collection_handles contains category_token %}
+            {% assign visible_categories = visible_categories | plus: 1 %}
+            {% assign rendered_collection_handles = rendered_collection_handles | append: category.handle | append: '|' %}
+            {% assign category_image = category.featured_image %}
+            {% assign category_image_key = blank %}
+            {% if category_image != blank %}{% assign category_image_key = category_image | image_url: width: 900 %}{% endif %}
+            {% if category_image == blank or used_category_images contains category_image_key %}
+              {% assign fallback_product = category.products.first %}
+              {% if fallback_product != blank and fallback_product.featured_image != blank %}
+                {% assign candidate_key = fallback_product.featured_image | image_url: width: 1200 %}
+                {% unless used_category_images contains candidate_key %}
+                  {% assign category_image = fallback_product.featured_image %}
+                  {% assign category_image_key = candidate_key %}
+                {% endunless %}
+              {% endif %}
+            {% endif %}
+            {% if category_image != blank and category_image_key != blank %}{% assign used_category_images = used_category_images | append: category_image_key | append: '|' %}{% endif %}
+            <a class="category-card category-card--{{ visible_categories }}" href="{{ category.url }}">
+              <div class="category-card__media">
+                {% if category_image != blank %}
+                  {{ category_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '450,650,900', sizes: '(min-width: 750px) 33vw, 50vw', alt: category.title | escape }}
+                {% else %}
+                  <div class="category-card__placeholder" aria-hidden="true"><span>{{ category.title | slice: 0 | escape }}</span></div>
+                {% endif %}
+                <div class="category-card__veil"></div>
+              </div>
+              <div class="category-card__content">
+                <span class="category-card__number">{{ visible_categories | prepend: '0' }}</span>
+                <span class="category-card__name">{{ category.title | escape }}<small>{{ category.all_products_count }} {{ 'templates.collection.products' | t }}</small></span>
+                <span class="category-card__arrow" aria-hidden="true">↗</span>
+              </div>
+            </a>
+          {% endunless %}
+        {% endunless %}
       {% endfor %}
     </div>
     {% if visible_categories > 6 %}<div class="category-more"><button class="button" type="button" data-category-toggle aria-expanded="false" data-show-all="{{ 'general.show_all_collections' | t | escape }}" data-show-fewer="{{ 'general.show_fewer_collections' | t | escape }}">{{ 'general.show_all_collections' | t }}</button></div>{% endif %}
