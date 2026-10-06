@@ -68,6 +68,32 @@
       });
     }
 
+    // Keep product-card Quick Add in-page: add to cart without sending shoppers away from browsing.
+    if(!document.documentElement.dataset.quickAddBound){
+      document.documentElement.dataset.quickAddBound='true';
+      document.addEventListener('submit',function(e){
+        var form=e.target.closest('.card-quick-add');
+        if(!form)return;
+        e.preventDefault();
+        var button=form.querySelector('.quick-add');
+        var input=form.querySelector('input[name="id"]');
+        if(!button||!input)return;
+        var original=button.textContent;
+        button.disabled=true;button.textContent='Adding…';
+        fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({items:[{id:Number(input.value),quantity:1}]})})
+          .then(function(r){if(!r.ok)throw new Error('cart');return r.json();})
+          .then(function(){
+            button.textContent='Added ✓';
+            fetch('/cart.js',{headers:{'Accept':'application/json'}}).then(function(r){return r.json();}).then(function(cart){
+              document.querySelectorAll('.bag-count').forEach(function(el){el.textContent=cart.item_count;});
+              document.querySelectorAll('.bag-action').forEach(function(el){el.setAttribute('aria-label','Cart, '+cart.item_count);});
+            }).catch(function(){});
+            setTimeout(function(){button.disabled=false;button.textContent=original;},1200);
+          })
+          .catch(function(){button.disabled=false;button.textContent='Try again';setTimeout(function(){button.textContent=original;},1600);});
+      });
+    }
+
     if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
       var targets=document.querySelectorAll('.section,.floating-card,.shop-the-look,[data-reveal]');
       targets.forEach(function(el){el.classList.add('edenrose-reveal');});
