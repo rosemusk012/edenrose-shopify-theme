@@ -106,3 +106,9 @@
     }
   });
 })();
+/* EdenRose card interaction polish: announce async cart state accessibly. */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.quick-add');
+  if(!b)return;
+  b.classList.add('is-engaged');
+});
