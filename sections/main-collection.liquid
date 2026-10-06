@@ -34,7 +34,7 @@
             <button type="button" class="collection-view-btn is-active" data-grid-view="2" aria-pressed="true" aria-label="Two columns">2</button>
             <button type="button" class="collection-view-btn" data-grid-view="3" aria-pressed="false" aria-label="Three columns">3</button>
           </div>
-          <div class="collection-count"><strong data-product-count>{{ collection.products_count }}</strong> <span>{{ 'templates.collection.products' | t }}</span></div>
+          <div class="collection-count"><strong data-product-count>{{ collection.products_count }}</strong> <span>{{ 'templates.collection.products' | t }}</span></div><span class="collection-browse-note" aria-hidden="true">Swipe, filter or sort</span>
           <div class="collection-actions">
             <button type="button" class="filter-toggle button button--secondary" aria-expanded="false" aria-controls="CollectionFilters">{{ 'templates.collection.filter' | t }}</button>
             <div class="sort-form">
@@ -341,11 +341,11 @@
 .pagination .current{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .pagination a:hover{background:var(--soft);text-decoration:none}
 @media(min-width:750px){.collection-toolbar > .collection-view-controls{display:flex}}
-@media(max-width:749px){
+@media(max-width:749px){.collection-browse-note{display:none}
   .collection-toolbar:before{display:none}
   .collection-toolbar{position:sticky;top:68px;z-index:20;background:var(--paper);box-shadow:0 1px 0 var(--line);padding-block:.75rem;margin-bottom:1rem;align-items:center}
   .collection-toolbar,.collection-actions{min-width:0}
-  .collection-count{white-space:nowrap}
+  .collection-browse-note{font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);white-space:nowrap}.collection-count{white-space:nowrap}
   .collection-actions{flex:1;justify-content:flex-end}
   .filter-toggle{flex:0 0 auto;min-width:92px}
   .sort-form{min-width:0;justify-content:flex-end}
