@@ -334,7 +334,7 @@
 .collection-empty .button{display:inline-flex}
 .collection-load-sentinel{display:flex;align-items:center;justify-content:center;gap:.7rem;min-height:72px;color:var(--muted);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
 .collection-load-spinner{width:16px;height:16px;border:1px solid var(--line);border-top-color:var(--ink);border-radius:50%;animation:edenrose-spin .8s linear infinite}
-.collection-load-sentinel:not(.is-loading){opacity:.7}
+.collection-load-sentinel:not(.is-loading){opacity:.7}.collection-load-sentinel:not(.is-loading) .collection-load-spinner{display:none}
 @keyframes edenrose-spin{to{transform:rotate(360deg)}}
 .pagination{padding:1rem 0 3rem;display:flex;justify-content:center;flex-wrap:wrap;gap:6px}
 .pagination a,.pagination span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:.4rem .7rem;border:1px solid var(--line);border-radius:999px}
