@@ -43,12 +43,12 @@
         "category-2": {"type": "category", "settings": {"collection": "jewelry"}},
         "category-3": {"type": "category", "settings": {"collection": "shoes"}},
         "category-4": {"type": "category", "settings": {"collection": "men"}},
-        "category-5": {"type": "category", "settings": {"collection": "womens-tops"}},
+        "category-5": {"type": "category", "settings": {"collection": "tops"}},
         "category-6": {"type": "category", "settings": {"collection": "swimwear"}},
         "category-7": {"type": "category", "settings": {"collection": "apparel"}},
-        "category-8": {"type": "category", "settings": {"collection": "bottoms-sets"}},
+        "category-8": {"type": "category", "settings": {"collection": "two-piece-sets-1"}},
         "category-9": {"type": "category", "settings": {"collection": "jumpsuits-rompers"}},
-        "category-10": {"type": "category", "settings": {"collection": "sweaters-hoodies"}},
+        "category-10": {"type": "category", "settings": {"collection": "knitwear-sweats"}},
         "category-11": {"type": "category", "settings": {"collection": "plus-size"}},
         "category-12": {"type": "category", "settings": {"collection": "rings"}},
         "category-13": {"type": "category", "settings": {"collection": "necklaces"}},
@@ -147,7 +147,7 @@
     "tops_edit": {
       "type": "featured-collection",
       "settings": {
-        "collection": "womens-tops",
+        "collection": "tops",
         "heading": "Tops & blouses",
         "subheading": "Fresh layers and everyday favourites.",
         "products_to_show": 8
@@ -156,7 +156,7 @@
     "bottoms_edit": {
       "type": "featured-collection",
       "settings": {
-        "collection": "bottoms-sets",
+        "collection": "two-piece-sets-1",
         "heading": "Bottoms & sets",
         "subheading": "Build the look your way.",
         "products_to_show": 8
