@@ -10,6 +10,7 @@
 {% if page_description != blank %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
 {{ content_for_header }}
 <script src="{{ 'edenrose-search.js' | asset_url }}" defer></script>
+<script>window.EdenRoseConfig={currency:{{ shop.currency | json }},cartUrl:{{ routes.cart_url | json }},searchUrl:{{ routes.search_url | json }},predictiveSearchUrl:{{ routes.predictive_search_url | json }}};</script>
 <script src="{{ 'edenrose-interactions.js' | asset_url }}" defer></script>
 <style>
 :root{--ink:#211a1b;--paper:#fbf7f3;--soft:#eee3df;--muted:#776b69;--line:#dfd2cf;--accent:#9b596b;--rose:#ead2d6;--wine:#542a35;--max:1280px;--radius:3px;--focus:2px solid var(--accent);--display:'Playfair Display',Georgia,serif;--body:'DM Sans',Arial,sans-serif}
