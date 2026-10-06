@@ -125,3 +125,19 @@ document.addEventListener('click',function(e){
   if(!b)return;
   b.classList.add('is-engaged');
 });
+
+/* EdenRose: gently reveal product cards as they enter the viewport. */
+(function () {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cards = document.querySelectorAll('[data-product-card]');
+  if (!cards.length || !('IntersectionObserver' in window)) return;
+  cards.forEach(function (card) { card.classList.add('edenrose-reveal-ready'); });
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-revealed');
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  cards.forEach(function (card) { observer.observe(card); });
+})();
