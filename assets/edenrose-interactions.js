@@ -36,7 +36,7 @@
       document.body.appendChild(drawer);
       var qvContent=drawer.querySelector('.quick-view-content'), lastFocus=null;
       function esc(s){return String(s||'').replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]});}
-      function money(c){return new Intl.NumberFormat(document.documentElement.lang||'en-AU',{style:'currency',currency:'{{ shop.currency }}'}).format((c||0)/100);}
+      function money(c){return new Intl.NumberFormat(document.documentElement.lang||'en-AU',{style:'currency',currency:(window.EdenRoseConfig&&window.EdenRoseConfig.currency)||'AUD'}).format((c||0)/100);}
       function closeQv(){drawer.hidden=true;document.body.classList.remove('quick-view-open');if(lastFocus)lastFocus.focus();}
       drawer.addEventListener('click',function(e){if(e.target.closest('[data-qv-close]'))closeQv();});
       document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!drawer.hidden)closeQv();});
@@ -60,7 +60,7 @@
               add.disabled=true;add.textContent='Adding…';
               fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({items:[{id:Number(variant.value),quantity:1}]})})
                 .then(function(r){if(!r.ok)throw new Error('cart');return r.json();})
-                .then(function(){add.textContent='Added ✓';setTimeout(function(){closeQv();window.location.href='{{ routes.cart_url }}';},350);})
+                .then(function(){add.textContent='Added ✓';setTimeout(function(){closeQv();window.location.href=(window.EdenRoseConfig&&window.EdenRoseConfig.cartUrl)||'/cart';},350);})
                 .catch(function(){add.disabled=false;add.textContent='Try again';});
             });
           })
