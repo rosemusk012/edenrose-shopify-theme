@@ -1,190 +1,31 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made here may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "promo": {
-      "type": "promo-banner",
-      "settings": {}
-    },
-    "hero": {
-      "type": "hero",
-      "settings": {
-        "eyebrow": "EdenRose",
-        "heading": "Find something that feels like you.",
-        "text": "Clothing and jewellery, brought together in one easy-to-browse collection.",
-        "button_label": "Shop clothing & jewellery",
-        "button_link": "/collections/all"
-      }
-    },
-    "sale_promo": {
-      "type": "sale-collection-promo",
-      "settings": {}
-    },
-    "featured": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "new-arrivals-1",
-        "heading": "New arrivals",
-        "subheading": "A fresh edit of pieces to discover now.",
-        "products_to_show": 12
-      }
-    },
-    "categories": {
-      "type": "shop-by-category",
-      "blocks": {
-        "category-1": {"type": "category", "settings": {"collection": "dresses"}},
-        "category-2": {"type": "category", "settings": {"collection": "jewelry"}},
-        "category-3": {"type": "category", "settings": {"collection": "shoes"}},
-        "category-4": {"type": "category", "settings": {"collection": "men"}},
-        "category-5": {"type": "category", "settings": {"collection": "womens-tops"}},
-        "category-6": {"type": "category", "settings": {"collection": "swimwear"}},
-        "category-7": {"type": "category", "settings": {"collection": "apparel"}},
-        "category-8": {"type": "category", "settings": {"collection": "bottoms-sets"}},
-        "category-9": {"type": "category", "settings": {"collection": "jumpsuits-rompers"}},
-        "category-10": {"type": "category", "settings": {"collection": "sweaters-hoodies"}},
-        "category-11": {"type": "category", "settings": {"collection": "plus-size"}},
-        "category-12": {"type": "category", "settings": {"collection": "rings"}},
-        "category-13": {"type": "category", "settings": {"collection": "necklaces"}},
-        "category-14": {"type": "category", "settings": {"collection": "earrings"}}
-      },
-      "block_order": [
-        "category-1", "category-2", "category-3", "category-4",
-        "category-5", "category-6", "category-7", "category-8",
-        "category-9", "category-10", "category-11", "category-12",
-        "category-13", "category-14"
-      ],
-      "settings": {}
-    },
-    "floating": {
-      "type": "floating-collections",
-      "blocks": {
-        "float-1": {"type": "collection", "settings": {"collection": "new-arrivals-1"}},
-        "float-2": {"type": "collection", "settings": {"collection": "dresses"}},
-        "float-3": {"type": "collection", "settings": {"collection": "jewelry"}},
-        "float-4": {"type": "collection", "settings": {"collection": "shoes"}},
-        "float-5": {"type": "collection", "settings": {"collection": "rings"}},
-        "float-6": {"type": "collection", "settings": {"collection": "earrings"}}
-      },
-      "block_order": ["float-1", "float-2", "float-3", "float-4", "float-5", "float-6"],
-      "settings": {
-        "eyebrow": "The EdenRose edit",
-        "heading": "Pick your mood.",
-        "text": "A little inspiration before you keep exploring."
-      }
-    },
-    "editorial_1": {
-      "type": "editorial-product-feature",
-      "settings": {
-        "product": "adored-moissanite-stud-earrings",
-        "secondary_product": "inlaid-moissanite-hoop-earrings",
-        "third_product": "moissanite-cross-stud-earrings",
-        "heading": "A little something extra.",
-        "text": "One piece, styled as its own little editorial moment."
-      }
-    },
-    "clothing_edit": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "apparel",
-        "heading": "Clothing",
-        "subheading": "Explore the full EdenRose clothing collection.",
-        "products_to_show": 8
-      }
-    },
-    "jewellery_edit": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "jewelry",
-        "heading": "Jewellery",
-        "subheading": "Explore rings, necklaces and earrings.",
-        "products_to_show": 8
-      }
-    },
-    "shoes_edit": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "shoes",
-        "heading": "Shoes",
-        "subheading": "Finish the look with something new.",
-        "products_to_show": 8
-      }
-    },
-    "break_1": {
-      "type": "editorial-break",
-      "settings": {
-        "heading": "The edit",
-        "link_label": "Explore the edit",
-        "link": "/collections/statement-pieces"
-      }
-    },
-    "apps": {"type": "apps", "settings": {}},
-    "benefits": {"type": "benefits", "settings": {}},
-    "sale_edit": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "15-off-selected-styles",
-        "heading": "15% off selected styles",
-        "subheading": "A little more reason to find your next favourite.",
-        "products_to_show": 8
-      }
-    },
-    "dresses_edit": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "dresses",
-        "heading": "Dresses",
-        "subheading": "Easy pieces for nights out, weekends and everything between.",
-        "products_to_show": 8
-      }
-    },
-    "tops_edit": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "womens-tops",
-        "heading": "Tops & blouses",
-        "subheading": "Fresh layers and everyday favourites.",
-        "products_to_show": 8
-      }
-    },
-    "bottoms_edit": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "bottoms-sets",
-        "heading": "Bottoms & sets",
-        "subheading": "Build the look your way.",
-        "products_to_show": 8
-      }
-    },
-    "swimwear_edit": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "swimwear",
-        "heading": "Swimwear",
-        "subheading": "Ready for sunny days and getaways.",
-        "products_to_show": 8
-      }
-    },
-    "men_edit": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "men",
-        "heading": "Men",
-        "subheading": "Explore the latest men's styles.",
-        "products_to_show": 8
-      }
-    }
+    "promo": {"type":"promo-banner","settings":{}},
+    "hero": {"type":"hero","settings":{"eyebrow":"The new EdenRose edit","heading":"Find something that feels like you.","text":"New fashion, jewellery and pieces worth discovering — curated to make browsing easy.","button_label":"Shop new arrivals","button_link":"/collections/new-arrivals-1"}},
+    "featured": {"type":"featured-collection","settings":{"collection":"new-arrivals-1","heading":"New arrivals","subheading":"Fresh pieces worth seeing first.","products_to_show":12}},
+    "categories": {"type":"shop-by-category","blocks":{
+      "category-1":{"type":"category","settings":{"collection":"dresses"}},
+      "category-2":{"type":"category","settings":{"collection":"jewelry"}},
+      "category-3":{"type":"category","settings":{"collection":"womens-tops"}},
+      "category-4":{"type":"category","settings":{"collection":"bottoms-sets"}},
+      "category-5":{"type":"category","settings":{"collection":"shoes"}},
+      "category-6":{"type":"category","settings":{"collection":"men"}},
+      "category-7":{"type":"category","settings":{"collection":"swimwear"}},
+      "category-8":{"type":"category","settings":{"collection":"rings"}}
+    },"block_order":["category-1","category-2","category-3","category-4","category-5","category-6","category-7","category-8"],"settings":{}},
+    "jewellery_edit":{"type":"featured-collection","settings":{"collection":"jewelry","heading":"Jewellery","subheading":"The little things that finish the look.","products_to_show":12}},
+    "floating":{"type":"floating-collections","blocks":{
+      "float-1":{"type":"collection","settings":{"collection":"dresses"}},
+      "float-2":{"type":"collection","settings":{"collection":"jewelry"}},
+      "float-3":{"type":"collection","settings":{"collection":"shoes"}},
+      "float-4":{"type":"collection","settings":{"collection":"men"}}
+    },"block_order":["float-1","float-2","float-3","float-4"],"settings":{"eyebrow":"The EdenRose edit","heading":"Shop your way.","text":"Jump into the collections you are actually looking for."}},
+    "look":{"type":"shop-the-look","blocks":{},"block_order":[],"settings":{"eyebrow":"Shop the look","heading":"Styled together.","text":"Add your editorial image and the products you want to feature here."}},
+    "dresses_edit":{"type":"featured-collection","settings":{"collection":"dresses","heading":"Dresses","subheading":"Pieces for going out, weekends and everything between.","products_to_show":8}},
+    "men_edit":{"type":"featured-collection","settings":{"collection":"men","heading":"Men","subheading":"The latest men's styles.","products_to_show":8}},
+    "sale_edit":{"type":"featured-collection","settings":{"collection":"15-off-selected-styles","heading":"15% off selected styles","subheading":"Selected pieces, while available.","products_to_show":8}},
+    "apps":{"type":"apps","settings":{}},
+    "benefits":{"type":"benefits","settings":{}}
   },
-  "order": [
-    "promo", "hero", "sale_promo", "featured", "categories",
-    "jewellery_edit", "dresses_edit", "tops_edit", "men_edit",
-    "bottoms_edit", "shoes_edit", "swimwear_edit", "sale_edit",
-    "floating", "editorial_1", "break_1", "apps", "benefits"
-  ]
+  "order":["promo","hero","featured","categories","jewellery_edit","floating","look","dresses_edit","men_edit","sale_edit","apps","benefits"]
 }
