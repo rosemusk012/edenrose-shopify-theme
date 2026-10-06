@@ -35,11 +35,23 @@
       drawer.innerHTML='<div class="quick-view-overlay" data-qv-close></div><div class="quick-view-panel" role="dialog" aria-modal="true" aria-label="Quick view"><button type="button" class="quick-view-close" data-qv-close aria-label="Close">×</button><div class="quick-view-content"></div></div>';
       document.body.appendChild(drawer);
       var qvContent=drawer.querySelector('.quick-view-content'), lastFocus=null;
+      function focusables(){
+        return Array.prototype.slice.call(drawer.querySelectorAll('button:not([disabled]),a[href],select,input:not([disabled])'));
+      }
       function esc(s){return String(s||'').replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]});}
       function money(c){return new Intl.NumberFormat(document.documentElement.lang||'en-AU',{style:'currency',currency:(window.EdenRoseConfig&&window.EdenRoseConfig.currency)||'AUD'}).format((c||0)/100);}
       function closeQv(){drawer.hidden=true;document.body.classList.remove('quick-view-open');if(lastFocus)lastFocus.focus();}
       drawer.addEventListener('click',function(e){if(e.target.closest('[data-qv-close]'))closeQv();});
-      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!drawer.hidden)closeQv();});
+      document.addEventListener('keydown',function(e){
+        if(drawer.hidden)return;
+        if(e.key==='Escape'){closeQv();return;}
+        if(e.key==='Tab'){
+          var items=focusables();if(!items.length)return;
+          var first=items[0],last=items[items.length-1];
+          if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+          else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+        }
+      });
       document.addEventListener('click',function(e){
         var button=e.target.closest('[data-quick-view]');
         if(!button)return;
@@ -54,6 +66,7 @@
             if(variants.length>1){options='<label class="quick-view-label" for="QuickViewVariant">Choose an option</label><select id="QuickViewVariant" class="quick-view-select">'+variants.map(function(v){return '<option value="'+esc(v.id)+'">'+esc(v.title)+' — '+money(v.price)+'</option>';}).join('')+'</select>';}
             else if(variants.length===1){options='<input type="hidden" id="QuickViewVariant" value="'+esc(variants[0].id)+'">';}
             qvContent.innerHTML='<div class="quick-view-image">'+image+'</div><div class="quick-view-details"><p class="eyebrow">EDENROSE QUICK VIEW</p><h2>'+esc(p.title)+'</h2><p class="quick-view-price">'+money(p.price)+'</p>'+options+'<button type="button" class="button quick-view-add">Add to bag</button><a class="quick-view-full" href="/products/'+encodeURIComponent(p.handle)+'">View full details →</a></div>';
+            var initial=focusables()[0]; if(initial)initial.focus();
             var add=qvContent.querySelector('.quick-view-add');
             if(add)add.addEventListener('click',function(){
               var variant=qvContent.querySelector('#QuickViewVariant');if(!variant)return;
