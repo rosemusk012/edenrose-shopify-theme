@@ -91,7 +91,7 @@
             </aside>
 
           <div class="collection-results">
-            <div class="product-grid">
+            <div class="product-grid" data-columns="3">
               {% for product in collection.products %}
                 {% render 'card-product', product: product %}
               {% else %}
@@ -119,6 +119,22 @@
 </section>
 
 <script>
+(function(){
+  var viewControls=document.querySelector('.collection-view-controls');
+  var grid=document.querySelector('.collection-results .product-grid');
+  if(viewControls&&grid&&!viewControls.dataset.bound){
+    viewControls.dataset.bound='true';
+    viewControls.addEventListener('click',function(e){
+      var btn=e.target.closest('[data-grid-columns]'); if(!btn)return;
+      var cols=btn.dataset.gridColumns;
+      grid.dataset.columns=cols;
+      viewControls.querySelectorAll('[data-grid-columns]').forEach(function(b){
+        var active=b===btn; b.classList.toggle('is-active',active); b.setAttribute('aria-pressed',active?'true':'false');
+      });
+    });
+  }
+})();
+
 (function(){
   var loadSentinel=document.querySelector('[data-collection-load]');
   if(loadSentinel&&!loadSentinel.dataset.bound){
