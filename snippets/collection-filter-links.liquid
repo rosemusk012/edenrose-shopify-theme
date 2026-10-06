@@ -10,13 +10,13 @@ Collection groups are kept separate so unrelated collections do not appear insid
   {% assign is_shoes_swim_collection = false %}
   {% assign is_accessories_collection = false %}
 
-  {% assign clothing_handles = 'apparel,dresses-1,maxi-dresses,midi-dresses,mini-dresses,tops-blouses,shirts,cami-tank-tops,active-tops,crop-tops-1,sweaters-hoodies,hoodies-1,cardigans-1,bottoms-sets,pants,jeans,shorts-1,denim-shorts-1,skirts-1,leggings,jumpsuits-rompers,jumpsuits,rompers-1,two-piece-sets-1' | split: ',' %}
+  {% assign clothing_handles = 'apparel,dresses,maxi-dresses,midi-dresses,mini-dresses,tops,crop-tops-1,knitwear-sweats,cardigans-1,women-s-pants,shorts-1,jumpsuits-rompers,two-piece-sets-1,activewear' | split: ',' %}
   {% if clothing_handles contains current_handle %}{% assign is_clothing_collection = true %}{% endif %}
 
-  {% assign jewellery_handles = 'jewelry,rings,earrings,necklaces,pendants' | split: ',' %}
+  {% assign jewellery_handles = 'jewelry,rings,earrings,necklaces,bracelets-1' | split: ',' %}
   {% if jewellery_handles contains current_handle %}{% assign is_jewellery_collection = true %}{% endif %}
 
-  {% assign shoes_swim_handles = 'shoes,sneakers,boots,sandals,heels,swimwear,bikinis,one-piece-swimwear,swim-sets,swim-dresses,cover-ups' | split: ',' %}
+  {% assign shoes_swim_handles = 'shoes,swimwear,bikinis,one-piece-swimwear' | split: ',' %}
   {% if shoes_swim_handles contains current_handle %}{% assign is_shoes_swim_collection = true %}{% endif %}
 
   {% assign accessory_handles = 'socks' | split: ',' %}
@@ -75,7 +75,7 @@ Collection groups are kept separate so unrelated collections do not appear insid
   <details class="collection-filter-group">
     <summary><span>{{ 'templates.collection.shop_by_edit' | t }}</span><span aria-hidden="true">+</span></summary>
     <div class="collection-filter-links">
-      {% assign edit_handles = 'new-arrivals,plus-size,gift-ideas,statement-pieces,under-50,15-off-selected-styles' | split: ',' %}
+      {% assign edit_handles = 'new-arrivals-1,plus-size,gift-ideas,statement-pieces,under-50,15-off-selected-styles' | split: ',' %}
       {% for handle in edit_handles %}
         {% assign linked_collection = collections[handle] %}
         {% if linked_collection != blank and linked_collection.products_count > 0 %}
