@@ -27,19 +27,38 @@
         var html='<div class="edenrose-predictive-inner">';
         if(products.length){html+='<div class="edenrose-predictive-heading">Products</div><div class="edenrose-predictive-products">';products.slice(0,6).forEach(function(p){var img=p.image?'<img src="'+esc(p.image)+'" alt="" loading="lazy">':'';html+='<a role="option" href="'+esc(p.url)+'" class="edenrose-predictive-product">'+img+'<span><strong>'+esc(p.title)+'</strong><small>'+money(p.price)+'</small></span></a>';});html+='</div>';}
         if(collections.length){html+='<div class="edenrose-predictive-heading">Collections</div><div class="edenrose-predictive-collections">';collections.slice(0,3).forEach(function(c){html+='<a role="option" href="'+esc(c.url)+'">'+esc(c.title)+'</a>';});html+='</div>';}
-        html+='<a class="edenrose-predictive-more" href="{{ routes.search_url }}?q='+encodeURIComponent(term)+'">Search for “'+esc(term)+'” →</a></div>';
+        html+='<a class="edenrose-predictive-more" href="'+((window.EdenRoseConfig&&window.EdenRoseConfig.searchUrl)||'/search')+'?q='+encodeURIComponent(term)+'">Search for “'+esc(term)+'” →</a></div>';
         panel.innerHTML=html;panel.hidden=false;input.setAttribute('aria-expanded','true');
+        panel.querySelectorAll('[role="option"]').forEach(function(option,i){
+          option.id=panel.id+'-option-'+i;
+          option.setAttribute('tabindex','-1');
+        });
       }
       function search(){
         var term=input.value.trim();
         if(term.length<2){close();return;}
         if(controller) controller.abort();
         controller=new AbortController();
-        fetch('{{ routes.predictive_search_url }}?q='+encodeURIComponent(term)+'&resources[type]=product,collection&resources[limit]=6&resources[limit_scope]=each',{signal:controller.signal,headers:{Accept:'application/json'}})
+        fetch(((window.EdenRoseConfig&&window.EdenRoseConfig.predictiveSearchUrl)||'/search/suggest')+'?q='+encodeURIComponent(term)+'&resources[type]=product,collection&resources[limit]=6&resources[limit_scope]=each',{signal:controller.signal,headers:{Accept:'application/json'}})
           .then(function(r){if(!r.ok)throw new Error('search');return r.json()})
           .then(function(data){render(data,term)})
           .catch(function(e){if(e.name!=='AbortError')close()});
       }
+      input.addEventListener('keydown',function(e){
+        if(panel.hidden)return;
+        var options=Array.prototype.slice.call(panel.querySelectorAll('[role="option"]'));
+        if(!options.length)return;
+        var current=options.indexOf(document.activeElement);
+        if(e.key==='ArrowDown'){e.preventDefault();(options[current+1]||options[0]).focus();}
+        else if(e.key==='ArrowUp'){e.preventDefault();(options[current-1]||options[options.length-1]).focus();}
+        else if(e.key==='Escape'){close();input.focus();}
+      });
+      panel.addEventListener('keydown',function(e){
+        var options=Array.prototype.slice.call(panel.querySelectorAll('[role="option"]')), current=options.indexOf(document.activeElement);
+        if(e.key==='ArrowDown'){e.preventDefault();(options[current+1]||options[0]).focus();}
+        else if(e.key==='ArrowUp'){e.preventDefault();(options[current-1]||options[options.length-1]).focus();}
+        else if(e.key==='Escape'){close();input.focus();}
+      });
       input.addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(search,300)});
       input.addEventListener('focus',function(){clearTimeout(timer);if(input.value.trim().length>=2)search()});
       form.addEventListener('submit',function(){clearTimeout(timer);if(controller)controller.abort();});
