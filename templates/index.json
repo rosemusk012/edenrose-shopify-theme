@@ -182,9 +182,9 @@
     }
   },
   "order": [
-    "promo", "hero", "sale_promo", "featured", "categories",
-    "jewellery_edit", "dresses_edit", "tops_edit", "men_edit",
-    "bottoms_edit", "shoes_edit", "swimwear_edit", "sale_edit",
+    "promo", "hero", "featured", "jewellery_edit", "categories",
+    "dresses_edit", "tops_edit", "men_edit", "bottoms_edit",
+    "shoes_edit", "swimwear_edit", "sale_promo", "sale_edit",
     "floating", "editorial_1", "break_1", "apps", "benefits"
   ]
 }
