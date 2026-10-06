@@ -25,6 +25,7 @@
         var collections=(data.resources&&data.resources.results&&data.resources.results.collections)||[];
         if(!products.length&&!collections.length){close();return;}
         var html='<div class="edenrose-predictive-inner">';
+        html+='<div class="edenrose-predictive-query">Searching for <strong>“'+esc(term)+'”</strong></div>';
         if(products.length){html+='<div class="edenrose-predictive-heading">Products</div><div class="edenrose-predictive-products">';products.slice(0,6).forEach(function(p){var img=p.image?'<img src="'+esc(p.image)+'" alt="" loading="lazy">':'';html+='<a role="option" href="'+esc(p.url)+'" class="edenrose-predictive-product">'+img+'<span><strong>'+esc(p.title)+'</strong><small>'+money(p.price)+'</small></span></a>';});html+='</div>';}
         if(collections.length){html+='<div class="edenrose-predictive-heading">Collections</div><div class="edenrose-predictive-collections">';collections.slice(0,3).forEach(function(c){html+='<a role="option" href="'+esc(c.url)+'">'+esc(c.title)+'</a>';});html+='</div>';}
         html+='<a class="edenrose-predictive-more" href="'+((window.EdenRoseConfig&&window.EdenRoseConfig.searchUrl)||'/search')+'?q='+encodeURIComponent(term)+'">Search for “'+esc(term)+'” →</a></div>';
