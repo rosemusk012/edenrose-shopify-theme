@@ -5,7 +5,7 @@
     {% assign edenrose_categories = 'new_arrivals|new-arrivals,clothing|apparel,jewellery|jewelry,men|men,swimwear|swimwear,shoes|shoes,accessories|accessories,the_edit|new-arrivals,sale|15-off-selected-styles' | split: ',' %}
 
     <nav class="nav nav-desktop" aria-label="{{ 'accessibility.main_navigation' | t }}">
-      <span class="nav-label" aria-hidden="true">Shop</span><a class="nav-new-pill" href="{{ collections['new-arrivals'].url }}">New In</a><a class="nav-featured-link" href="{{ collections['dresses'].url }}">Dresses</a>
+      <span class="nav-label" aria-hidden="true">Shop</span><a class="nav-new-pill" href="{{ collections['new-arrivals-1'].url }}">New In</a><a class="nav-featured-link" href="{{ collections['dresses'].url }}">Dresses</a>
       {% for item in edenrose_categories %}
         {% assign item_parts = item | split: '|' %}
         {% assign item_title = item_parts[0] %}
@@ -18,8 +18,8 @@
               <a href="{{ collections['apparel'].url }}">All Clothing</a>
               <a href="{{ collections['dresses'].url }}">Dresses</a>
               <a href="{{ collections['womens-tops'].url }}">Tops</a>
-              <a href="{{ collections['women-s-pants'].url }}">Bottoms</a>
-              <a href="{{ collections['jumpsuits'].url }}">Jumpsuits & Rompers</a>
+              <a href="{{ collections['bottoms-sets'].url }}">Bottoms</a>
+              <a href="{{ collections['jumpsuits-rompers'].url }}">Jumpsuits & Rompers</a>
               <a href="{{ collections['plus-size'].url }}">Plus Size</a>
               <span class="nav-dropdown__sub-label">Shop by style</span>
               <a href="{{ collections['maxi-dresses'].url }}">Maxi Dresses</a>
@@ -104,7 +104,7 @@
             <summary aria-expanded="false">The Edit<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
             <div class="nav-dropdown__menu">
               <span class="nav-dropdown__label">EdenRose Edit</span>
-              <a class="mobile-nav-featured" href="{{ collections['new-arrivals'].url }}">New Arrivals <span aria-hidden="true">✦</span></a>
+              <a class="mobile-nav-featured" href="{{ collections['new-arrivals-1'].url }}">New Arrivals <span aria-hidden="true">✦</span></a>
               <a href="{{ collections['dresses'].url }}">Going Out</a>
               <a href="{{ collections['statement-pieces'].url }}">Statement Pieces</a>
               <a href="{{ collections['under-50'].url }}">Under $50</a>
@@ -235,7 +235,7 @@
                 <details class="mobile-nav-group">
                   <summary aria-expanded="false">The Edit<span aria-hidden="true">⌄</span></summary>
                   <div class="mobile-nav-sub-links">
-                    <a href="{{ collections['new-arrivals'].url }}">New Arrivals</a>
+                    <a href="{{ collections['new-arrivals-1'].url }}">New Arrivals</a>
                     <a href="{{ collections['dresses'].url }}">Going Out</a>
                     <a href="{{ collections['statement-pieces'].url }}">Statement Pieces</a>
                     <a href="{{ collections['under-50'].url }}">Under $50</a>
