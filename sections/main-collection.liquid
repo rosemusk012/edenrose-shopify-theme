@@ -90,8 +90,8 @@
               {% endif %}
             </aside>
 
-          <div class="collection-results">
-            <div class="product-grid" data-columns="3">
+          <div class="collection-results" data-collection-results>
+            <div class="product-grid" data-product-grid data-columns="3">
               {% for product in collection.products %}
                 {% render 'card-product', product: product %}
               {% else %}
