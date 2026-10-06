@@ -12,11 +12,17 @@
   padding: clamp(54px, 8vw, 105px) 20px;
   background: var(--wine);
   color: var(--paper);
+  position: relative;
+  isolation: isolate;
 }
+.edenrose-break::before { content: ""; position:absolute; width:min(38vw,520px); aspect-ratio:1; border:1px solid rgba(255,255,255,.14); border-radius:50%; left:-12vw; top:-38%; pointer-events:none; }
+.edenrose-break::after { content: ""; position:absolute; width:min(28vw,380px); aspect-ratio:1; border:1px solid rgba(255,255,255,.10); border-radius:50%; right:-9vw; bottom:-42%; pointer-events:none; }
 .edenrose-break__inner {
   max-width: var(--max);
   margin: 0 auto;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 .edenrose-break__eyebrow {
   margin: 0 0 18px;
