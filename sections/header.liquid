@@ -2,10 +2,10 @@
   <div class="page-width header-row">
     <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 300 | image_tag: loading: 'eager', widths: '180,240,300', sizes: '(min-width: 901px) 180px, 150px', class: 'brand-logo', alt: shop.name }}{% else %}<span>{{ shop.name | escape }}</span>{% endif %}</a>
 
-    {% assign edenrose_categories = 'new_arrivals|new-arrivals-1,clothing|apparel,jewellery|jewelry,swimwear|swimwear,shoes|shoes,accessories|accessories,the_edit|new-arrivals-1,sale|15-off-selected-styles' | split: ',' %}
+    {% assign edenrose_categories = 'new_arrivals|new-arrivals,clothing|apparel,jewellery|jewelry,men|men,swimwear|swimwear,shoes|shoes,accessories|accessories,the_edit|new-arrivals,sale|15-off-selected-styles' | split: ',' %}
 
     <nav class="nav nav-desktop" aria-label="{{ 'accessibility.main_navigation' | t }}">
-      <span class="nav-label" aria-hidden="true">Shop</span><a class="nav-new-pill" href="{{ collections['new-arrivals-1'].url }}">New In</a>
+      <span class="nav-label" aria-hidden="true">Shop</span><a class="nav-new-pill" href="{{ collections['new-arrivals'].url }}">New In</a><a class="nav-featured-link" href="{{ collections['dresses'].url }}">Dresses</a>
       {% for item in edenrose_categories %}
         {% assign item_parts = item | split: '|' %}
         {% assign item_title = item_parts[0] %}
@@ -16,13 +16,10 @@
             <div class="nav-dropdown__menu">
               <span class="nav-dropdown__label">Shop Clothing</span>
               <a href="{{ collections['apparel'].url }}">All Clothing</a>
-              <a href="{{ collections['dresses-1'].url }}">Dresses</a>
+              <a href="{{ collections['dresses'].url }}">Dresses</a>
               <a href="{{ collections['tops'].url }}">Tops</a>
               <a href="{{ collections['bottoms-sets'].url }}">Bottoms</a>
-              <a href="{{ collections['two-piece-sets-1'].url }}">Sets</a>
               <a href="{{ collections['jumpsuits-rompers'].url }}">Jumpsuits & Rompers</a>
-              <a href="{{ collections['sweaters-hoodies'].url }}">Sweaters & Hoodies</a>
-              <a href="{{ collections['cardigans-1'].url }}">Cardigans</a>
               <a href="{{ collections['plus-size'].url }}">Plus Size</a>
               <span class="nav-dropdown__sub-label">Shop by style</span>
               <a href="{{ collections['maxi-dresses'].url }}">Maxi Dresses</a>
@@ -33,8 +30,6 @@
               <a href="{{ collections['shorts-1'].url }}">Shorts</a>
               <a href="{{ collections['skirts-1'].url }}">Skirts</a>
               <a href="{{ collections['leggings'].url }}">Leggings</a>
-              <a href="{{ collections['jumpsuits'].url }}">Jumpsuits</a>
-              <a href="{{ collections['rompers-1'].url }}">Rompers</a>
             </div>
           </details>
         {% elsif item_title == 'jewellery' %}
@@ -50,6 +45,17 @@
               <a href="{{ collections['bracelets-1'].url }}">Bracelets</a>
             </div>
           </details>
+        {% elsif item_title == 'men' %}
+          <details class="nav-dropdown">
+            <summary aria-expanded="false">Men<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
+            <div class="nav-dropdown__menu">
+              <span class="nav-dropdown__label">Shop Men</span>
+              <a href="{{ collections['men'].url }}">All Men</a>
+              <a href="{{ collections['men-sets'].url }}">Sets</a>
+              <a href="{{ collections['men-shirts-tops'].url }}">Shirts & Tops</a>
+              <a href="{{ collections['men-pants'].url }}">Pants</a>
+            </div>
+          </details>
         {% elsif item_title == 'swimwear' %}
           <details class="nav-dropdown">
             <summary aria-expanded="false">Swim<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
@@ -58,8 +64,6 @@
               <a href="{{ collections['swimwear'].url }}">All Swimwear</a>
               <a href="{{ collections['bikinis'].url }}">Bikinis</a>
               <a href="{{ collections['one-piece-swimwear'].url }}">One-Piece Swimwear</a>
-              <a href="{{ collections['swim-sets'].url }}">Swim Sets</a>
-              <a href="{{ collections['swim-dresses'].url }}">Swim Dresses</a>
               <a href="{{ collections['cover-ups'].url }}">Cover-Ups</a>
             </div>
           </details>
@@ -100,8 +104,8 @@
             <summary aria-expanded="false">The Edit<span class="nav-dropdown__chevron" aria-hidden="true">⌄</span></summary>
             <div class="nav-dropdown__menu">
               <span class="nav-dropdown__label">EdenRose Edit</span>
-              <a class="mobile-nav-featured" href="{{ collections['new-arrivals-1'].url }}">New Arrivals <span aria-hidden="true">✦</span></a>
-              <a href="{{ collections['dresses-1'].url }}">Going Out</a>
+              <a class="mobile-nav-featured" href="{{ collections['new-arrivals'].url }}">New Arrivals <span aria-hidden="true">✦</span></a>
+              <a href="{{ collections['dresses'].url }}">Going Out</a>
               <a href="{{ collections['statement-pieces'].url }}">Statement Pieces</a>
               <a href="{{ collections['under-50'].url }}">Under $50</a>
               <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
@@ -161,15 +165,10 @@
                   <summary aria-expanded="false">Clothing<span aria-hidden="true">⌄</span></summary>
                   <div class="mobile-nav-sub-links">
                     <a href="{{ collections['apparel'].url }}">All Clothing</a>
-                    <a href="{{ collections['dresses-1'].url }}">Dresses</a>
+                    <a href="{{ collections['dresses'].url }}">Dresses</a>
                     <a href="{{ collections['tops'].url }}">Tops</a>
                     <a href="{{ collections['bottoms-sets'].url }}">Bottoms</a>
-              <a href="{{ collections['two-piece-sets-1'].url }}">Sets</a>
                     <a href="{{ collections['jumpsuits-rompers'].url }}">Jumpsuits & Rompers</a>
-                    <a href="{{ collections['jumpsuits'].url }}">Jumpsuits</a>
-                    <a href="{{ collections['rompers-1'].url }}">Rompers</a>
-                    <a href="{{ collections['sweaters-hoodies'].url }}">Sweaters & Hoodies</a>
-                    <a href="{{ collections['cardigans-1'].url }}">Cardigans</a>
               <a href="{{ collections['plus-size'].url }}">Plus Size</a>
                     <a href="{{ collections['maxi-dresses'].url }}">Maxi Dresses</a>
                     <a href="{{ collections['midi-dresses'].url }}">Midi Dresses</a>
@@ -200,8 +199,6 @@
                     <a href="{{ collections['swimwear'].url }}">All Swimwear</a>
                     <a href="{{ collections['bikinis'].url }}">Bikinis</a>
                     <a href="{{ collections['one-piece-swimwear'].url }}">One-Piece Swimwear</a>
-                    <a href="{{ collections['swim-sets'].url }}">Swim Sets</a>
-                    <a href="{{ collections['swim-dresses'].url }}">Swim Dresses</a>
                     <a href="{{ collections['cover-ups'].url }}">Cover-Ups</a>
                   </div>
                 </details>
@@ -238,8 +235,8 @@
                 <details class="mobile-nav-group">
                   <summary aria-expanded="false">The Edit<span aria-hidden="true">⌄</span></summary>
                   <div class="mobile-nav-sub-links">
-                    <a href="{{ collections['new-arrivals-1'].url }}">New Arrivals</a>
-                    <a href="{{ collections['dresses-1'].url }}">Going Out</a>
+                    <a href="{{ collections['new-arrivals'].url }}">New Arrivals</a>
+                    <a href="{{ collections['dresses'].url }}">Going Out</a>
                     <a href="{{ collections['statement-pieces'].url }}">Statement Pieces</a>
                     <a href="{{ collections['under-50'].url }}">Under $50</a>
                     <a href="{{ collections['15-off-selected-styles'].url }}">15% Off Selected Styles</a>
