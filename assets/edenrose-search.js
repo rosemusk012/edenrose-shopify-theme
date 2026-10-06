@@ -19,7 +19,7 @@
       var timer=null, controller=null;
       function close(){panel.hidden=true;input.setAttribute('aria-expanded','false');}
       function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-      function money(cents){return new Intl.NumberFormat(document.documentElement.lang||'en-AU',{style:'currency',currency:'{{ shop.currency }}'}).format((cents||0)/100)}
+      function money(cents){return new Intl.NumberFormat(document.documentElement.lang||'en-AU',{style:'currency',currency:(window.EdenRoseConfig&&window.EdenRoseConfig.currency)||'AUD'}).format((cents||0)/100)}
       function render(data,term){
         var products=(data.resources&&data.resources.results&&data.resources.results.products)||[];
         var collections=(data.resources&&data.resources.results&&data.resources.results.collections)||[];
