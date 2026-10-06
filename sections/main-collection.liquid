@@ -101,6 +101,26 @@
                 </div>
               {% endfor %}
             </div>
+            <div class="collection-continue-shopping">
+              <div class="collection-continue-heading">
+                <p class="eyebrow">KEEP EXPLORING</p>
+                <h2>More EdenRose to discover</h2>
+              </div>
+              <div class="collection-discovery-rail" aria-label="Explore more EdenRose collections">
+                {% assign discovery_handles = 'new-arrivals-1,jewelry,dresses,womens-tops,bottoms-sets,shoes,men,swimwear' | split: ',' %}
+                {% for handle in discovery_handles %}
+                  {% assign discovery_collection = collections[handle] %}
+                  {% if discovery_collection and discovery_collection.handle != collection.handle %}
+                    <a class="collection-discovery-card" href="{{ discovery_collection.url }}">
+                      {% if discovery_collection.featured_image %}
+                        {{ discovery_collection.featured_image | image_url: width: 500 | image_tag: loading: 'lazy', widths: '250,400,500', sizes: '(min-width: 750px) 18vw, 42vw', alt: discovery_collection.title | escape }}
+                      {% endif %}
+                      <span>{{ discovery_collection.title | escape }}</span>
+                    </a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
           </div>
         </div>
       </form>
@@ -293,5 +313,5 @@
   .collection-hero h1{font-size:clamp(3rem,15vw,5rem)}
   .collection-description{font-size:.92rem}
 }
-{% endstylesheet %}
+ .collection-continue-shopping{padding:4rem 0 5rem}.collection-continue-heading{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:1rem}.collection-continue-heading h2{margin:0;font-size:clamp(1.7rem,3vw,2.7rem);letter-spacing:-.03em}.collection-discovery-rail{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x proximity;padding:.25rem .1rem 1rem;scrollbar-width:none}.collection-discovery-rail::-webkit-scrollbar{display:none}.collection-discovery-card{flex:0 0 clamp(180px,18vw,250px);scroll-snap-align:start;color:inherit;text-decoration:none}.collection-discovery-card img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px;margin-bottom:.65rem;transition:transform .25s ease}.collection-discovery-card:hover img{transform:scale(1.02)}.collection-discovery-card span{font-size:.85rem;font-weight:600}@media(max-width:749px){.collection-continue-shopping{padding:2.8rem 0 3.5rem}.collection-continue-heading{display:block}.collection-continue-heading h2{font-size:1.7rem}.collection-discovery-card{flex-basis:42vw}}{% endstylesheet %}
 {% schema %}{"name":"t:sections.main_collection.name"}{% endschema %}
