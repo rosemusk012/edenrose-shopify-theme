@@ -15,8 +15,8 @@
   <div class="section page-width">
     {% paginate collection.products by 24 %}
       <form id="CollectionFilterForm" class="collection-form" method="get" action="{{ collection.url }}">
-        <div class="collection-toolbar">
-          <div class="collection-count"><strong>{{ collection.products_count }}</strong> <span>{{ 'templates.collection.products' | t }}</span></div>
+        <div class="collection-toolbar" data-collection-toolbar>
+          <div class="collection-count"><strong data-product-count>{{ collection.products_count }}</strong> <span>{{ 'templates.collection.products' | t }}</span></div>
           <div class="collection-actions">
             <button type="button" class="filter-toggle button button--secondary" aria-expanded="false" aria-controls="CollectionFilters">{{ 'templates.collection.filter' | t }}</button>
             <div class="sort-form">
@@ -31,6 +31,17 @@
           </div>
         </div>
 
+        {% assign active_filter_count = 0 %}
+        {% for filter in collection.filters %}{% assign active_filter_count = active_filter_count | plus: filter.active_values.size %}{% endfor %}
+        {% if active_filter_count > 0 %}
+          <div class="applied-filters" aria-label="Applied filters">
+            <span class="applied-filters-label">{{ active_filter_count }} selected</span>
+            {% for filter in collection.filters %}{% for value in filter.active_values %}
+              <a class="filter-chip" href="{{ value.url_to_remove }}">{{ value.label | escape }} <span aria-hidden="true">×</span></a>
+            {% endfor %}{% endfor %}
+            <a class="filter-chip filter-chip--clear" href="{{ collection.url }}">Clear all</a>
+          </div>
+        {% endif %}
         <div class="collection-layout">
           <aside id="CollectionFilters" class="filter-panel" aria-label="{{ 'templates.collection.filter' | t }}" aria-hidden="true">
               <div class="filter-heading"><strong>{{ 'templates.collection.filter' | t }}</strong><button type="button" class="filter-close" aria-label="{{ 'templates.collection.close_filters' | t }}">×</button></div>
@@ -77,13 +88,51 @@
         </div>
       </form>
 
-      <div class="pagination">{{ paginate | default_pagination }}</div>
+      <div class="pagination" data-pagination>
+        {{ paginate | default_pagination }}
+      </div>
+      {% if paginate.next %}
+        <div class="collection-load-sentinel" data-collection-load data-next-url="{{ paginate.next.url }}">
+          <span class="collection-load-spinner" aria-hidden="true"></span>
+          <span>Loading more EdenRose pieces…</span>
+        </div>
+      {% endif %}
     {% endpaginate %}
   </div>
 </section>
 
 <script>
 (function(){
+  var loadSentinel=document.querySelector('[data-collection-load]');
+  if(loadSentinel&&!loadSentinel.dataset.bound){
+    loadSentinel.dataset.bound='true';
+    var busy=false, grid=document.querySelector('.collection-results .product-grid');
+    function loadMore(){
+      if(busy||!loadSentinel.dataset.nextUrl||!grid)return;
+      busy=true; loadSentinel.classList.add('is-loading');
+      fetch(loadSentinel.dataset.nextUrl,{headers:{'X-Requested-With':'XMLHttpRequest'}})
+        .then(function(r){if(!r.ok)throw new Error('load');return r.text()})
+        .then(function(html){
+          var doc=new DOMParser().parseFromString(html,'text/html');
+          var nextGrid=doc.querySelector('.collection-results .product-grid');
+          var next=doc.querySelector('[data-collection-load]');
+          if(nextGrid){
+            Array.prototype.slice.call(nextGrid.children).forEach(function(node){grid.appendChild(document.importNode(node,true));});
+          }
+          if(next&&next.dataset.nextUrl){
+            loadSentinel.dataset.nextUrl=next.dataset.nextUrl;
+            busy=false; loadSentinel.classList.remove('is-loading');
+          }else{
+            loadSentinel.remove();
+          }
+        })
+        .catch(function(){busy=false;loadSentinel.classList.remove('is-loading');});
+    }
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(entries){if(entries.some(function(e){return e.isIntersecting}))loadMore()},{rootMargin:'900px 0px'});
+      io.observe(loadSentinel);
+    }else{window.addEventListener('scroll',function(){if(window.innerHeight+window.scrollY>document.body.offsetHeight-1200)loadMore()},{passive:true});}
+  }
   var toggle=document.querySelector('.filter-toggle');
   var panel=document.getElementById('CollectionFilters');
   if(!toggle||!panel)return;
@@ -125,6 +174,11 @@
 .collection-mark{font:normal clamp(6rem,15vw,13rem)/.7 Georgia,serif;color:var(--line);user-select:none;transform:translateY(.08em)}
 .collection-toolbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-block:1px solid var(--line);padding:1rem 0;margin-bottom:1.5rem}
 .collection-toolbar:before{content:'{{ 'templates.collection.curated_for_you' | t }}';font-size:.62rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.applied-filters{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:-.45rem 0 1.2rem}
+.applied-filters-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-right:.15rem}
+.filter-chip{display:inline-flex;align-items:center;gap:.35rem;padding:.45rem .7rem;border:1px solid var(--line);border-radius:999px;background:var(--soft);font-size:.75rem}
+.filter-chip:hover{background:var(--ink);color:var(--paper);text-decoration:none}
+.filter-chip--clear{background:transparent;text-decoration:underline;text-underline-offset:3px}
 .collection-actions{display:flex;align-items:center;gap:.7rem;margin-left:auto}
 .sort-form{display:flex;align-items:center;gap:.5rem}
 .sort-form select{padding:.65rem 2rem .65rem .75rem;border:1px solid var(--line);background:var(--paper);border-radius:999px;min-height:44px}
@@ -151,7 +205,11 @@
 .collection-empty{grid-column:1/-1;text-align:center;padding:clamp(3rem,7vw,5rem) 1rem;border:1px solid var(--line);background:#f7efeb}
 .collection-empty p{color:var(--muted);margin:0 0 1rem}
 .collection-empty .button{display:inline-flex}
-.pagination{padding:3rem 0 4rem;display:flex;justify-content:center;flex-wrap:wrap;gap:6px}
+.collection-load-sentinel{display:flex;align-items:center;justify-content:center;gap:.7rem;min-height:72px;color:var(--muted);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+.collection-load-spinner{width:16px;height:16px;border:1px solid var(--line);border-top-color:var(--ink);border-radius:50%;animation:edenrose-spin .8s linear infinite}
+.collection-load-sentinel:not(.is-loading){opacity:.7}
+@keyframes edenrose-spin{to{transform:rotate(360deg)}}
+.pagination{padding:1rem 0 3rem;display:flex;justify-content:center;flex-wrap:wrap;gap:6px}
 .pagination a,.pagination span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:.4rem .7rem;border:1px solid var(--line);border-radius:999px}
 .pagination .current{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .pagination a:hover{background:var(--soft);text-decoration:none}
