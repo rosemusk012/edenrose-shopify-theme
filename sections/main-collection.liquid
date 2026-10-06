@@ -140,22 +140,75 @@
 
 <script>
 (function(){
-  var viewControls=document.querySelector('.collection-view-controls');
+  var loadSentinel=document.querySelector('[data-collection-load]');
+  if(loadSentinel&&!loadSentinel.dataset.bound){
+    loadSentinel.dataset.bound='true';
+    var busy=false, grid=document.querySelector('.collection-results .product-grid');
+    function loadMore(){
+      if(busy||!loadSentinel.dataset.nextUrl||!grid)return;
+      busy=true; loadSentinel.classList.add('is-loading');
+      fetch(loadSentinel.dataset.nextUrl,{headers:{'X-Requested-With':'XMLHttpRequest'}})
+        .then(function(r){if(!r.ok)throw new Error('load');return r.text()})
+        .then(function(html){
+          var doc=new DOMParser().parseFromString(html,'text/html');
+          var nextGrid=doc.querySelector('.collection-results .product-grid');
+          var next=doc.querySelector('[data-collection-load]');
+          if(nextGrid){
+            Array.prototype.slice.call(nextGrid.children).forEach(function(node){grid.appendChild(document.importNode(node,true));});
+          }
+          if(next&&next.dataset.nextUrl){
+            loadSentinel.dataset.nextUrl=next.dataset.nextUrl;
+            busy=false; loadSentinel.classList.remove('is-loading');
+          }else{loadSentinel.remove();}
+        })
+        .catch(function(){busy=false;loadSentinel.classList.remove('is-loading');});
+    }
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(entries){if(entries.some(function(e){return e.isIntersecting}))loadMore()},{rootMargin:'900px 0px'});
+      io.observe(loadSentinel);
+    }else{window.addEventListener('scroll',function(){if(window.innerHeight+window.scrollY>document.body.offsetHeight-1200)loadMore()},{passive:true});}
+  }
   var grid=document.querySelector('.collection-results .product-grid');
-  if(viewControls&&grid&&!viewControls.dataset.bound){
-    viewControls.dataset.bound='true';
-    viewControls.addEventListener('click',function(e){
-      var btn=e.target.closest('[data-grid-columns]'); if(!btn)return;
-      var cols=btn.dataset.gridColumns;
-      grid.dataset.columns=cols;
-      viewControls.querySelectorAll('[data-grid-columns]').forEach(function(b){
-        var active=b===btn; b.classList.toggle('is-active',active); b.setAttribute('aria-pressed',active?'true':'false');
+  var viewButtons=[].slice.call(document.querySelectorAll('[data-grid-view]'));
+  viewButtons.forEach(function(button){
+    button.addEventListener('click',function(){
+      if(!grid)return;
+      var cols=button.getAttribute('data-grid-view');
+      grid.setAttribute('data-columns',cols);
+      viewButtons.forEach(function(btn){
+        var active=btn===button;
+        btn.classList.toggle('is-active',active);
+        btn.setAttribute('aria-pressed',active?'true':'false');
       });
     });
+  });
+  var toggle=document.querySelector('.filter-toggle');
+  var panel=document.getElementById('CollectionFilters');
+  if(!toggle||!panel)return;
+  var close=panel.querySelector('.filter-close');
+  toggle.setAttribute('aria-controls','CollectionFilters');
+  var overlay=document.createElement('div');
+  overlay.className='collection-filter-overlay';
+  overlay.setAttribute('aria-hidden','true');
+  document.body.appendChild(overlay);
+  panel.setAttribute('aria-hidden','true');
+  function setOpen(open){
+    panel.classList.toggle('is-open',open);
+    overlay.classList.toggle('is-open',open);
+    toggle.setAttribute('aria-expanded',open?'true':'false');
+    document.body.classList.toggle('collection-filters-open',open);
+    panel.setAttribute('aria-hidden',open?'false':'true');
+    overlay.setAttribute('aria-hidden',open?'false':'true');
   }
+  var previousFocus=null;
+  function openWithFocus(){previousFocus=document.activeElement;setOpen(true);if(close)close.focus();}
+  function closeWithFocus(){setOpen(false);if(previousFocus&&previousFocus.focus)previousFocus.focus();}
+  toggle.addEventListener('click',function(){if(panel.classList.contains('is-open'))closeWithFocus();else openWithFocus();});
+  if(close)close.addEventListener('click',closeWithFocus);
+  overlay.addEventListener('click',closeWithFocus);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('is-open'))closeWithFocus();});
 })();
-
-(function(){
+</script>(function(){
   var loadSentinel=document.querySelector('[data-collection-load]');
   if(loadSentinel&&!loadSentinel.dataset.bound){
     loadSentinel.dataset.bound='true';
