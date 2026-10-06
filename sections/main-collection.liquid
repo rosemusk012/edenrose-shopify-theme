@@ -12,6 +12,19 @@
     </div>
   </div>
 
+  {% assign related_collection_handles = 'new-arrivals-1,jewelry,dresses,womens-tops,bottoms-sets,shoes,men,swimwear' | split: ',' %}
+  {% unless collection.handle == 'new-arrivals-1' %}
+    <nav class="collection-discovery page-width" aria-label="Shop more categories">
+      <div class="collection-discovery-track">
+        {% for handle in related_collection_handles %}
+          {% assign related = collections[handle] %}
+          {% if related != blank and related.handle != collection.handle %}
+            <a class="collection-discovery-chip" href="{{ related.url }}">{{ related.title | escape }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </nav>
+  {% endunless %}
   <div class="section page-width">
     {% paginate collection.products by 24 %}
       <form id="CollectionFilterForm" class="collection-form" method="get" action="{{ collection.url }}">
@@ -172,7 +185,7 @@
 .collection-hero h1{font-size:clamp(3.2rem,8vw,7rem);line-height:.88;letter-spacing:-.06em;margin:0;max-width:9ch}
 .collection-description{max-width:650px;margin:1.25rem 0 0;color:var(--muted);line-height:1.65}
 .collection-mark{font:normal clamp(6rem,15vw,13rem)/.7 Georgia,serif;color:var(--line);user-select:none;transform:translateY(.08em)}
-.collection-toolbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-block:1px solid var(--line);padding:1rem 0;margin-bottom:1.5rem}
+.collection-discovery{padding-top:1rem}.collection-discovery-track{display:flex;gap:.55rem;overflow-x:auto;scrollbar-width:none;padding:.2rem 0 .8rem}.collection-discovery-track::-webkit-scrollbar{display:none}.collection-discovery-chip{flex:0 0 auto;padding:.55rem .85rem;border:1px solid var(--line);border-radius:999px;background:var(--soft);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}.collection-discovery-chip:hover{background:var(--ink);color:var(--paper);text-decoration:none}.collection-discovery-chip:focus-visible{outline:var(--focus);outline-offset:3px}.collection-toolbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-block:1px solid var(--line);padding:1rem 0;margin-bottom:1.5rem}
 .collection-toolbar:before{content:'{{ 'templates.collection.curated_for_you' | t }}';font-size:.62rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
 .applied-filters{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:-.45rem 0 1.2rem}
 .applied-filters-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-right:.15rem}
